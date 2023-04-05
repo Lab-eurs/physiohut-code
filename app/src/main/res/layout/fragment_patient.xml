@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PatientFragment">
+
+    <TextView
+        android:id="@+id/patienthome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:text="@string/next_move"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/appointmentbtn"
+        android:layout_width="333dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="@color/button"
+        android:text="@string/appointment" />
+
+    <Button
+        android:id="@+id/economicbtn"
+        android:layout_width="333dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="@color/button"
+        android:text="@string/economic" />
+
+    <TextView
+        android:id="@+id/appointmenttext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|start"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="137dp"
+        android:text="@string/appointmenttext"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/economictext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|start"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="63dp"
+        android:text="@string/economictext"
+        android:textColor="@color/black" />
+</FrameLayout>

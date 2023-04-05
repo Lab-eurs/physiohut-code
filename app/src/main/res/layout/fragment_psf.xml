@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PsfFragment">
+
+    <TextView
+        android:id="@+id/patienthome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:text="@string/next_move"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/createclinic"
+        android:layout_width="333dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+        android:text="@string/create_clinic"
+        android:backgroundTint="@color/button"/>
+
+    <Button
+        android:id="@+id/createnewprovision"
+        android:layout_width="333dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:text="@string/create_new_provision"
+        android:backgroundTint="@color/button"/>
+
+    <TextView
+        android:id="@+id/textclinic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|start"
+        android:layout_marginBottom="137dp"
+        android:layout_marginLeft="40dp"
+        android:text="@string/text_clinic"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/textprovision"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|start"
+        android:layout_marginTop="63dp"
+        android:layout_marginLeft="40dp"
+        android:text="@string/text_provision"
+        android:textColor="@color/black"/>
+</FrameLayout>

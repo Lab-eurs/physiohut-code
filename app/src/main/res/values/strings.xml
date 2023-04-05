@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">physiohut</string>
+    <string name="logo">logo</string>
+    <string name="back">Back</string>
+    <string name="home">Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="go_to_doctor">Go to Doctor</string>
+    <string name="go_to_patient">Go to Patient</string>
+    <string name="go_to_psf">Go to PSF</string>
+    <string name="welcome_to_doctor_s_page">Welcome to doctor\'s page</string>
+    <string name="welcome_to_patient_s_home">Welcome to patient\'s home</string>
+    <string name="welcome_or_something">Welcome or something</string>
+    <string name="create_clinic">Δημιουργία Φυσιοθεραπευτηρίου</string>
+    <string name="create_new_provision">Δημιουργία Νέας Παροχής</string>
+    <string name="next_move">Επέλεξε την επόμενη σου κίνηση:</string>
+    <string name="text_clinic">Δημιουργία Φυσιοθεραπευτηρίου:</string>
+    <string name="text_provision">Δημιουργία Νέας Παροχής:</string>
+    <string name="appointment">Κλείστε ραντεβού</string>
+    <string name="economic">Ανάλυση οικονομικής κατάστασης</string>
+    <string name="appointmenttext">Για να κλείσετε ένα ραντεβού:</string>
+    <string name="economictext">Για να δείτε την οικονομική κατάσταση:</string>
+    <string name="showHistory">Προβολή Ιστορικού</string>
+    <string name="add_patient">add patient</string>
+    <string name="appointment_request">Appointment Request</string>
+    <string name="create_appointment">Create Appointment</string>
+</resources>
