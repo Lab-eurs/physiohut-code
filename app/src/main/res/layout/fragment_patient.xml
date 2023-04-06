@@ -1,56 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PatientFragment">
 
-    <TextView
-        android:id="@+id/patienthome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:text="@string/next_move"
-        android:layout_marginTop="50dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/appointmentbtn"
-        android:layout_width="333dp"
-        android:layout_height="59dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="100dp"
-        android:backgroundTint="@color/button"
-        android:text="@string/appointment" />
+        <TextView
+            android:id="@+id/patienthome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:text="@string/next_move"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/appointmenttext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/economicbtn"
-        android:layout_width="333dp"
-        android:layout_height="59dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:backgroundTint="@color/button"
-        android:text="@string/economic" />
+        <Button
+            android:id="@+id/appointmentbtn"
+            android:layout_width="333dp"
+            android:layout_height="59dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/button"
+            android:text="@string/appointment"
+            app:layout_constraintBottom_toTopOf="@+id/economictext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/appointmenttext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|start"
-        android:layout_marginLeft="40dp"
-        android:layout_marginBottom="137dp"
-        android:text="@string/appointmenttext"
-        android:textColor="@color/black" />
+        <Button
+            android:id="@+id/economicbtn"
+            android:layout_width="333dp"
+            android:layout_height="59dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/button"
+            android:text="@string/economic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.602"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appointmentbtn"
+            app:layout_constraintVertical_bias="0.486" />
 
-    <TextView
-        android:id="@+id/economictext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|start"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="63dp"
-        android:text="@string/economictext"
-        android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/economictext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:text="@string/economictext"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/economicbtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.297"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/appointmenttext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:text="@string/appointmenttext"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/appointmentbtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.179"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

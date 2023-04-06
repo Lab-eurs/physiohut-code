@@ -1,56 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PsfFragment">
 
-    <TextView
-        android:id="@+id/patienthome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:text="@string/next_move"
-        android:layout_marginTop="50dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/createclinic"
-        android:layout_width="333dp"
-        android:layout_height="59dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="100dp"
-        android:text="@string/create_clinic"
-        android:backgroundTint="@color/button"/>
+        <TextView
+            android:id="@+id/patienthome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:text="@string/next_move"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/createclinic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/createnewprovision"
-        android:layout_width="333dp"
-        android:layout_height="59dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:text="@string/create_new_provision"
-        android:backgroundTint="@color/button"/>
+        <TextView
+            android:id="@+id/textclinic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:text="@string/text_clinic"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/createclinic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.202"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textclinic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|start"
-        android:layout_marginBottom="137dp"
-        android:layout_marginLeft="40dp"
-        android:text="@string/text_clinic"
-        android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/createclinic"
+            android:layout_width="333dp"
+            android:layout_height="59dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/button"
+            android:text="@string/create_clinic"
+            app:layout_constraintBottom_toTopOf="@+id/textprovision"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textprovision"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|start"
-        android:layout_marginTop="63dp"
-        android:layout_marginLeft="40dp"
-        android:text="@string/text_provision"
-        android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/createnewprovision"
+            android:layout_width="333dp"
+            android:layout_height="59dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="39dp"
+            android:layout_marginEnd="39dp"
+            android:backgroundTint="@color/button"
+            android:text="@string/create_new_provision"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createclinic" />
+
+        <TextView
+            android:id="@+id/textprovision"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:text="@string/text_provision"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/createnewprovision"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.165"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>
