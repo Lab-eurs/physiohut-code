@@ -1,5 +1,7 @@
 package com.example.physiohut;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,9 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,5 +94,49 @@ public class R1Fragment extends Fragment {
                 return false;
             }
         });
+
+        Button btnSubmit = (Button) view.findViewById(R.id.clinicsubmitbutton);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //name
+                //TextInputLayout textInputLayoutName= view.findViewById(R.id.nameinputlayout);
+                //EditText editTextName= textInputLayoutName.getEditText();
+                //address
+                //TextInputLayout textInputLayoutAddress = view.findViewById(R.id.addressinputlayout);
+                //EditText editTextAddress = textInputLayoutAddress.getEditText();
+                //afm
+                //TextInputLayout textInputLayoutAfm = view.findViewById(R.id.afminputlayout);
+                //EditText editTextAfm = textInputLayoutAfm.getEditText();
+                //System.out.println(textInputLayoutName);
+                //if ((editTextName != null && editTextName.getText().toString().isEmpty())||(editTextAddress != null && editTextAddress.getText().toString().isEmpty())||(editTextAfm != null && editTextAfm.getText().toString().isEmpty())) {
+                  //  Toast.makeText(getContext(), "Invalid input", Toast.LENGTH_SHORT).show();
+                //} else {
+                    //popUp
+                    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                    builder.setTitle("Υποβολή Φυσιοθεραπευτηρίου");
+                    builder.setMessage("ονομα κλπ κλπ");
+                    builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Navigation.findNavController(view).navigate(R.id.action_r1Fragment_to_psfFragment);
+                            //bash dedomenwn kwdikas
+                        }
+                    });
+                    builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(getContext(), "Something went kwnna", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                //}
+
+
+            }
+        });
+
+
     }
 }
