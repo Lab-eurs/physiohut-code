@@ -5,9 +5,11 @@
     <item
         android:id="@+id/back"
         android:icon="@drawable/iconfinder_back_arrow_216437"
-        android:title="@string/back" />
+        android:title="@string/back"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/home"
         android:icon="@drawable/baseline_home_24"
-        android:title="@string/home" />
+        android:title="@string/home"
+        app:showAsAction="always" />
 </menu>

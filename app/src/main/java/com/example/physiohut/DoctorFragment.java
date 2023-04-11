@@ -5,14 +5,17 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TabHost;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -112,6 +115,22 @@ public class DoctorFragment extends Fragment {
         createAppointment.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.action_doctorFragment_to_r8Fragment);
+            }
+        });
+
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.back:
+                        Navigation.findNavController(view).navigate(R.id.action_doctorFragment_to_mainFragment);
+                        break;
+                    case R.id.home:
+                        Navigation.findNavController(view).navigate(R.id.action_doctorFragment_self);
+                        break;
+                }
+                return false;
             }
         });
 

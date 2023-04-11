@@ -37,6 +37,12 @@
         <action
             android:id="@+id/action_doctorFragment_to_r8Fragment"
             app:destination="@id/r8Fragment" />
+        <action
+            android:id="@+id/action_doctorFragment_self"
+            app:destination="@id/doctorFragment" />
+        <action
+            android:id="@+id/action_doctorFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/patientFragment"
@@ -49,6 +55,12 @@
         <action
             android:id="@+id/action_patientFragment_to_r10Fragment"
             app:destination="@id/r10Fragment" />
+        <action
+            android:id="@+id/action_patientFragment_self"
+            app:destination="@id/patientFragment" />
+        <action
+            android:id="@+id/action_patientFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/psfFragment"
@@ -61,17 +73,31 @@
         <action
             android:id="@+id/action_psfFragment_to_r2Fragment"
             app:destination="@id/r2Fragment" />
+        <action
+            android:id="@+id/action_psfFragment_self"
+            app:destination="@id/psfFragment" />
+        <action
+            android:id="@+id/action_psfFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/r1Fragment"
         android:name="com.example.physiohut.R1Fragment"
         android:label="fragment_r1"
-        tools:layout="@layout/fragment_r1" />
+        tools:layout="@layout/fragment_r1" >
+        <action
+            android:id="@+id/action_r1Fragment_to_psfFragment"
+            app:destination="@id/psfFragment" />
+    </fragment>
     <fragment
         android:id="@+id/r2Fragment"
         android:name="com.example.physiohut.R2Fragment"
         android:label="fragment_r2"
-        tools:layout="@layout/fragment_r2" />
+        tools:layout="@layout/fragment_r2" >
+        <action
+            android:id="@+id/action_r2Fragment_to_psfFragment"
+            app:destination="@id/psfFragment" />
+    </fragment>
     <fragment
         android:id="@+id/r9Fragment"
         android:name="com.example.physiohut.R9Fragment"
@@ -80,35 +106,65 @@
         <action
             android:id="@+id/action_r9Fragment_to_provisionFragment"
             app:destination="@id/provisionFragment" />
+        <action
+            android:id="@+id/action_r9Fragment_to_patientFragment"
+            app:destination="@id/patientFragment" />
     </fragment>
     <fragment
         android:id="@+id/provisionFragment"
         android:name="com.example.physiohut.ProvisionFragment"
         android:label="fragment_provision"
-        tools:layout="@layout/fragment_provision" />
+        tools:layout="@layout/fragment_provision" >
+        <action
+            android:id="@+id/action_provisionFragment_to_patientFragment"
+            app:destination="@id/patientFragment" />
+    </fragment>
     <fragment
         android:id="@+id/r10Fragment"
         android:name="com.example.physiohut.R10Fragment"
         android:label="fragment_r10"
-        tools:layout="@layout/fragment_r10" />
+        tools:layout="@layout/fragment_r10" >
+        <action
+            android:id="@+id/action_r10Fragment_to_patientFragment"
+            app:destination="@id/patientFragment" />
+    </fragment>
     <fragment
         android:id="@+id/r4Fragment"
         android:name="com.example.physiohut.R4Fragment"
         android:label="fragment_r4"
-        tools:layout="@layout/fragment_r4" />
+        tools:layout="@layout/fragment_r4" >
+        <action
+            android:id="@+id/action_r4Fragment_to_doctorFragment"
+            app:destination="@id/doctorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/r3Fragment"
         android:name="com.example.physiohut.R3Fragment"
         android:label="fragment_r3"
-        tools:layout="@layout/fragment_r3" />
+        tools:layout="@layout/fragment_r3" >
+        <action
+            android:id="@+id/action_r3Fragment_to_doctorFragment"
+            app:destination="@id/doctorFragment" />
+        <action
+            android:id="@+id/action_r3Fragment_to_doctorFragment2"
+            app:destination="@id/doctorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/r7Fragment"
         android:name="com.example.physiohut.R7Fragment"
         android:label="fragment_r7"
-        tools:layout="@layout/fragment_r7" />
+        tools:layout="@layout/fragment_r7" >
+        <action
+            android:id="@+id/action_r7Fragment_to_doctorFragment"
+            app:destination="@id/doctorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/r8Fragment"
         android:name="com.example.physiohut.R8Fragment"
         android:label="fragment_r8"
-        tools:layout="@layout/fragment_r8" />
+        tools:layout="@layout/fragment_r8" >
+        <action
+            android:id="@+id/action_r8Fragment_to_doctorFragment"
+            app:destination="@id/doctorFragment" />
+    </fragment>
 </navigation>

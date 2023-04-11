@@ -8,9 +8,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,6 +84,22 @@ public class PatientFragment extends Fragment {
         economicHistory.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Navigation.findNavController(view).navigate(R.id.action_patientFragment_to_r10Fragment);
+            }
+        });
+
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.back:
+                        Navigation.findNavController(view).navigate(R.id.action_patientFragment_to_mainFragment);
+                        break;
+                    case R.id.home:
+                        Navigation.findNavController(view).navigate(R.id.action_patientFragment_self);
+                        break;
+                }
+                return false;
             }
         });
 

@@ -9,9 +9,13 @@ import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainFragment extends Fragment {
@@ -88,6 +92,20 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_psfFragment);
+            }
+        });
+
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.back:
+                    case R.id.home:
+                        Toast.makeText(getContext(),"Είσαι γιατρός, ασθενής ή ΠΣΦ?",Toast.LENGTH_LONG).show();
+                        break;
+                }
+                return false;
             }
         });
     }
