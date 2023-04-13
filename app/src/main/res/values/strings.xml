@@ -24,4 +24,15 @@
     <string name="add_patient">add patient</string>
     <string name="appointment_request">Appointment Request</string>
     <string name="create_appointment">Create Appointment</string>
+    <string name="creation">Δημιουργία</string>
+    <string name="creation_provition">Δημιουργία Παροχής:</string>
+    <string name="text_code">Εισαγώγη κωδικού:</string>
+    <string name="text_name"> Εισαγωγή ονόματος:</string>
+    <string name="text_description"> Εισαγωγή περιγραφής:</string>
+    <string name="text_price"> Εισαγωγή τιμής:</string>
+    <string name="code">Κωδικός...</string>
+    <string name="name">Όνομα...</string>
+    <string name="description"> Περιγραφή...</string>
+    <string name="price">Τιμή...</string>
+
 </resources>
