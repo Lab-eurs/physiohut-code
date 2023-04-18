@@ -12,11 +12,17 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TabHost;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,9 +78,19 @@ public class DoctorFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_doctor, container, false);
     }
 
+    ListView listView;
+    List<String> friends = new ArrayList<String>();
+    String [] startingList = {"Ραντεβού #1", "Ραντεβού #2", "Ραντεβού #3", "Ραντεβού #4", "Ραντεβού #5", "Ραντεβού #6"};
+    ArrayAdapter<String> ad;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ListView listView = (ListView) view.findViewById(R.id.listview);
+        friends = new ArrayList<String>(Arrays.asList(startingList));
+        ad = new ArrayAdapter<String>(getParentFragment().getContext(), android.R.layout.simple_list_item_1,friends);
+        listView.setAdapter(ad);
 
         TabHost th = (TabHost) view.findViewById(R.id.patientandoc);
         th.setup();
