@@ -79,17 +79,23 @@ public class DoctorFragment extends Fragment {
     }
 
     ListView listView;
-    List<String> friends = new ArrayList<String>();
-    String [] startingList = {"Ραντεβού #1", "Ραντεβού #2", "Ραντεβού #3", "Ραντεβού #4", "Ραντεβού #5", "Ραντεβού #6"};
-    ArrayAdapter<String> ad;
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         ListView listView = (ListView) view.findViewById(R.id.listview);
-        friends = new ArrayList<String>(Arrays.asList(startingList));
-        ad = new ArrayAdapter<String>(getParentFragment().getContext(), android.R.layout.simple_list_item_1,friends);
+
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        arrayList.add("Ραντεβού #1");
+        arrayList.add("Ραντεβού #2");
+        arrayList.add("Ραντεβού #3");
+        arrayList.add("Ραντεβού #4");
+        arrayList.add("Ραντεβού #5");
+        arrayList.add("Ραντεβού #6");
+        arrayList.add("Ραντεβού #7");
+
+        ArrayAdapter ad = new ArrayAdapter<>(getParentFragment().getContext(), android.R.layout.simple_list_item_1,arrayList);
         listView.setAdapter(ad);
 
         TabHost th = (TabHost) view.findViewById(R.id.patientandoc);
