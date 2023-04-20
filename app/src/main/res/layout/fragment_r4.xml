@@ -10,16 +10,173 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/rantevou9"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="@string/rant9"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:guidelineUseRtl="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/rantevou8"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="@string/rant8"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:guidelineUseRtl="false"
+            app:layout_constraintBottom_toTopOf="@+id/rantevou9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/rantevou7"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="@string/rant7"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:guidelineUseRtl="false"
+            app:layout_constraintBottom_toTopOf="@+id/rantevou8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/rantevou6"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="@string/rant6"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:guidelineUseRtl="false"
+            app:layout_constraintBottom_toTopOf="@+id/rantevou7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/rantevou5"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="@string/rant5"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:guidelineUseRtl="false"
+            app:layout_constraintBottom_toTopOf="@+id/rantevou6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/rantevou3"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="@string/rant3"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:guidelineUseRtl="false"
+            app:layout_constraintBottom_toTopOf="@+id/rantevou4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/rantevou4"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="@string/rant4"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:guidelineUseRtl="false"
+            app:layout_constraintBottom_toTopOf="@+id/rantevou5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
             android:id="@+id/r4textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Make changes for R4"
+            android:layout_marginTop="2dp"
+            android:text="@string/history_text"
+            android:textColor="@color/black"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+            app:layout_constraintVertical_bias="0.021" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="24sp"/>
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/rantevou1"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="@string/rant1"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:guidelineUseRtl="false"
+            app:layout_constraintBottom_toTopOf="@+id/rantevou2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/rantevou2"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="@string/rant2"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:guidelineUseRtl="false"
+            app:layout_constraintBottom_toTopOf="@+id/rantevou3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

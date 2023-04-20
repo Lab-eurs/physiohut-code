@@ -24,4 +24,16 @@
     <string name="add_patient">add patient</string>
     <string name="appointment_request">Appointment Request</string>
     <string name="create_appointment">Create Appointment</string>
+    <string name="history_text">Ιστορικό Ασθενή #1:</string>
+    <string name="rant1">Ημερομηνία ραντεβού #1:</string>
+    <string name="rant2">Ημερομηνία ραντεβού #2:</string>
+    <string name="rant3">Ημερομηνία ραντεβού #3:</string>
+    <string name="rant4">Ημερομηνία ραντεβού #4:</string>
+    <string name="rant5">Ημερομηνία ραντεβού #5:</string>
+    <string name="rant6">Ημερομηνία ραντεβού #6:</string>
+    <string name="rant7">Ημερομηνία ραντεβού #7:</string>
+    <string name="rant8">Ημερομηνία ραντεβού #8:</string>
+    <string name="rant9">Ημερομηνία ραντεβού #9:</string>
+    <string name="patient">Ασθενής</string>
+    <string name="date">Ραντεβού</string>
 </resources>
