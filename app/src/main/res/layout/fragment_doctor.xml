@@ -70,7 +70,7 @@
                             app:layout_constraintVertical_bias="0.96" />
 
                         <ListView
-                            android:id="@+id/listview"
+                            android:id="@+id/listView"
                             android:layout_width="wrap_content"
                             android:layout_height="200dp"
                             android:layout_marginTop="24dp"

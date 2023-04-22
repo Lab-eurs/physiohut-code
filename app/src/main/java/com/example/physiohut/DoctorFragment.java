@@ -65,6 +65,7 @@ public class DoctorFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -79,24 +80,20 @@ public class DoctorFragment extends Fragment {
     }
 
     ListView listView;
+    String app_list[] = {"Ραντεβού #1","Ραντεβού #2","Ραντεβού #3","Ραντεβού #4","Ραντεβού #5","Ραντεβού #6","Ραντεβού #7"};
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ListView listView = (ListView) view.findViewById(R.id.listview);
+        // setContentView(R.layout.activity_main);
+        listView =  view.findViewById(R.id.listView);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getParentFragment().getContext(), R.layout.activity_listview, R.id.textView, app_list);
+        listView.setAdapter(arrayAdapter);
 
-        ArrayList<String> arrayList = new ArrayList<>();
 
-        arrayList.add("Ραντεβού #1");
-        arrayList.add("Ραντεβού #2");
-        arrayList.add("Ραντεβού #3");
-        arrayList.add("Ραντεβού #4");
-        arrayList.add("Ραντεβού #5");
-        arrayList.add("Ραντεβού #6");
-        arrayList.add("Ραντεβού #7");
 
-        ArrayAdapter ad = new ArrayAdapter<>(getParentFragment().getContext(), android.R.layout.simple_list_item_1,arrayList);
-        listView.setAdapter(ad);
+        //ArrayList<String> arrayList = new ArrayList<>();
 
         TabHost th = (TabHost) view.findViewById(R.id.patientandoc);
         th.setup();
