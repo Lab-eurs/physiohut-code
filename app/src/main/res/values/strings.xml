@@ -24,4 +24,5 @@
     <string name="add_patient">add patient</string>
     <string name="appointment_request">Appointment Request</string>
     <string name="create_appointment">Create Appointment</string>
+    <string name="katagrafitext">Καταγραφή Ενεργειών</string>
 </resources>
