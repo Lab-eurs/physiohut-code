@@ -81,19 +81,17 @@ public class DoctorFragment extends Fragment {
 
     ListView listView;
     String app_list[] = {"Ραντεβού #1","Ραντεβού #2","Ραντεβού #3","Ραντεβού #4","Ραντεβού #5","Ραντεβού #6","Ραντεβού #7","Ραντεβού #8","Ραντεβού #9","Ραντεβού #10"};
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // setContentView(R.layout.activity_main);
         listView =  view.findViewById(R.id.listView);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getParentFragment().getContext(), R.layout.activity_listview, R.id.textView, app_list);
         listView.setAdapter(arrayAdapter);
 
 
 
-        //ArrayList<String> arrayList = new ArrayList<>();
+
 
         TabHost th = (TabHost) view.findViewById(R.id.patientandoc);
         th.setup();
