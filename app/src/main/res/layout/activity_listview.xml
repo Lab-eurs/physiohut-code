@@ -9,7 +9,8 @@
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:src="@drawable/user_icon"
-        android:layout_marginTop="10dp"/>
+        android:layout_gravity="center_vertical"
+    />
 
     <TextView
         android:id="@+id/textView"
@@ -17,7 +18,8 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:textColor="@color/black"
-        android:layout_marginTop="2dp"/>
+        android:gravity="center_vertical"
+    />
 
     <Button
         android:id="@+id/item_btn"
@@ -25,6 +27,9 @@
         android:layout_height="32dp"
         android:text="@string/katagrafitext"
         android:textSize="8dp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+    />
 
+    
 </LinearLayout>
