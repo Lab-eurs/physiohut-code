@@ -120,6 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:layout_marginBottom="632dp"
             android:text="@string/history_text"
             android:textColor="@color/black"
             android:textSize="24sp"
@@ -131,16 +132,28 @@
             app:layout_constraintVertical_bias="0.021" />
 
         <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/patient"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:contextClickable="false"
+                android:text="@string/patient"
+                android:textColor="#03A9F4" />
+
+            <Button
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:text="@string/date"
+                android:textColor="#807777" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/rantevou1"
@@ -173,8 +186,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
