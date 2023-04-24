@@ -24,4 +24,10 @@
     <string name="add_patient">add patient</string>
     <string name="appointment_request">Appointment Request</string>
     <string name="create_appointment">Create Appointment</string>
+    <string name="spinner_title">Select Patient</string>
+    <string-array name="patientsArray">
+        <item>Pats</item>
+        <item>Pats 2</item>
+        <item>Pats 3</item>
+    </string-array>
 </resources>

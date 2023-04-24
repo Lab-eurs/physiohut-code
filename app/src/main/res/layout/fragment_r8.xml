@@ -11,14 +11,102 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/r8textview"
+            android:id="@+id/Provisions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Palio malaka diko sou einai auto"
+            android:text="Provisions"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/TextR8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.829" />
+
+        <Spinner
+            android:id="@+id/PatientSpinner"
+            android:layout_width="201dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="44dp"
+            android:accessibilityLiveRegion="polite"
+            android:alpha="@dimen/material_emphasis_medium"
+            android:autofillHints="Patients"
+            android:contentDescription="username_hint"
+            android:labelFor="@id/PatientSpinner"
+            android:prompt="@string/spinner_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/ProvitionsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/button"
+            android:text="Select Provision"
+            app:layout_constraintBottom_toTopOf="@+id/Provisions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PatientSpinner"
+            app:layout_constraintVertical_bias="0.722" />
+
+        <TextView
+            android:id="@+id/TextR8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Επιλέξτε ημερομηνία και ώρα:"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.511"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.379" />
+
+        <Button
+            android:id="@+id/Calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F6F2F2"
+            android:hint="Ημέρα/Μήνας/΄Ετος/Ώρα"
+            app:icon="@drawable/iconfinder_calendar_date_event_month_115762"
+            app:iconTint="@color/black"
+            app:iconGravity="end"
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextR8"
+            app:layout_constraintVertical_bias="0.346" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="284dp"
+            android:layout_height="121dp"
+            android:layout_marginBottom="180dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Σχόλιο"
+                android:gravity="start"
+                android:textAlignment="viewStart"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/Submitbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:backgroundTint="@color/button"
+            android:text="Υποβολή"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textSize="24sp"/>
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
