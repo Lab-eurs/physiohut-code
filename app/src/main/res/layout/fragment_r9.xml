@@ -62,20 +62,23 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3"
             app:layout_constraintVertical_bias="0.23" />
 
-        <EditText
-            android:id="@+id/editTextTextMultiLine4"
-            android:layout_width="292dp"
-            android:layout_height="87dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Σχόλιο"
-            android:inputType="textMultiLine"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="318dp"
+            android:layout_height="138dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.667" />
+            app:layout_constraintVertical_bias="0.689">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/r9sxolio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/white"
+                android:hint="Σχόλιο" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
