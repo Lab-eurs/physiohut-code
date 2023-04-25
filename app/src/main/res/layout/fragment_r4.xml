@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,187 +7,192 @@
     tools:context=".R4Fragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/myLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/rantevou9"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@string/rant9"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:guidelineUseRtl="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/rantevou8"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@string/rant8"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:guidelineUseRtl="false"
-            app:layout_constraintBottom_toTopOf="@+id/rantevou9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/rantevou7"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@string/rant7"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:guidelineUseRtl="false"
-            app:layout_constraintBottom_toTopOf="@+id/rantevou8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/rantevou6"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@string/rant6"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:guidelineUseRtl="false"
-            app:layout_constraintBottom_toTopOf="@+id/rantevou7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/rantevou5"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@string/rant5"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:guidelineUseRtl="false"
-            app:layout_constraintBottom_toTopOf="@+id/rantevou6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/rantevou3"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@string/rant3"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:guidelineUseRtl="false"
-            app:layout_constraintBottom_toTopOf="@+id/rantevou4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/rantevou4"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@string/rant4"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:guidelineUseRtl="false"
-            app:layout_constraintBottom_toTopOf="@+id/rantevou5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        android:scrollIndicators="none"
+        android:scrollbarSize="4dp"
+        android:scrollbars="vertical">
 
         <TextView
-            android:id="@+id/r4textView"
+            android:id="@+id/item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="632dp"
-            android:text="@string/history_text"
-            android:textColor="@color/black"
-            android:textSize="24sp"
+            android:text="@string/showHistory"
+            android:textSize="42sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
-            app:layout_constraintVertical_bias="0.021" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.013" />
+
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/patient"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/white"
-                android:contextClickable="false"
-                android:text="@string/patient"
-                android:textColor="#03A9F4" />
-
-            <Button
-                android:id="@+id/date"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/white"
-                android:text="@string/date"
-                android:textColor="#807777" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/rantevou1"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@string/rant1"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:guidelineUseRtl="false"
-            app:layout_constraintBottom_toTopOf="@+id/rantevou2"
+            android:id="@+id/linearLayout"
+            android:layout_width="412dp"
+            android:layout_height="657dp"
+            android:orientation="vertical"
+            android:scrollIndicators="right"
+            android:scrollbarSize="14dp"
+            android:scrollbarThumbVertical="@color/black"
+            android:scrollbarTrackVertical="@color/black"
+            android:scrollbars="vertical"
+            android:soundEffectsEnabled="false"
+            android:verticalScrollbarPosition="right"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/item_name">
 
-        <Button
-            android:id="@+id/rantevou2"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@string/rant2"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:guidelineUseRtl="false"
-            app:layout_constraintBottom_toTopOf="@+id/rantevou3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi1"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi2"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi3"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi4"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi5"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi6"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi7"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi8"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi9"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi10"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi11"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi12"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi13"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi14"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:scrollbarSize="12dp"
+                android:text="@string/paroxi15"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_paroxi16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/paroxi16"
+                android:textSize="36sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</LinearLayout>
