@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
         android:src="@drawable/user_icon"
         android:layout_gravity="center_vertical"
     />
@@ -16,7 +16,7 @@
         android:id="@+id/textView"
         android:layout_width="136dp"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:padding="6dp"
         android:textColor="@color/black"
         android:gravity="center_vertical"
     />
@@ -24,9 +24,10 @@
     <Button
         android:id="@+id/item_btn"
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_height="35dp"
         android:text="@string/katagrafitext"
-        android:textSize="8dp"
+        android:textSize="8sp"
+        android:textColor="@color/white"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="20dp"
     />
