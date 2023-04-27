@@ -1,9 +1,11 @@
 package com.example.physiohut;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -11,6 +13,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -83,6 +88,44 @@ public class R3Fragment extends Fragment {
                         break;
                 }
                 return false;
+            }
+        });
+        //code_Eleni
+        Button buttonSubmition =getActivity().findViewById(R.id.button_submition);
+        buttonSubmition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText editTextName=getActivity().findViewById(R.id.editText_name);
+                String name = String.valueOf(editTextName.getText());
+                editTextName.setText(" ");
+                EditText editTextAddress=getActivity().findViewById(R.id.editText_address);
+                String  address = String.valueOf(editTextAddress.getText());
+                editTextAddress.setText("  ");
+                EditText editTextAmka=getActivity().findViewById(R.id.editText_amka);
+                String amka = String.valueOf(editTextAmka.getText());
+                editTextAmka.setText("  ");
+             //pop up message
+                AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+                 builder.setCancelable(true);
+                builder.setTitle("Επιβεβαίωση ασθενή");
+                builder.setMessage("Όνομα:{"+name+"}\n"+"Δίευθυνση:{"+address+"}\n"+"ΑΜΚΑ:{"+amka+"}");
+                builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast myToast= Toast.makeText(getActivity(),"H υποβολή ασθενή ακυρώθηκε!",Toast.LENGTH_SHORT);
+                        myToast.show();
+                        dialogInterface.cancel();
+                    }
+                });
+                builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast myToast= Toast.makeText(getActivity(),"H υποβολή ασθενή έγινε!",Toast.LENGTH_SHORT);
+                        myToast.show();
+
+                    }
+                });
+                builder.show();
             }
         });
     }
