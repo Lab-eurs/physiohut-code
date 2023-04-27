@@ -34,5 +34,5 @@
     <string name="name">Όνομα...</string>
     <string name="description"> Περιγραφή...</string>
     <string name="price">Τιμή...</string>
-
+    <string name="space">   </string>
 </resources>

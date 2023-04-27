@@ -1,9 +1,12 @@
 package com.example.physiohut;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -11,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -85,5 +91,60 @@ public class R2Fragment extends Fragment {
                 return false;
             }
         });
+
+        //code_Flora
+       Button buttonSubmition =getActivity().findViewById(R.id.buttonCreation);
+       buttonSubmition.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+
+               EditText EditTextCode = (EditText)  getActivity().findViewById(R.id.editText_code);
+               String code  = String.valueOf(EditTextCode.getText());
+                 EditTextCode.setText("   ");
+                 EditTextCode.setHint("Κωδικός...");
+               EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
+               String name  = String.valueOf(EditTextName.getText());
+               EditTextName.setText("   ");
+               EditTextName.setHint("Όνομα...");
+               EditText EditTextDescription = (EditText)  getActivity().findViewById(R.id.editText_description);
+               String description  = String.valueOf(EditTextDescription.getText());
+               EditTextDescription.setText("   ");
+               EditTextDescription.setHint("Περιγραφή...");
+               EditText EditTextPrice = (EditText)  getActivity().findViewById(R.id.editText_price);
+               String price  = String.valueOf(EditTextPrice.getText());
+               EditTextPrice.setText("   ");
+               EditTextPrice.setHint("Τιμή...");
+               //pop-up message
+
+               AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+               builder.setCancelable(true); //επιτρέπω στον χρήστη να πατάει έκτος παραθύρου
+               builder.setTitle("Υποβολή Παροχής");
+               builder.setMessage("Κωδικός:{"+code+"}\n"+"Όνομα:{"+name+"}\n"+"Περιγραφή:{"+description+"}\n"+"Τιμή:{"+price+"}");
+               builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialogInterface, int i) {
+                       Toast myToast= Toast.makeText(getActivity(),"H υποβολή ακυρώθηκε!",Toast.LENGTH_SHORT);
+                       myToast.show();
+                       dialogInterface.cancel();
+                   }
+               });
+
+          builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialogInterface, int i) {
+                  Toast myToast= Toast.makeText(getActivity(),"H υποβολή έγινε!",Toast.LENGTH_SHORT);
+                  myToast.show();
+                  //σε αυτό το σημείο θα αποστέλω τα δεδομένα στη ΒΔ
+
+
+              }
+          });
+
+        builder.show();
+
+
+           }
+       });
+
     }
 }
