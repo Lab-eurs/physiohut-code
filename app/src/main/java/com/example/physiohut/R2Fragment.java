@@ -100,20 +100,16 @@ public class R2Fragment extends Fragment {
 
                EditText EditTextCode = (EditText)  getActivity().findViewById(R.id.editText_code);
                String code  = String.valueOf(EditTextCode.getText());
-                 EditTextCode.setText("   ");
-                 EditTextCode.setHint("Κωδικός...");
+
                EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
                String name  = String.valueOf(EditTextName.getText());
-               EditTextName.setText("   ");
-               EditTextName.setHint("Όνομα...");
+
                EditText EditTextDescription = (EditText)  getActivity().findViewById(R.id.editText_description);
                String description  = String.valueOf(EditTextDescription.getText());
-               EditTextDescription.setText("   ");
-               EditTextDescription.setHint("Περιγραφή...");
+
                EditText EditTextPrice = (EditText)  getActivity().findViewById(R.id.editText_price);
                String price  = String.valueOf(EditTextPrice.getText());
-               EditTextPrice.setText("   ");
-               EditTextPrice.setHint("Τιμή...");
+
                //pop-up message
 
                AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
@@ -123,9 +119,13 @@ public class R2Fragment extends Fragment {
                builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
+
                        Toast myToast= Toast.makeText(getActivity(),"H υποβολή ακυρώθηκε!",Toast.LENGTH_SHORT);
                        myToast.show();
+                       clear_EditText();
+                       Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
                        dialogInterface.cancel();
+
                    }
                });
 
@@ -134,6 +134,8 @@ public class R2Fragment extends Fragment {
               public void onClick(DialogInterface dialogInterface, int i) {
                   Toast myToast= Toast.makeText(getActivity(),"H υποβολή έγινε!",Toast.LENGTH_SHORT);
                   myToast.show();
+                  clear_EditText();
+                  Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
                   //σε αυτό το σημείο θα αποστέλω τα δεδομένα στη ΒΔ
 
 
@@ -147,4 +149,22 @@ public class R2Fragment extends Fragment {
        });
 
     }
+   private  void clear_EditText( )
+   {
+       EditText EditTextCode = (EditText)  getActivity().findViewById(R.id.editText_code);
+       EditTextCode.setText("   ");
+       EditTextCode.setHint("Κωδικός...");
+
+       EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
+       EditTextName.setText("   ");
+       EditTextName.setHint("Όνομα...");
+
+       EditText EditTextDescription = (EditText)  getActivity().findViewById(R.id.editText_description);
+       EditTextDescription.setText("   ");
+       EditTextDescription.setHint("Περιγραφή...");
+
+       EditText EditTextPrice = (EditText)  getActivity().findViewById(R.id.editText_price);
+       EditTextPrice.setText("   ");
+       EditTextPrice.setHint("Τιμή...");
+   }
 }
