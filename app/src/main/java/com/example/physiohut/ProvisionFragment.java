@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
@@ -103,6 +105,16 @@ public class ProvisionFragment extends Fragment {
         CheckBox checkBox5 = view.findViewById(R.id.checkBox5);
 
 
+        Bundle bundle = new Bundle();
+        R8Fragment r8Fragment = new R8Fragment();
+        r8Fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        // Remove the previous R8Fragment instance before adding the new one
+        fragmentManager.popBackStackImmediate(R8Fragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        // Add the new R8Fragment instance
+        transaction.replace(R.id.fragmentContainerView, r8Fragment);
+
         Button provisionBtn = view.findViewById(R.id.provisionSubmit);
         provisionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +145,11 @@ public class ProvisionFragment extends Fragment {
                     provitions.remove(checkBox4.getText().toString());
                 }
                 String provisionsList = TextUtils.join(", ", provitions);
+                bundle.putString("List",provisionsList);
+                // Add the transaction to the back stack
+                transaction.addToBackStack(null);
+                // Commit the transaction
+                transaction.commit();
                 Navigation.findNavController(view).navigate(R.id.action_provisionFragment_to_r8Fragment);
             }
         });

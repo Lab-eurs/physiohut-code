@@ -74,7 +74,9 @@ public class R8Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_r8, container, false);
+
     }
+    private String text;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -87,6 +89,16 @@ public class R8Fragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_r8Fragment_to_provisionFragment);
             }
         });
+
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            text = bundle.getString("List");
+            System.out.println(text);
+        }
+
+        TextView textView = (TextView) view.findViewById(R.id.Provisions);
+        textView.setText(text);
 
         //navigation bar leitourgikotita
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
@@ -111,11 +123,6 @@ public class R8Fragment extends Fragment {
                 showDialog();
             }
         });
-    }
-
-    public void updateTextView(String newText) {
-        TextView textView = getView().findViewById(R.id.Provisions);
-        textView.setText(newText);
     }
     private String selectedDate;
     //dhmiourgia custom popup gia to calendar
