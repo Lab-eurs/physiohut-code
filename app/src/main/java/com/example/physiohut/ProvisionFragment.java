@@ -2,11 +2,26 @@ package com.example.physiohut;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,5 +75,66 @@ public class ProvisionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_provision, container, false);
+    }
+
+    List<String> provitions = new ArrayList<String>();
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.back:
+                    case R.id.home:
+                        Navigation.findNavController(view).navigate(R.id.action_provisionFragment_to_r8Fragment);
+                        break;
+                }
+                return false;
+            }
+        });
+
+        CheckBox checkBox = view.findViewById(R.id.checkBox);
+        CheckBox checkBox2 = view.findViewById(R.id.checkBox2);
+        CheckBox checkBox3 = view.findViewById(R.id.checkBox3);
+        CheckBox checkBox4 = view.findViewById(R.id.checkBox4);
+        CheckBox checkBox5 = view.findViewById(R.id.checkBox5);
+
+
+        Button provisionBtn = view.findViewById(R.id.provisionSubmit);
+        provisionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkBox.isChecked()){
+                    provitions.add(checkBox.getText().toString());
+                }else{
+                    provitions.remove(checkBox.getText().toString());
+                }
+                if(checkBox2.isChecked()){
+                    provitions.add(checkBox2.getText().toString());
+                }else{
+                    provitions.remove(checkBox2.getText().toString());
+                }
+                if(checkBox3.isChecked()){
+                    provitions.add(checkBox3.getText().toString());
+                }else {
+                    provitions.remove(checkBox3.getText().toString());
+                }
+                if(checkBox4.isChecked()){
+                    provitions.add(checkBox4.getText().toString());
+                }else{
+                    provitions.remove(checkBox4.getText().toString());
+                }
+                if(checkBox5.isChecked()){
+                    provitions.add(checkBox5.getText().toString());
+                }else{
+                    provitions.remove(checkBox4.getText().toString());
+                }
+                String provisionsList = TextUtils.join(", ", provitions);
+                Navigation.findNavController(view).navigate(R.id.action_provisionFragment_to_r8Fragment);
+            }
+        });
     }
 }

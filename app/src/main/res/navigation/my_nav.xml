@@ -104,9 +104,6 @@
         android:label="fragment_r9"
         tools:layout="@layout/fragment_r9" >
         <action
-            android:id="@+id/action_r9Fragment_to_provisionFragment"
-            app:destination="@id/provisionFragment" />
-        <action
             android:id="@+id/action_r9Fragment_to_patientFragment"
             app:destination="@id/patientFragment" />
     </fragment>
@@ -116,8 +113,8 @@
         android:label="fragment_provision"
         tools:layout="@layout/fragment_provision" >
         <action
-            android:id="@+id/action_provisionFragment_to_patientFragment"
-            app:destination="@id/patientFragment" />
+            android:id="@+id/action_provisionFragment_to_r8Fragment"
+            app:destination="@id/r8Fragment" />
     </fragment>
     <fragment
         android:id="@+id/r10Fragment"
@@ -166,5 +163,8 @@
         <action
             android:id="@+id/action_r8Fragment_to_doctorFragment"
             app:destination="@id/doctorFragment" />
+        <action
+            android:id="@+id/action_r8Fragment_to_provisionFragment"
+            app:destination="@id/provisionFragment" />
     </fragment>
 </navigation>
