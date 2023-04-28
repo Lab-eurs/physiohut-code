@@ -97,13 +97,13 @@ public class R3Fragment extends Fragment {
             public void onClick(View view) {
                 EditText editTextName=getActivity().findViewById(R.id.editText_name);
                 String name = String.valueOf(editTextName.getText());
-                editTextName.setText(" ");
+
                 EditText editTextAddress=getActivity().findViewById(R.id.editText_address);
                 String  address = String.valueOf(editTextAddress.getText());
-                editTextAddress.setText("  ");
+
                 EditText editTextAmka=getActivity().findViewById(R.id.editText_amka);
                 String amka = String.valueOf(editTextAmka.getText());
-                editTextAmka.setText("  ");
+
              //pop up message
                 AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
                  builder.setCancelable(true);
@@ -114,6 +114,7 @@ public class R3Fragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Toast myToast= Toast.makeText(getActivity(),"H υποβολή ασθενή ακυρώθηκε!",Toast.LENGTH_SHORT);
                         myToast.show();
+                        Navigation.findNavController(view).navigate(R.id.action_r3Fragment_to_doctorFragment);
                         dialogInterface.cancel();
                     }
                 });
@@ -122,11 +123,29 @@ public class R3Fragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Toast myToast= Toast.makeText(getActivity(),"H υποβολή ασθενή έγινε!",Toast.LENGTH_SHORT);
                         myToast.show();
+                        Navigation.findNavController(view).navigate(R.id.action_r3Fragment_to_doctorFragment);
 
                     }
                 });
                 builder.show();
             }
         });
+    }
+    private  void clear_EditText( )
+    {
+
+
+        EditText editTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
+        editTextName.setText("   ");
+        editTextName.setHint("Όνομα...");
+
+        EditText editTextAddress=getActivity().findViewById(R.id.editText_address);
+        editTextAddress.setText("  ");
+        editTextAddress.setHint("Διεύθυνση...");
+
+        EditText editTextAmka=getActivity().findViewById(R.id.editText_amka);
+        editTextAmka.setText("  ");
+        editTextAmka.setHint("ΑΜΚΑ...");
+
     }
 }
