@@ -19,6 +19,7 @@
         android:padding="6dp"
         android:textColor="@color/black"
         android:gravity="center_vertical"
+        android:textSize="15sp"
     />
 
     <Button
