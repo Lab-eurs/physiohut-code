@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -26,11 +28,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    RecyclerView recyclerView;
+    List<R4Fragment> r4FragmentList;
+    CustomAdapter customAdapter;
     private View decorView;
 
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +53,43 @@ public class MainActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
 
+        // ArrayList<String> arrayList=new ArrayList<>();
+        // arrayList.add("12/03/22 Παροχή #2");
+        // arrayList.add("16/03/22 Παροχή #3");
+        // arrayList.add("09/04/22 Παροχή #4");
+        // arrayList.add("11/06/22 Παροχή #5");
+        // arrayList.add("01/09/22 Παροχή #6");
+        // arrayList.add("22/11/22 Παροχή #7");
+        // arrayList.add("30/11/22 Παροχή #8");
+        // arrayList.add("19/12/22 Παροχή #9");
+        // arrayList.add("14/01/23 Παροχή #10");
+        // arrayList.add("01/03/23 Παροχή #11");
+        // arrayList.add("25/04/23 Παροχή #12");
 
+        displayItems();
+
+    }
+
+    private void displayItems() {
+        recyclerView = findViewById(R.id.recycler_main);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        r4FragmentList = new ArrayList<>();
+        r4FragmentList.add(new R4Fragment("08/01/22", "Παροχή #1"));
+        r4FragmentList.add(new R4Fragment("12/02/22", "Παροχή #2"));
+        r4FragmentList.add(new R4Fragment("16/03/22", "Παροχή #3"));
+        r4FragmentList.add(new R4Fragment("09/04/22", "Παροχή #4"));
+        r4FragmentList.add(new R4Fragment("11/06/22", "Παροχή #5"));
+        r4FragmentList.add(new R4Fragment("01/09/22", "Παροχή #6"));
+        r4FragmentList.add(new R4Fragment("22/11/22", "Παροχή #7"));
+        r4FragmentList.add(new R4Fragment("30/11/22", "Παροχή #8"));
+        r4FragmentList.add(new R4Fragment("19/12/22", "Παροχή #9"));
+        r4FragmentList.add(new R4Fragment("14/01/23", "Παροχή #10"));
+        r4FragmentList.add(new R4Fragment("01/03/23", "Παροχή #11"));
+        r4FragmentList.add(new R4Fragment("25/04/23", "Παροχή #12"));
+
+        customAdapter = new CustomAdapter(this, r4FragmentList);
+        recyclerView.setAdapter(customAdapter);
     }
 
 

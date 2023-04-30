@@ -1,24 +1,22 @@
 package com.example.physiohut;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,9 +32,34 @@ public class R4Fragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    String imerominia = "";
+    String paroxi = "";
+
+    public R4Fragment(String imerominia, String paroxi) {
+        this.imerominia = imerominia;
+        this.paroxi = paroxi;
+    }
+
+    public String getImerominia() {
+        return imerominia;
+    }
+
+    public void setImerominia(String imerominia) {
+        this.imerominia = imerominia;
+    }
+
+    public String getParoxi() {
+        return paroxi;
+    }
+
+    public void setParoxi(String paroxi) {
+        this.paroxi = paroxi;
+    }
 
     public R4Fragment() {
         // Required empty public constructor

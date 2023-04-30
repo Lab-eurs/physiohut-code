@@ -1,198 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".R4Fragment">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/myLinearLayout"
+    <TextView
+        android:id="@+id/textHistory"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollIndicators="none"
-        android:scrollbarSize="4dp"
-        android:scrollbars="vertical">
+        android:layout_height="wrap_content"
+        android:text="@string/history_text"
+        android:textColor="@color/black">
+    </TextView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
 
         <TextView
-            android:id="@+id/item_name"
-            android:layout_width="wrap_content"
+            android:id="@+id/textImerominia"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/showHistory"
-            android:textSize="42sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.013" />
+            android:layout_weight="1"
+            android:text="08/01/22"
+            android:textColor="@color/black"
+            android:textSize="26sp"></TextView>
 
+        <TextView
+            android:id="@+id/textParoxi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Παροχή #1"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="26sp"></TextView>
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="412dp"
-            android:layout_height="657dp"
-            android:orientation="vertical"
-            android:scrollIndicators="right"
-            android:scrollbarSize="14dp"
-            android:scrollbarThumbVertical="@color/black"
-            android:scrollbarTrackVertical="@color/black"
-            android:scrollbars="vertical"
-            android:soundEffectsEnabled="false"
-            android:verticalScrollbarPosition="right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_name">
+    </LinearLayout>
 
-
-            <TextView
-                android:id="@+id/item_paroxi1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi1"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi2"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi3"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi4"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi5"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi6"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi7"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi8"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi9"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi10"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi11"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi12"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi13"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi14"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:scrollbarSize="12dp"
-                android:text="@string/paroxi15"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/item_paroxi16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/paroxi16"
-                android:textSize="36sp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </LinearLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>
