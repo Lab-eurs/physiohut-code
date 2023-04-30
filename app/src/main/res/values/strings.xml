@@ -24,4 +24,14 @@
     <string name="add_patient">add patient</string>
     <string name="appointment_request">Appointment Request</string>
     <string name="create_appointment">Create Appointment</string>
+    <string name="total_payments">Συνολικά έχετε πληρώσει:</string>
+    <string name="default_total">0$</string>
+    <string name="sort_by">Ταξινόμηση Κατά:</string>
+    <string-array name="sort_choices_array">
+        <item>Επιλογές:</item>
+        <item>Αύξον Κόστος</item>
+        <item>Φθίνον Κόστος</item>
+        <item>Πιο πρόσφατες</item>
+        <item>Πιο παλιές</item>
+    </string-array>
 </resources>

@@ -1,2 +1,4 @@
-package com.example.physiohut;public class DBDataFetcher {
+package com.example.physiohut;
+
+public class DBDataFetcher {
 }

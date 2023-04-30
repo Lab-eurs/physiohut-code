@@ -9,4 +9,13 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#2667FF</color>
     <color name="button">#3B28CC</color>
+    <style name="provision_recycler_view">
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="android:scrollbarTrackVertical">@drawable/provision_scrollbar_track</item>
+        <item name="android:scrollbarThumbVertical">@drawable/provision_scrollbar_thumb</item>
+    </style>
+
 </resources>
