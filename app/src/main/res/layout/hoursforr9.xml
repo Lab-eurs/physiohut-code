@@ -2,104 +2,109 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/hoursforr9"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/selectbutton"
-        android:layout_width="228dp"
-        android:layout_height="55dp"
-        android:backgroundTint="@color/button"
-        android:text="Επιλογή"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-        app:layout_constraintVertical_bias="0.583" />
-
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="353dp"
-        android:layout_height="219dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.347">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/day2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/button22"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/material_dynamic_neutral60"
-                android:text="9:00 - 11:00" />
-
-            <Button
-                android:id="@+id/button23"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/material_dynamic_neutral60"
-                android:text="11:00 - 13:00" />
-
-            <Button
-                android:id="@+id/button24"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/material_dynamic_neutral60"
-                android:text="13:00 - 15:00" />
-
-            <Button
-                android:id="@+id/button25"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/material_dynamic_neutral60"
-                android:text="15:00 - 17:00" />
-
-            <Button
-                android:id="@+id/button26"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/material_dynamic_neutral60"
-                android:text="17:00 - 19:00" />
-
-            <Button
-                android:id="@+id/button27"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/material_dynamic_neutral60"
-                android:text="19:00 - 21:00" />
-        </LinearLayout>
-    </ScrollView>
-
     <TextView
-        android:id="@+id/textView6"
-        android:layout_width="280dp"
-        android:layout_height="33dp"
+        android:id="@+id/textView4"
+        android:layout_width="255dp"
+        android:layout_height="37dp"
         android:text="Το επόμενο ραντεβού σας:"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="322dp"
+        android:layout_height="241dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.338">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/grey"
+                android:text="9:00 - 11:00" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/grey"
+                android:text="11:00 - 13:00" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/grey"
+                android:text="13:00 - 15:00" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/grey"
+                android:text="15:00 - 17:00" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/grey"
+                android:text="17:00 - 19:00" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/grey"
+                android:text="19:00 - 21:00" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/submitbutton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button"
+        android:text="Επιλογή"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <TextView
+        android:id="@+id/day2"
+        android:layout_width="108dp"
+        android:layout_height="24dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

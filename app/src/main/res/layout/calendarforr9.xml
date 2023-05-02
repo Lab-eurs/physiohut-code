@@ -34,6 +34,7 @@
         android:layout_width="280dp"
         android:layout_height="33dp"
         android:text="Το επόμενο ραντεβού σας:"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/calendarView"

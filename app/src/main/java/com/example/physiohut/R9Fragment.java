@@ -127,34 +127,32 @@ public class R9Fragment extends Fragment {
         });
     }
 
-    private String time;
-    //dhmiourgia custom hour pop-up
-    private String showHourPopup(String date) {
-
+   String time;
+    private void showHourPopup(String date){
         Dialog hourDialog = new Dialog(getContext());
         hourDialog.setContentView(R.layout.hoursforr9);
         hourDialog.show();
 
         TextView textView = hourDialog.findViewById(R.id.day2);
-        textView.setText(date);
+       textView.setText(date);
 
-        Button firstButton = hourDialog.findViewById(R.id.button22);
-        Button secondButton = hourDialog.findViewById(R.id.button23);
-        Button thirdButton = hourDialog.findViewById(R.id.button24);
-        Button fourthButton = hourDialog.findViewById(R.id.button25);
-        Button fifthButton = hourDialog.findViewById(R.id.button26);
-        Button sixthButton = hourDialog.findViewById((R.id.button27));
-        Button submitButton = hourDialog.findViewById(R.id.submitbutton);
+        Button firstButton = hourDialog.findViewById(R.id.button);
+        Button secondButton = hourDialog.findViewById(R.id.button2);
+        Button thirdButton = hourDialog.findViewById(R.id.button3);
+        Button fourthButton = hourDialog.findViewById(R.id.button4);
+        Button fifthButton = hourDialog.findViewById(R.id.button5);
+        Button sixthButton = hourDialog.findViewById((R.id.button6));
+        Button submitButton = hourDialog.findViewById(R.id.submitbutton1);
 
         firstButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 firstButton.setBackgroundColor(getResources().getColor(R.color.button));
-                secondButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                thirdButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                fourthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                fifthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                sixthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
+                secondButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                thirdButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fourthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fifthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                sixthButton.setBackgroundColor(getResources().getColor(R.color.grey));
                 time = "9:00 - 11:00";
             }
         });
@@ -162,12 +160,12 @@ public class R9Fragment extends Fragment {
         secondButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firstButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
+                firstButton.setBackgroundColor(getResources().getColor(R.color.grey));
                 secondButton.setBackgroundColor(getResources().getColor(R.color.button));
-                thirdButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                fourthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                fifthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                sixthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
+                thirdButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fourthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fifthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                sixthButton.setBackgroundColor(getResources().getColor(R.color.grey));
                 time = "11:00 - 13:00";
             }
         });
@@ -175,12 +173,12 @@ public class R9Fragment extends Fragment {
         thirdButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firstButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                secondButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
+                firstButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                secondButton.setBackgroundColor(getResources().getColor(R.color.grey));
                 thirdButton.setBackgroundColor(getResources().getColor(R.color.button));
-                fourthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                fifthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                sixthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
+                fourthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fifthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                sixthButton.setBackgroundColor(getResources().getColor(R.color.grey));
                 time = "13:00 - 15:00";
             }
         });
@@ -188,12 +186,12 @@ public class R9Fragment extends Fragment {
         fourthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firstButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                secondButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                thirdButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
+                firstButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                secondButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                thirdButton.setBackgroundColor(getResources().getColor(R.color.grey));
                 fourthButton.setBackgroundColor(getResources().getColor(R.color.button));
-                fifthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                sixthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
+                fifthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                sixthButton.setBackgroundColor(getResources().getColor(R.color.grey));
                 time = "15:00 - 17:00";
             }
         });
@@ -201,12 +199,12 @@ public class R9Fragment extends Fragment {
         fifthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firstButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                secondButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                thirdButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                fourthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
+                firstButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                secondButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                thirdButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fourthButton.setBackgroundColor(getResources().getColor(R.color.grey));
                 fifthButton.setBackgroundColor(getResources().getColor(R.color.button));
-                sixthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
+                sixthButton.setBackgroundColor(getResources().getColor(R.color.grey));
                 time = "17:00 - 19:00";
             }
         });
@@ -214,11 +212,11 @@ public class R9Fragment extends Fragment {
         sixthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firstButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                secondButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                thirdButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                fourthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
-                fifthButton.setBackgroundColor(getResources().getColor(com.google.android.material.R.color.material_dynamic_neutral60));
+                firstButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                secondButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                thirdButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fourthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fifthButton.setBackgroundColor(getResources().getColor(R.color.grey));
                 sixthButton.setBackgroundColor(getResources().getColor(R.color.button));
                 time = "19:00 - 21:00";
             }
@@ -227,11 +225,12 @@ public class R9Fragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Ραντεβού έκλεισε για " + time + date, Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Ραντεβού έκλεισε για "+time +", " + date, Toast.LENGTH_LONG).show();
                 hourDialog.dismiss();
             }
         });
-        return  time;
+
+
     }
 
     //NA VALW SWSTO RETURN, NA MOU DWSEI TO ALERT H KWNNA
