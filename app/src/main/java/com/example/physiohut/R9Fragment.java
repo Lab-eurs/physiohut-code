@@ -1,6 +1,9 @@
 package com.example.physiohut;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,10 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputLayout;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -91,11 +98,41 @@ public class R9Fragment extends Fragment {
             }
         });
         //koumpi calendar
-        Button submit = view.findViewById(R.id.calendarbutton);
-        submit.setOnClickListener(new View.OnClickListener() {
+        Button calendarbtn = view.findViewById(R.id.calendarbutton);
+        calendarbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPopup();
+            }
+        });
+        TextInputLayout comment = view.findViewById(R.id.commentr9);
+        EditText commentEditText = comment.getEditText();
+        Button submit = view.findViewById(R.id.submitbutton);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String comment = commentEditText.getText().toString();
+                //pop-up
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                builder.setTitle("Επιβεβαίωση Ραντεβού");
+                builder.setMessage("Ημερομηνία: "+selectedDate+"\n"+"Ώρα: "+time+"\n"+"Σχόλιο: "+comment);
+                builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(), "Ραντεβού έκλεισε για "+time +", " + selectedDate, Toast.LENGTH_LONG).show();
+                        //bash dedomenwn kwdikas
+                    }
+                });
+                builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(), "Κάτι πήγε λάθος", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                //}
+
             }
         });
 
@@ -225,19 +262,11 @@ public class R9Fragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Ραντεβού έκλεισε για "+time +", " + date, Toast.LENGTH_LONG).show();
                 hourDialog.dismiss();
             }
         });
 
 
     }
-
-    //NA VALW SWSTO RETURN, NA MOU DWSEI TO ALERT H KWNNA
-
-
-    //Confirmation alert gia to rantevou
-
-
 
 }

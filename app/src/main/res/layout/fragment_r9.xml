@@ -65,6 +65,7 @@
             app:layout_constraintVertical_bias="0.225" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/commentr9"
             android:layout_width="318dp"
             android:layout_height="138dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -79,9 +80,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/white"
-                android:hint="Σχόλιο"
                 android:gravity="start"
-                android:textAlignment="viewStart"/>
+                android:hint="Σχόλιο"
+                android:textAlignment="viewStart" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
