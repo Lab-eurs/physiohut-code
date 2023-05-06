@@ -215,7 +215,7 @@ public class R2Fragment extends Fragment {
          EditTextName.setError("Το πεδίο Όνομα Παροχής είναι κενό!");
          counter=counter+100;
      }
-     if(sName.length()<=4)
+     if(sName.length()<=3)
      {
          EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
          EditTextName.requestFocus();
