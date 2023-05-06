@@ -94,6 +94,7 @@ public class R2Fragment extends Fragment {
 
         //code_Flora
        Button buttonSubmition =getActivity().findViewById(R.id.buttonCreation);
+
        buttonSubmition.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
@@ -110,10 +111,16 @@ public class R2Fragment extends Fragment {
                EditText EditTextPrice = (EditText)  getActivity().findViewById(R.id.editText_price);
                String price  = String.valueOf(EditTextPrice.getText());
 
+              int counter=0;
+              boolean errorVariable;
+               errorVariable=Check_Field(code,name,description,price,counter);
+
+
                //pop-up message
 
                AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
                builder.setCancelable(true); //επιτρέπω στον χρήστη να πατάει έκτος παραθύρου
+               if(errorVariable==true){
                builder.setTitle("Υποβολή Παροχής");
                builder.setMessage("Κωδικός:{"+code+"}\n"+"Όνομα:{"+name+"}\n"+"Περιγραφή:{"+description+"}\n"+"Τιμή:{"+price+"}");
                builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
@@ -142,10 +149,26 @@ public class R2Fragment extends Fragment {
               }
           });
 
-        builder.show();
+        builder.show();}
 
-
+               else
+                   {
+                       builder.setTitle("Υποβολή Παροχής");
+                       builder.setMessage("Τα δεδομένα που έχετε εισάγει  ΔΕΝ ΕΙΝΑΙ ΕΓΚΥΡΑ παρακαλώ επαναλάβετε την διαδικασία με προσοχή!");
+                       builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialogInterface, int i) {
+                               Toast myToast= Toast.makeText(getActivity(),"H υποβολή ακυρώθηκε!",Toast.LENGTH_SHORT);
+                               myToast.show();
+                               clear_EditText();
+                               Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
+                               dialogInterface.cancel();
+                           }
+                       });
+                       builder.show();
+                   }
            }
+
        });
 
     }
@@ -157,7 +180,7 @@ public class R2Fragment extends Fragment {
 
        EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
        EditTextName.setText("   ");
-       EditTextName.setHint("Όνομα...");
+       EditTextName.setHint("Όνομα Παροχής...");
 
        EditText EditTextDescription = (EditText)  getActivity().findViewById(R.id.editText_description);
        EditTextDescription.setText("   ");
@@ -167,4 +190,69 @@ public class R2Fragment extends Fragment {
        EditTextPrice.setText("   ");
        EditTextPrice.setHint("Τιμή...");
    }
+ private boolean  Check_Field(String sCode, String sName, String sDescription, String sPrice, int counter)
+ { //  η συνάρτηση επιστέφει true μόνο αμα δεν εντοπίζεται κανένα σφάλμα
+      counter=00000;
+     if(sCode.matches(""))
+     {
+         EditText EditTextCode = (EditText)  getActivity().findViewById(R.id.editText_code);
+         EditTextCode.requestFocus();
+         EditTextCode.setError("Το πεδίο Κωδικός είναι κένo!");
+         counter=1000;
+     }
+     else if(sCode.length()<=7)
+     {
+         EditText EditTextCode = (EditText)  getActivity().findViewById(R.id.editText_code);
+         EditTextCode.requestFocus();
+         EditTextCode.setError("Το πεδίο Κωδικός έχει μη έγκυρα δεδομένα!");
+         counter=1000;
+     }
+
+     if(sName.matches(""))
+     {
+         EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
+         EditTextName.requestFocus();
+         EditTextName.setError("Το πεδίο Όνομα Παροχής είναι κενό!");
+         counter=counter+100;
+     }
+     if(sName.length()<=4)
+     {
+         EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
+         EditTextName.requestFocus();
+         EditTextName.setError("Το πεδίο Όνομα Παροχής έχει λάθος δεδομένα!");
+         counter=counter+100;
+     }
+
+
+     if(sDescription.matches(""))
+     {
+         EditText EditTextDescription = (EditText)  getActivity().findViewById(R.id.editText_description);
+         EditTextDescription.requestFocus();
+         EditTextDescription.setError("Το πεδίο Περιγραφή είναι κενό!");
+         counter=counter+10;
+     }
+
+     if(sPrice.matches(""))
+     {
+         EditText EditTextPrice = (EditText)  getActivity().findViewById(R.id.editText_price);
+         EditTextPrice.requestFocus();
+         EditTextPrice.setError("Το πεδίο Τιμή  είναι κενό!");
+         counter=counter+1;
+     }
+
+     if(sPrice.length()<=3 )
+     {
+         EditText EditTextPrice = (EditText)  getActivity().findViewById(R.id.editText_price);
+         EditTextPrice.requestFocus();
+         EditTextPrice.setError("Το πεδίο Τιμή  έχει λάθος δεδομένα!");
+         counter=counter+1;
+     }
+
+
+           if(counter==0)
+               {return true;}
+           else
+              {return  false;}
+ }
+
 }
