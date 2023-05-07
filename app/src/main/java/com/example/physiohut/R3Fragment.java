@@ -9,12 +9,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -91,61 +93,101 @@ public class R3Fragment extends Fragment {
             }
         });
         //code_Eleni
-        Button buttonSubmition =getActivity().findViewById(R.id.button_submition);
-        buttonSubmition.setOnClickListener(new View.OnClickListener() {
+        Button buttonSubmission = getActivity().findViewById(R.id.button_submition);
+        buttonSubmission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText editTextName=getActivity().findViewById(R.id.editText_name);
+                boolean check =false;
+                EditText editTextName = getActivity().findViewById(R.id.editText_name);
                 String name = String.valueOf(editTextName.getText());
+                if (name.isEmpty()) {
+                    editTextName.requestFocus();
+                    editTextName.setError("Το πεδίο Όνομαεπωνύμο είναι κενό!");
+                    check = true;
+                }
+               else  if (name.length() <= 8) {
+                    editTextName.requestFocus();
+                    editTextName.setError("Το πεδίο Όνομαεπωνύμο  έχει λάθος δεδομένα!");
+                    check = true;
+                }
 
-                EditText editTextAddress=getActivity().findViewById(R.id.editText_address);
-                String  address = String.valueOf(editTextAddress.getText());
+                EditText editTextAddress = getActivity().findViewById(R.id.editText_address);
+                String address = String.valueOf(editTextAddress.getText());
+                if (address.isEmpty()) {
+                    editTextAddress.requestFocus();
+                    editTextAddress.setError("Το πεδίο Διεύθυνση είναι κενό!");
+                     check= true;
+                }
+               else  if (address.length()< 4 ) {
+                    editTextAddress.requestFocus();
+                    editTextAddress.setError("Το πεδίο Διεύθυνση έχει λάθος δεδομένα!");
+                    check = true;
+                }
 
-                EditText editTextAmka=getActivity().findViewById(R.id.editText_amka);
+                EditText editTextAmka = getActivity().findViewById(R.id.editText_amka);
                 String amka = String.valueOf(editTextAmka.getText());
+                if (amka.isEmpty()) {
+                    editTextAmka.requestFocus();
+                    editTextAmka.setError("Το πεδίο AMKA  είναι κενό!");
+                    check = true;
+                }
 
-             //pop up message
-                AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
-                 builder.setCancelable(true);
-                builder.setTitle("Επιβεβαίωση ασθενή");
-                builder.setMessage("Όνομα:{"+name+"}\n"+"Δίευθυνση:{"+address+"}\n"+"ΑΜΚΑ:{"+amka+"}");
-                builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast myToast= Toast.makeText(getActivity(),"H υποβολή ασθενή ακυρώθηκε!",Toast.LENGTH_SHORT);
-                        myToast.show();
-                        Navigation.findNavController(view).navigate(R.id.action_r3Fragment_to_doctorFragment);
-                        dialogInterface.cancel();
-                    }
-                });
-                builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast myToast= Toast.makeText(getActivity(),"H υποβολή ασθενή έγινε!",Toast.LENGTH_SHORT);
-                        myToast.show();
-                        Navigation.findNavController(view).navigate(R.id.action_r3Fragment_to_doctorFragment);
+               else if(amka.length()!=11)
+                {
+                    editTextAmka.requestFocus();
+                    editTextAmka.setError("Το πεδίο AMKA  έχει λάθος δεδομένα!");
+                    check=true;
+                }
+                editTextAmka.setText("   ");
+                editTextAddress.setText("   ");
+                editTextName.setText("   ");
+                if (check == false)
+                //pop up message
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setCancelable(true);
+                    builder.setTitle("Επιβεβαίωση ασθενή");
+                    builder.setMessage("Όνομα:{" + name + "}\n" + "Δίευθυνση:{" + address + "}\n" + "ΑΜΚΑ:{" + amka + "}");
+                    builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast myToast = Toast.makeText(getActivity(), "H υποβολή ασθενή ακυρώθηκε!", Toast.LENGTH_SHORT);
+                            myToast.show();
+                            Navigation.findNavController(view).navigate(R.id.action_r3Fragment_to_doctorFragment);
+                            dialogInterface.cancel();
+                        }
+                    });
+                    builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast myToast = Toast.makeText(getActivity(), "H υποβολή ασθενή έγινε!", Toast.LENGTH_SHORT);
+                            myToast.show();
+                            Navigation.findNavController(view).navigate(R.id.action_r3Fragment_to_doctorFragment);
 
-                    }
-                });
-                builder.show();
+                        }
+                    });
+                    builder.show();
+                } else if (check == true) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setCancelable(true);
+                    builder.setTitle("Επιβεβαίωση ασθενή");
+                    builder.setMessage("Απαιτείται διόρθωση δεδομένων παρακαλώ επαναλάβεται την διαδικάσια από την αρχή!");
+                    builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast myToast = Toast.makeText(getActivity(), "H υποβολή ασθενή ακυρώθηκε!", Toast.LENGTH_SHORT);
+                            myToast.show();
+                            Navigation.findNavController(view).navigate(R.id.action_r3Fragment_to_doctorFragment);
+                            dialogInterface.cancel();
+                        }
+                    });
+                    builder.show();
+
+
+                }
+
             }
         });
     }
-    private  void clear_EditText( )
-    {
 
-
-        EditText editTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
-        editTextName.setText("   ");
-        editTextName.setHint("Όνομα...");
-
-        EditText editTextAddress=getActivity().findViewById(R.id.editText_address);
-        editTextAddress.setText("  ");
-        editTextAddress.setHint("Διεύθυνση...");
-
-        EditText editTextAmka=getActivity().findViewById(R.id.editText_amka);
-        editTextAmka.setText("  ");
-        editTextAmka.setHint("ΑΜΚΑ...");
-
-    }
 }
