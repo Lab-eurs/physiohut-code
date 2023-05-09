@@ -118,7 +118,7 @@ public class R3Fragment extends Fragment {
                     editTextAddress.setError("Το πεδίο Διεύθυνση είναι κενό!");
                      check= true;
                 }
-               else  if (address.length()< 4 ) {
+               else  if (address.length() <=4 ) {
                     editTextAddress.requestFocus();
                     editTextAddress.setError("Το πεδίο Διεύθυνση έχει λάθος δεδομένα!");
                     check = true;
@@ -163,7 +163,7 @@ public class R3Fragment extends Fragment {
                             Toast myToast = Toast.makeText(getActivity(), "H υποβολή ασθενή έγινε!", Toast.LENGTH_SHORT);
                             myToast.show();
                             Navigation.findNavController(view).navigate(R.id.action_r3Fragment_to_doctorFragment);
-
+                            //εδω θα γίνει η αποστολή των δεδομένων στην ΒΔ
                         }
                     });
                     builder.show();

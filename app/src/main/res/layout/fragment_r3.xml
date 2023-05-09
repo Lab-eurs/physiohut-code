@@ -32,10 +32,10 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/button_submition"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.214"
+            app:layout_constraintHorizontal_bias="0.26"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_addition"
-            app:layout_constraintVertical_bias="0.002" />
+            app:layout_constraintVertical_bias="0.004" />
 
         <Button
             android:id="@+id/button_submition"
