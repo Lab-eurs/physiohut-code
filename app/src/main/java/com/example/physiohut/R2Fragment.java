@@ -164,9 +164,7 @@ public class R2Fragment extends Fragment {
                    {incorrectFields="Τιμή";}
                    else {incorrectFields+=" ,Τιμή";}
                }
-
-
-
+               
                //pop-up message
 
                AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
@@ -177,7 +175,6 @@ public class R2Fragment extends Fragment {
                builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
-
                        Toast myToast= Toast.makeText(getActivity(),"H υποβολή ακυρώθηκε!",Toast.LENGTH_SHORT);
                        myToast.show();
                        Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
@@ -203,7 +200,7 @@ public class R2Fragment extends Fragment {
                else
                    {
                        builder.setTitle("Υποβολή Παροχής");
-                       builder.setMessage("Tα παρακάτω πεδία είναι συμπληρωμένα λάθος:"+incorrectFields+". \nΠαρακαλώ επαναλάβετε την διαδικάσια.");
+                       builder.setMessage("Tα παρακάτω πεδία είναι συμπληρωμένα λάθος:\n"+incorrectFields+".\nΠαρακαλώ επαναλάβετε την διαδικάσια εξ αρχής.");
                        builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialogInterface, int i) {
