@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -93,43 +94,92 @@ public class R2Fragment extends Fragment {
         });
 
         //code_Flora
-       Button buttonSubmition =getActivity().findViewById(R.id.buttonCreation);
+       Button buttonSubmission =getActivity().findViewById(R.id.buttonCreation);
 
-       buttonSubmition.setOnClickListener(new View.OnClickListener() {
+       buttonSubmission.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
 
                EditText EditTextCode = (EditText)  getActivity().findViewById(R.id.editText_code);
-               String code  = String.valueOf(EditTextCode.getText());
+               String sCode  = String.valueOf(EditTextCode.getText());
 
                EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
-               String name  = String.valueOf(EditTextName.getText());
+               String sName  = String.valueOf(EditTextName.getText());
 
                EditText EditTextDescription = (EditText)  getActivity().findViewById(R.id.editText_description);
-               String description  = String.valueOf(EditTextDescription.getText());
+               String sDescription  = String.valueOf(EditTextDescription.getText());
 
                EditText EditTextPrice = (EditText)  getActivity().findViewById(R.id.editText_price);
-               String price  = String.valueOf(EditTextPrice.getText());
+               String sPrice  = String.valueOf(EditTextPrice.getText());
 
-              int counter=0;
-              boolean errorVariable;
-               errorVariable=Check_Field(code,name,description,price,counter);
+               clear_EditTexts(EditTextCode, EditTextName,EditTextDescription,EditTextPrice);
+
+               String incorrectFields =" ";
+               boolean flag=true;
+
+               if (sCode.matches("")) {
+                   EditTextCode.requestFocus();
+                   EditTextCode.setError("Το πεδίο Κωδικός είναι κένo!");
+                   flag = false;
+                   incorrectFields="Κωδικός";
+
+               } else if (sCode.length() <= 7) {
+                   EditTextCode.requestFocus();
+                   EditTextCode.setError("Το πεδίο Κωδικός έχει μη έγκυρα δεδομένα!");
+                   flag = false;
+                   incorrectFields=" Κωδικός";
+               }
+
+               if (sName.matches("")) {
+                   EditTextName.requestFocus();
+                   EditTextName.setError("Το πεδίο Όνομα Παροχής είναι κενό!");
+                   flag = false;
+                   if (flag)
+                   {incorrectFields="Όνομα Παροχής";}
+                   else{incorrectFields="Kωδικός, Όνομα Παροχής";}
+               }
+               if (sName.length() <= 3) {
+                   EditTextName.requestFocus();
+                   EditTextName.setError("Το πεδίο Όνομα Παροχής έχει λάθος δεδομένα!");
+                   flag = false;
+                   if (flag)
+                   {incorrectFields="Όνομα Παροχής";}
+                   else {incorrectFields="Κωδικός ,Όνομα Παροχής";}
+               }
+
+
+               if (sDescription.matches("")) {
+                   EditTextDescription.requestFocus();
+                   EditTextDescription.setError("Το πεδίο Περιγραφή είναι κενό!");
+                   flag = false;
+                   if (flag)
+                   {incorrectFields="Περιγραφή";}
+                   else {incorrectFields+=" ,Περιγραφή";}
+               }
+               if (sPrice.matches("")) {
+                   EditTextPrice.requestFocus();
+                   EditTextPrice.setError("Το πεδίο Τιμή  είναι κενό!");
+                   flag = false;
+                   if (flag)
+                   {incorrectFields="Τιμή";}
+                   else {incorrectFields+=" ,Τιμή";}
+               }
+
 
 
                //pop-up message
 
                AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
                builder.setCancelable(true); //επιτρέπω στον χρήστη να πατάει έκτος παραθύρου
-               if(errorVariable==true){
+               if(flag){
                builder.setTitle("Υποβολή Παροχής");
-               builder.setMessage("Κωδικός:{"+code+"}\n"+"Όνομα:{"+name+"}\n"+"Περιγραφή:{"+description+"}\n"+"Τιμή:{"+price+"}");
+               builder.setMessage("Κωδικός:{"+sCode+"}\n"+"Όνομα:{"+sName+"}\n"+"Περιγραφή:{"+sDescription+"}\n"+"Τιμή:{"+sPrice+"}");
                builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
 
                        Toast myToast= Toast.makeText(getActivity(),"H υποβολή ακυρώθηκε!",Toast.LENGTH_SHORT);
                        myToast.show();
-                       clear_EditText();
                        Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
                        dialogInterface.cancel();
 
@@ -141,7 +191,6 @@ public class R2Fragment extends Fragment {
               public void onClick(DialogInterface dialogInterface, int i) {
                   Toast myToast= Toast.makeText(getActivity(),"H υποβολή έγινε!",Toast.LENGTH_SHORT);
                   myToast.show();
-                  clear_EditText();
                   Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
                   //σε αυτό το σημείο θα αποστέλω τα δεδομένα στη ΒΔ
 
@@ -154,13 +203,12 @@ public class R2Fragment extends Fragment {
                else
                    {
                        builder.setTitle("Υποβολή Παροχής");
-                       builder.setMessage("Τα δεδομένα που έχετε εισάγει  ΔΕΝ ΕΙΝΑΙ ΕΓΚΥΡΑ παρακαλώ επαναλάβετε την διαδικασία με προσοχή!");
+                       builder.setMessage("Tα παρακάτω πεδία είναι συμπληρωμένα λάθος:"+incorrectFields+". \nΠαρακαλώ επαναλάβετε την διαδικάσια.");
                        builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialogInterface, int i) {
                                Toast myToast= Toast.makeText(getActivity(),"H υποβολή ακυρώθηκε!",Toast.LENGTH_SHORT);
                                myToast.show();
-                               clear_EditText();
                                Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
                                dialogInterface.cancel();
                            }
@@ -172,87 +220,12 @@ public class R2Fragment extends Fragment {
        });
 
     }
-   private  void clear_EditText( )
-   {
-       EditText EditTextCode = (EditText)  getActivity().findViewById(R.id.editText_code);
+   private  void clear_EditTexts(EditText EditTextCode, EditText EditTextName, EditText EditTextDescription,  EditText EditTextPrice ) {
        EditTextCode.setText("   ");
-       EditTextCode.setHint("Κωδικός...");
-
-       EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
        EditTextName.setText("   ");
-       EditTextName.setHint("Όνομα Παροχής...");
-
-       EditText EditTextDescription = (EditText)  getActivity().findViewById(R.id.editText_description);
        EditTextDescription.setText("   ");
-       EditTextDescription.setHint("Περιγραφή...");
-
-       EditText EditTextPrice = (EditText)  getActivity().findViewById(R.id.editText_price);
        EditTextPrice.setText("   ");
-       EditTextPrice.setHint("Τιμή...");
    }
- private boolean  Check_Field(String sCode, String sName, String sDescription, String sPrice, int counter)
- { //  η συνάρτηση επιστέφει true μόνο αμα δεν εντοπίζεται κανένα σφάλμα
-      counter=00000;
-     if(sCode.matches(""))
-     {
-         EditText EditTextCode = (EditText)  getActivity().findViewById(R.id.editText_code);
-         EditTextCode.requestFocus();
-         EditTextCode.setError("Το πεδίο Κωδικός είναι κένo!");
-         counter=1000;
-     }
-     else if(sCode.length()<=7)
-     {
-         EditText EditTextCode = (EditText)  getActivity().findViewById(R.id.editText_code);
-         EditTextCode.requestFocus();
-         EditTextCode.setError("Το πεδίο Κωδικός έχει μη έγκυρα δεδομένα!");
-         counter=1000;
-     }
 
-     if(sName.matches(""))
-     {
-         EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
-         EditTextName.requestFocus();
-         EditTextName.setError("Το πεδίο Όνομα Παροχής είναι κενό!");
-         counter=counter+100;
-     }
-     if(sName.length()<=3)
-     {
-         EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
-         EditTextName.requestFocus();
-         EditTextName.setError("Το πεδίο Όνομα Παροχής έχει λάθος δεδομένα!");
-         counter=counter+100;
-     }
-
-
-     if(sDescription.matches(""))
-     {
-         EditText EditTextDescription = (EditText)  getActivity().findViewById(R.id.editText_description);
-         EditTextDescription.requestFocus();
-         EditTextDescription.setError("Το πεδίο Περιγραφή είναι κενό!");
-         counter=counter+10;
-     }
-
-     if(sPrice.matches(""))
-     {
-         EditText EditTextPrice = (EditText)  getActivity().findViewById(R.id.editText_price);
-         EditTextPrice.requestFocus();
-         EditTextPrice.setError("Το πεδίο Τιμή  είναι κενό!");
-         counter=counter+1;
-     }
-
-     if(sPrice.length()<=3 )
-     {
-         EditText EditTextPrice = (EditText)  getActivity().findViewById(R.id.editText_price);
-         EditTextPrice.requestFocus();
-         EditTextPrice.setError("Το πεδίο Τιμή  έχει λάθος δεδομένα!");
-         counter=counter+1;
-     }
-
-
-           if(counter==0)
-               {return true;}
-           else
-              {return  false;}
- }
 
 }
