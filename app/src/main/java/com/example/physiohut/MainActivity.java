@@ -71,25 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayItems() {
-        recyclerView = findViewById(R.id.recycler_main);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        r4FragmentList = new ArrayList<>();
-        r4FragmentList.add(new R4Fragment("08/01/22", "Παροχή #1"));
-        r4FragmentList.add(new R4Fragment("12/02/22", "Παροχή #2"));
-        r4FragmentList.add(new R4Fragment("16/03/22", "Παροχή #3"));
-        r4FragmentList.add(new R4Fragment("09/04/22", "Παροχή #4"));
-        r4FragmentList.add(new R4Fragment("11/06/22", "Παροχή #5"));
-        r4FragmentList.add(new R4Fragment("01/09/22", "Παροχή #6"));
-        r4FragmentList.add(new R4Fragment("22/11/22", "Παροχή #7"));
-        r4FragmentList.add(new R4Fragment("30/11/22", "Παροχή #8"));
-        r4FragmentList.add(new R4Fragment("19/12/22", "Παροχή #9"));
-        r4FragmentList.add(new R4Fragment("14/01/23", "Παροχή #10"));
-        r4FragmentList.add(new R4Fragment("01/03/23", "Παροχή #11"));
-        r4FragmentList.add(new R4Fragment("25/04/23", "Παροχή #12"));
 
-        customAdapter = new CustomAdapter(this, r4FragmentList);
-        recyclerView.setAdapter(customAdapter);
     }
 
 

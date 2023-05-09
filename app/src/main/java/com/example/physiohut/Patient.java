@@ -11,4 +11,17 @@ public class Patient {
         this.address = address;
         this.AMKA = AMKA;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getAMKA() {
+        return AMKA;
+    }
+
 }

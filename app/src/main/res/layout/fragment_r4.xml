@@ -1,46 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 
-    <TextView
-        android:id="@+id/textHistory"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/history_text"
-        android:textColor="@color/black">
-    </TextView>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
-
+        android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textImerominia"
-            android:layout_width="0dp"
+            android:id="@+id/textHistory"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="08/01/22"
+            android:text="@string/history_text"
             android:textColor="@color/black"
-            android:textSize="26sp"></TextView>
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
-        <TextView
-            android:id="@+id/textParoxi"
-            android:layout_width="0dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_main"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Παροχή #1"
-            android:textAlignment="textEnd"
-            android:textColor="@color/black"
-            android:textSize="26sp"></TextView>
+            android:layout_margin="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textHistory">
 
-    </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -26,10 +26,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-
         holder.textImerominia.setText(list.get(position).getImerominia());
         holder.textParoxi.setText(String.valueOf(list.get(position).getParoxi()));
-
     }
 
     @Override

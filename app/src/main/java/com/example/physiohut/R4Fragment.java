@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -13,10 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -101,6 +107,9 @@ public class R4Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_r4, container, false);
     }
 
+    RecyclerView recyclerView;
+    List<R4Fragment> r4FragmentList;
+    CustomAdapter customAdapter;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -118,7 +127,113 @@ public class R4Fragment extends Fragment {
                 return false;
             }
         });
+        //todo prosthiki strings etc.
+        ArrayList<String> provisions = new ArrayList<>();
+        provisions.add("Παροχη#1");
+        provisions.add("Παροχη#2");
+        provisions.add("Παροχη#3");
+        provisions.add("Παροχη#4");
+        provisions.add("Παροχη#5");
+        provisions.add("Παροχη#6");
+        provisions.add("Παροχη#7");
+        provisions.add("Παροχη#8");
+        provisions.add("Παροχη#9");
+        provisions.add("Παροχη#10");
+        provisions.add("Παροχη#11");
+        provisions.add("Παροχη#12");
+        provisions.add("Παροχη#13");
+        provisions.add("Παροχη#14");
+        provisions.add("Παροχη#15");
+        provisions.add("Παροχη#16");
+        ArrayList<String> dates = new ArrayList<>();
+        dates.add("22-01-2021    ");
+        dates.add("02-02-2021    ");
+        dates.add("08-02-2021    ");
+        dates.add("30-06-2021    ");
+        dates.add("14-07-2021    ");
+        dates.add("20-09-2021    ");
+        dates.add("27-12-2021    ");
+        dates.add("10-03-2022    ");
+        dates.add("20-04-2022    ");
+        dates.add("06-05-2022    ");
+        dates.add("17-05-2022    ");
+        dates.add("04-08-2022    ");
+        dates.add("11-11-2022    ");
+        dates.add("29-03-2023    ");
+        dates.add("22-04-2023    ");
+        dates.add("19-05-2023    ");
+
+        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycler_main);
+        recyclerView.setAdapter(new MyAdapter(provisions,dates));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //recyclerView = view.findViewById(R.id.recycler_main);
+        //recyclerView.setHasFixedSize(true);
+        //recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+
+        /*r4FragmentList = new ArrayList<>();
+        r4FragmentList.add(new R4Fragment("08/01/22", "Παροχή #1"));
+        r4FragmentList.add(new R4Fragment("12/02/22", "Παροχή #2"));
+        r4FragmentList.add(new R4Fragment("16/03/22", "Παροχή #3"));
+        r4FragmentList.add(new R4Fragment("09/04/22", "Παροχή #4"));
+        r4FragmentList.add(new R4Fragment("11/06/22", "Παροχή #5"));
+        r4FragmentList.add(new R4Fragment("01/09/22", "Παροχή #6"));
+        r4FragmentList.add(new R4Fragment("22/11/22", "Παροχή #7"));
+        r4FragmentList.add(new R4Fragment("30/11/22", "Παροχή #8"));
+        r4FragmentList.add(new R4Fragment("19/12/22", "Παροχή #9"));
+        r4FragmentList.add(new R4Fragment("14/01/23", "Παροχή #10"));
+        r4FragmentList.add(new R4Fragment("01/03/23", "Παροχή #11"));
+        r4FragmentList.add(new R4Fragment("25/04/23", "Παροχή #12"));*/
 
 
+        //customAdapter = new CustomAdapter(getContext(), r4FragmentList);
+        //recyclerView.setAdapter(adapter);
+
+    }
+
+    // MyAdapter class
+    private class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+        //todo auto na allaksei type analoga me to ti thes
+        private ArrayList<String> dataList;
+        private ArrayList<String> dateList;
+
+        public MyAdapter(ArrayList<String> dataList,ArrayList<String> dates) {
+            this.dataList = dataList;
+            this.dateList = dates;
+        }
+
+        @NonNull
+        @Override
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_history_layout, parent, false);
+            return new MyViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+            // Get the data for the current position
+            //Patient data = dataList.get(position);
+
+            // Update the view holder with the new data
+            //TODO ALLAGH
+            holder.textHmeromhnia.setText(dateList.get(position));
+            holder.textParoxi.setText(dataList.get(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return dataList.size();
+        }
+    }
+
+    // MyViewHolder class
+    private static class MyViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView textHmeromhnia, textParoxi;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            textHmeromhnia = itemView.findViewById(R.id.textImerominia);
+            textParoxi = itemView.findViewById(R.id.textParoxi);
+        }
     }
 }
