@@ -106,7 +106,7 @@
             android:id="@+id/editText_amka"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:digits="123456789"
+            android:digits="0123456789"
             android:ems="10"
             android:hint="@string/amka"
             android:inputType="textPersonName"
