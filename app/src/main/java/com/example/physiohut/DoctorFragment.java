@@ -12,11 +12,17 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TabHost;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +39,11 @@ public class DoctorFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ListView listView;
+    private ArrayAdapter adapter;
+    private SearchView searchView;
+    private ArrayList<Doctor> doctorArrayList = new ArrayList<>();
 
     public DoctorFragment() {
         // Required empty public constructor
@@ -56,6 +67,7 @@ public class DoctorFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +75,7 @@ public class DoctorFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -134,5 +147,17 @@ public class DoctorFragment extends Fragment {
             }
         });
 
+
+        // Find the list view and set its adapter
+        listView = view.findViewById(R.id.list_view);
+        ArrayList<String> itemList = new ArrayList<>();
+        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, itemList);
+        listView.setAdapter(adapter);
+
+        // Find the search view and set its listener
+        searchView = view.findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
+
     }
+
 }
