@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomViewHolder extends RecyclerView.ViewHolder {
-    public TextView textImerominia, textParoxi, textpatient;
+    public TextView textImerominia, textParoxi;
 
     public CustomViewHolder(@NonNull View itemView) {
         super(itemView);
