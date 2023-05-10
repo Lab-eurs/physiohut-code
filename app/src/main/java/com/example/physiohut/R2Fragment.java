@@ -138,7 +138,7 @@ public class R2Fragment extends Fragment {
                    {incorrectFields="Όνομα Παροχής";}
                    else{incorrectFields="Kωδικός, Όνομα Παροχής";}
                }
-               if (sName.length() <= 3) {
+                else if (sName.length() <= 3) {
                    EditTextName.requestFocus();
                    EditTextName.setError("Το πεδίο Όνομα Παροχής έχει λάθος δεδομένα!");
                    flag = false;
