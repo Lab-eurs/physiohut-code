@@ -167,7 +167,7 @@ public class R3Fragment extends Fragment {
                         }
                     });
                     builder.show();
-                } else if (check == true) {
+                } else if (check) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setCancelable(true);
                     builder.setTitle("Επιβεβαίωση ασθενή");
