@@ -96,26 +96,26 @@ public class R1Fragment extends Fragment {
         });
 
         Button btnSubmit = (Button) view.findViewById(R.id.clinicsubmitbutton);
+
+        TextInputLayout nameInput = view.findViewById(R.id.nameinputlayout);
+        EditText nameText = nameInput.getEditText();
+
+        TextInputLayout afmInput = view.findViewById(R.id.afminputlayout);
+        EditText afmText = afmInput.getEditText();
+
+        TextInputLayout addressInput = view.findViewById(R.id.addressinputlayout);
+        EditText addressText = addressInput.getEditText();
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //name
-                //TextInputLayout textInputLayoutName= view.findViewById(R.id.nameinputlayout);
-                //EditText editTextName= textInputLayoutName.getEditText();
-                //address
-                //TextInputLayout textInputLayoutAddress = view.findViewById(R.id.addressinputlayout);
-                //EditText editTextAddress = textInputLayoutAddress.getEditText();
-                //afm
-                //TextInputLayout textInputLayoutAfm = view.findViewById(R.id.afminputlayout);
-                //EditText editTextAfm = textInputLayoutAfm.getEditText();
-                //System.out.println(textInputLayoutName);
-                //if ((editTextName != null && editTextName.getText().toString().isEmpty())||(editTextAddress != null && editTextAddress.getText().toString().isEmpty())||(editTextAfm != null && editTextAfm.getText().toString().isEmpty())) {
-                  //  Toast.makeText(getContext(), "Invalid input", Toast.LENGTH_SHORT).show();
-                //} else {
+
+                String name = nameText.getText().toString();
+                String afm = afmText.getText().toString();
+                String address = addressText.getText().toString();
                     //popUp
                     AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                     builder.setTitle("Υποβολή Φυσιοθεραπευτηρίου");
-                    builder.setMessage("ονομα κλπ κλπ");
+                    builder.setMessage("Όνομα: "+name+"\n"+"Διεύθυνση: "+address+"\n"+"ΑΦΜ: "+afm);
                     builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -126,7 +126,7 @@ public class R1Fragment extends Fragment {
                     builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(getContext(), "Something went kwnna", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Κάτι πήγε λάθος", Toast.LENGTH_SHORT).show();
                         }
                     });
                     AlertDialog dialog = builder.create();
