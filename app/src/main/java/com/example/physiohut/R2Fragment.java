@@ -1,16 +1,23 @@
 package com.example.physiohut;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -85,5 +92,137 @@ public class R2Fragment extends Fragment {
                 return false;
             }
         });
+
+        //code_Flora
+       Button buttonSubmission =getActivity().findViewById(R.id.buttonCreation);
+
+       buttonSubmission.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+
+               EditText EditTextCode = (EditText)  getActivity().findViewById(R.id.editText_code);
+               String sCode  = String.valueOf(EditTextCode.getText());
+
+               EditText EditTextName = (EditText)  getActivity().findViewById(R.id.editText_name);
+               String sName  = String.valueOf(EditTextName.getText());
+
+               EditText EditTextDescription = (EditText)  getActivity().findViewById(R.id.editText_description);
+               String sDescription  = String.valueOf(EditTextDescription.getText());
+
+               EditText EditTextPrice = (EditText)  getActivity().findViewById(R.id.editText_price);
+               String sPrice  = String.valueOf(EditTextPrice.getText());
+
+               clear_EditTexts(EditTextCode, EditTextName,EditTextDescription,EditTextPrice);
+
+               String incorrectFields =" ";
+               boolean flag=true;
+
+               if (sCode.matches("")) {
+                   EditTextCode.requestFocus();
+                   EditTextCode.setError("Το πεδίο Κωδικός είναι κένo!");
+                   flag = false;
+                   incorrectFields="Κωδικός";
+
+               } else if (sCode.length() <= 7) {
+                   EditTextCode.requestFocus();
+                   EditTextCode.setError("Το πεδίο Κωδικός έχει μη έγκυρα δεδομένα!");
+                   flag = false;
+                   incorrectFields=" Κωδικός";
+               }
+
+               if (sName.matches("")) {
+                   EditTextName.requestFocus();
+                   EditTextName.setError("Το πεδίο Όνομα Παροχής είναι κενό!");
+                   flag = false;
+                   if (flag)
+                   {incorrectFields="Όνομα Παροχής";}
+                   else{incorrectFields="Kωδικός, Όνομα Παροχής";}
+               }
+                else if (sName.length() <= 3) {
+                   EditTextName.requestFocus();
+                   EditTextName.setError("Το πεδίο Όνομα Παροχής έχει λάθος δεδομένα!");
+                   flag = false;
+                   if (flag)
+                   {incorrectFields="Όνομα Παροχής";}
+                   else {incorrectFields="Κωδικός ,Όνομα Παροχής";}
+               }
+
+
+               if (sDescription.matches("")) {
+                   EditTextDescription.requestFocus();
+                   EditTextDescription.setError("Το πεδίο Περιγραφή είναι κενό!");
+                   flag = false;
+                   if (flag)
+                   {incorrectFields="Περιγραφή";}
+                   else {incorrectFields+=" ,Περιγραφή";}
+               }
+               if (sPrice.matches("")) {
+                   EditTextPrice.requestFocus();
+                   EditTextPrice.setError("Το πεδίο Τιμή  είναι κενό!");
+                   flag = false;
+                   if (flag)
+                   {incorrectFields="Τιμή";}
+                   else {incorrectFields+=" ,Τιμή";}
+               }
+               
+               //pop-up message
+
+               AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+               builder.setCancelable(true); //επιτρέπω στον χρήστη να πατάει έκτος παραθύρου
+               if(flag){
+               builder.setTitle("Υποβολή Παροχής");
+               builder.setMessage("Κωδικός:{"+sCode+"}\n"+"Όνομα:{"+sName+"}\n"+"Περιγραφή:{"+sDescription+"}\n"+"Τιμή:{"+sPrice+"}");
+               builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialogInterface, int i) {
+                       Toast myToast= Toast.makeText(getActivity(),"H υποβολή ακυρώθηκε!",Toast.LENGTH_SHORT);
+                       myToast.show();
+                       Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
+                       dialogInterface.cancel();
+
+                   }
+               });
+
+          builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialogInterface, int i) {
+                  Toast myToast= Toast.makeText(getActivity(),"H υποβολή έγινε!",Toast.LENGTH_SHORT);
+                  myToast.show();
+                  Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
+                  //σε αυτό το σημείο θα αποστέλω τα δεδομένα στη ΒΔ
+
+
+              }
+          });
+
+        builder.show();}
+
+               else
+                   {
+                       builder.setTitle("Υποβολή Παροχής");
+                       builder.setMessage("Tα παρακάτω πεδία είναι συμπληρωμένα λάθος:\n"+incorrectFields+".\nΠαρακαλώ επαναλάβετε την διαδικάσια εξ αρχής.");
+                       builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialogInterface, int i) {
+                               Toast myToast= Toast.makeText(getActivity(),"H υποβολή ακυρώθηκε!",Toast.LENGTH_SHORT);
+                               myToast.show();
+                               Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
+                               dialogInterface.cancel();
+                           }
+                       });
+                       builder.show();
+                   }
+           }
+
+       });
+
     }
+   private  void clear_EditTexts(EditText EditTextCode, EditText EditTextName, EditText EditTextDescription,  EditText EditTextPrice ) {
+       EditTextCode.setText("   ");
+       EditTextName.setText("   ");
+       EditTextDescription.setText("   ");
+       EditTextPrice.setText("   ");
+   }
+
+
 }
