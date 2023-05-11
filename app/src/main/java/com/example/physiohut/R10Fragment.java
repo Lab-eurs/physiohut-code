@@ -39,6 +39,7 @@ public class R10Fragment extends Fragment  {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final R10DataFetcher dbFetcher = new R10DataFetcher();
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private HashMap<String, Comparator<Provision>> sortingFNsMapping = new HashMap<>();
@@ -146,12 +147,16 @@ public class R10Fragment extends Fragment  {
         sortSpinner.setAdapter(adapter);
 
         TextView totalAmount = (TextView) getView().findViewById(R.id.payment_amount);
-        Double paidAmount = provisionData.stream().reduce(0.0,(acc,curr)-> acc + curr.getPrice(),Double::sum);
+        //TODO:  get this somehow from the DB(when users are implemented it will be seen
+        //TODO: πρέπει κάπου να βάλουμε κάποια ημερομηνία για να μπει στο UI
+        int currentPatient = 1;
+        ArrayList<Provision> provData = dbFetcher.fetchProvisionsFromDbForPatient(currentPatient);
+        Double paidAmount = provData.stream().reduce(0.0,(acc,curr)-> acc + curr.getPrice(),Double::sum);
         totalAmount.setText( paidAmount + "$");
 
 
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.provision_recycler_view);
-        recyclerView.setAdapter(new RecyclerAdapter(provisionData));
+        recyclerView.setAdapter(new RecyclerAdapter(provData));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
