@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <stroke android:color="@color/primary" android:width="1dp"/>
+
+                    <corners android:radius="2dp"/>
+                </shape>
+
+            </item>
+
+            <item
+                android:drawable="@drawable/spinner_down_arrow"
+                android:width="25dp"
+                android:height="25dp"
+                android:gravity="center_vertical|end"/>
+        </layer-list>
+
+    </item>
 </selector>
