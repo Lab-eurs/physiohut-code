@@ -13,4 +13,20 @@ public class Provision {
         this.description = description;
         this.price = price;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getDate(){
+        return "2022/05/23";
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public String getName(){
+        return name;
+    }
 }
