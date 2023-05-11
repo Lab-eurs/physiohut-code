@@ -1,6 +1,8 @@
 package com.example.physiohut;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,12 +18,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,31 +85,22 @@ public class R8Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_r8, container, false);
 
     }
-    private String text;
+    private List<String> text = new ArrayList<String>();
+    private String provisionsList;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //koumpi gia paroxes
+        //------------------------koumpi gia popup paroxwn------------------------------------------------------------
         Button provisionBtn = view.findViewById(R.id.ProvitionsBtn);
         provisionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_r8Fragment_to_provisionFragment);
+                showProvisionPopUp();
             }
         });
 
-
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            text = bundle.getString("List");
-            System.out.println(text);
-        }
-
-        TextView textView = (TextView) view.findViewById(R.id.Provisions);
-        textView.setText(text);
-
-        //navigation bar leitourgikotita
+        //--------------------------navigation bar leitourgikotita------------------------------------------------------
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -115,17 +115,97 @@ public class R8Fragment extends Fragment {
             }
         });
 
-        //koumph upobolhs
-        Button submit = view.findViewById(R.id.Submitbtn);
-        submit.setOnClickListener(new View.OnClickListener() {
+        //---------------------------------------koumph gia popup calendar---------------------------------------------
+        Button calendarbtn = view.findViewById(R.id.Calendar);
+        calendarbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDialog();
             }
         });
+
+        //---------------------------------------------koumpi submit-----------------------------------------------------
+        TextInputLayout comment = view.findViewById(R.id.textInputLayout);
+        EditText commentEditText = comment.getEditText();
+
+        Button submit = view.findViewById(R.id.Submitbtn);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //--------------------------------------popup epivevaiwshs----------------------------------------------
+                String comment = commentEditText.getText().toString();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                builder.setTitle("Επιβεβαίωση Ραντεβού");
+                builder.setMessage("Ημερομηνία: "+ selectedDate+ "\n" + "Ώρα: "+ time+"\n"+"Σχόλιο: "+comment);
+                builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(), "Ραντεβού έκλεισε για: "+time+ selectedDate, Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(),"Κάτι πήγε στραβά", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
     }
+    //--------------------------------------------Popup Paroxwn------------------------------------------
+    private void showProvisionPopUp(){
+        Dialog provisionDialog = new Dialog(getContext());
+        provisionDialog.setContentView(R.layout.fragment_provision);
+        provisionDialog.show();
+
+        CheckBox checkBox = provisionDialog.findViewById(R.id.checkBox);
+        CheckBox checkBox2 = provisionDialog.findViewById(R.id.checkBox2);
+        CheckBox checkBox3 = provisionDialog.findViewById(R.id.checkBox3);
+        CheckBox checkBox4 = provisionDialog.findViewById(R.id.checkBox4);
+        CheckBox checkBox5 = provisionDialog.findViewById(R.id.checkBox5);
+
+        Button provisionBtn = provisionDialog.findViewById(R.id.provisionSubmit);
+        provisionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkBox.isChecked()){
+                    text.add(checkBox.getText().toString());
+                }else{
+                    text.remove(checkBox.getText().toString());
+                }
+                if(checkBox2.isChecked()){
+                    text.add(checkBox2.getText().toString());
+                }else{
+                    text.remove(checkBox2.getText().toString());
+                }
+                if(checkBox3.isChecked()){
+                    text.add(checkBox3.getText().toString());
+                }else {
+                    text.remove(checkBox3.getText().toString());
+                }
+                if(checkBox4.isChecked()){
+                    text.add(checkBox4.getText().toString());
+                }else{
+                    text.remove(checkBox4.getText().toString());
+                }
+                if(checkBox5.isChecked()){
+                    text.add(checkBox5.getText().toString());
+                }else{
+                    text.remove(checkBox4.getText().toString());
+                }
+                provisionsList = TextUtils.join(", ", text);
+                TextView textView = getActivity().findViewById(R.id.Provisions);
+                textView.setText(provisionsList);
+                provisionDialog.dismiss();
+            }
+        });
+    }
+    //----------------------------------------------------PopUp Calendar-----------------------------------------------
     private String selectedDate;
-    //dhmiourgia custom popup gia to calendar
     private void showDialog(){
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.calendar);
@@ -141,7 +221,7 @@ public class R8Fragment extends Fragment {
             }
         });
 
-        //koumpi gia tis wres
+        //---------------------------------------------------------koumpi gia tis wres-------------------------------------------------
         Button select = dialog.findViewById(R.id.calendarSelection);
         select.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +232,8 @@ public class R8Fragment extends Fragment {
         });
     }
 
-    //dhmiourgia custom pop up gia tis wres
+    //-----------------------------------------------------dhmiourgia custom pop up gia tis wres----------------------------------------
+    String time;
     private void showHourDialog(String date){
         Dialog hourDialog = new Dialog(getContext());
         hourDialog.setContentView(R.layout.hours);
@@ -167,10 +248,13 @@ public class R8Fragment extends Fragment {
         Button thirdButton = hourDialog.findViewById(R.id.button14);
         Button forthButton = hourDialog.findViewById(R.id.button15);
         Button fifthButton = hourDialog.findViewById(R.id.button16);
+        Button calendarButton = (Button) getActivity().findViewById(R.id.Calendar);
         firstButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Ραντεβού έκλεισε για 9:00- 11:00 "+ date, Toast.LENGTH_LONG).show();
+                time = "9:00- 11:00 ";
+                calendarButton.setText(date+time);
+                calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
         });
@@ -178,7 +262,9 @@ public class R8Fragment extends Fragment {
         secondButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Ραντεβού έκλεισε για 11:00- 13:00 "+ date, Toast.LENGTH_LONG).show();
+                time = "11:00- 13:00";
+                calendarButton.setText(date+time);
+                calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
         });
@@ -186,7 +272,9 @@ public class R8Fragment extends Fragment {
         thirdButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Ραντεβού έκλεισε για 13:00- 15:00 "+ date, Toast.LENGTH_LONG).show();
+                time = "13:00- 15:00";
+                calendarButton.setText(date+time);
+                calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
         });
@@ -194,7 +282,9 @@ public class R8Fragment extends Fragment {
         forthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Ραντεβού έκλεισε για 17:00- 19:00 "+ date, Toast.LENGTH_LONG).show();
+                time = "17:00- 19:00";
+                calendarButton.setText(date+time);
+                calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
         });
@@ -202,7 +292,9 @@ public class R8Fragment extends Fragment {
         fifthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Ραντεβού έκλεισε για 19:00- 21:00 "+ date, Toast.LENGTH_LONG).show();
+                time = "19:00- 21:00";
+                calendarButton.setText(date+time);
+                calendarButton.setBackgroundColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
         });
