@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -85,7 +84,7 @@ public class DoctorFragment extends Fragment {
         th.addTab(ts);
 
         TabHost.TabSpec ts2 = th.newTabSpec("ραντεβού");
-        ts2.setContent(R.id.appointment);
+        ts2.setContent(R.id.date);
         ts2.setIndicator("Ραντεβού");
         th.addTab(ts2);
 
