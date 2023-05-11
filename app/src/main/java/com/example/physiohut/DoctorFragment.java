@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TabHost;
 
@@ -22,7 +23,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DoctorFragment#newInstance} factory method to
@@ -70,6 +73,7 @@ public class DoctorFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -84,9 +88,19 @@ public class DoctorFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_doctor, container, false);
     }
 
+    ListView listView;
+    String app_list[] = {"Ραντεβού #1","Ραντεβού #2","Ραντεβού #3","Ραντεβού #4","Ραντεβού #5","Ραντεβού #6","Ραντεβού #7","Ραντεβού #8","Ραντεβού #9","Ραντεβού #10"};
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        listView =  view.findViewById(R.id.listView);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getParentFragment().getContext(), R.layout.activity_listview, R.id.textView, app_list);
+        listView.setAdapter(arrayAdapter);
+
+
+
+
 
         TabHost th = (TabHost) view.findViewById(R.id.patientandoc);
         th.setup();
