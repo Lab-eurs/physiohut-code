@@ -11,14 +11,111 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/r3textview"
+            android:id="@+id/textView_addition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Make Changes For R3"
+            android:text="@string/addition_patient"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.248"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.088" />
+
+        <TextView
+            android:id="@+id/textView_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="@string/import_name"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/button_submition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.26"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_addition"
+            app:layout_constraintVertical_bias="0.004" />
+
+        <Button
+            android:id="@+id/button_submition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/submition"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="24sp"/>
+            app:layout_constraintVertical_bias="0.83" />
+
+        <EditText
+            android:id="@+id/editText_name"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:text="@string/space"
+            app:layout_constraintBottom_toTopOf="@+id/button_submition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.284"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_name"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/import_address"
+            app:layout_constraintBottom_toTopOf="@+id/button_submition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.257"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_name"
+            app:layout_constraintVertical_bias="0.147" />
+
+        <EditText
+            android:id="@+id/editText_address"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/address"
+            android:inputType="textPersonName"
+            android:text="@string/space"
+            app:layout_constraintBottom_toTopOf="@+id/button_submition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.317"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_address"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView_amka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/import_amka"
+            app:layout_constraintBottom_toTopOf="@+id/button_submition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.198"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_address"
+            app:layout_constraintVertical_bias="0.299" />
+
+        <EditText
+            android:id="@+id/editText_amka"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:digits="0123456789"
+            android:ems="10"
+            android:hint="@string/amka"
+            android:inputType="textPersonName"
+            android:text="@string/space"
+            app:layout_constraintBottom_toTopOf="@+id/button_submition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.279"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_amka"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

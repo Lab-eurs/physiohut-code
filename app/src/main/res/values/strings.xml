@@ -24,15 +24,24 @@
     <string name="add_patient">add patient</string>
     <string name="appointment_request">Appointment Request</string>
     <string name="create_appointment">Create Appointment</string>
+    <string name="addition_patient">Προσθήκη Ασθενή</string>
+    <string name="import_amka">Εισαγωγή ΑΜΚΑ:</string>
+    <string name="import_name">Εισαγωγή ονοματεπωνύμου:</string>
+    <string name="import_address">Εισαγωγή διεύθυνησης:</string>
+    <string name="name">Ονοματεπώνυμο...</string>
+    <string name="amka">ΑΜΚΑ...</string>
+    <string name="address">Διεύθυνηση...</string>
+    <string name="submition">Υποβολή</string>
+    <string name="space">  </string>
     <string name="creation">Δημιουργία</string>
     <string name="creation_provision">Δημιουργία Παροχής:</string>
     <string name="text_code">Εισαγώγη κωδικού:</string>
     <string name="text_name_provision"> Εισαγωγή ονόματος παροχής:</string>
-    <string name="text_description"> Εισαγωγή περιγραφής:</string>
     <string name="text_price"> Εισαγωγή τιμής:</string>
+    <string name="text_description"> Εισαγωγή περιγραφής:</string>
     <string name="code">Κωδικός...</string>
     <string name="name_provision">Όνομα Παροχής...</string>
-    <string name="description"> Περιγραφή...</string>
     <string name="price">Τιμή...</string>
+    <string name="description"> Περιγραφή...</string>
     <string name="space">   </string>
 </resources>
