@@ -11,16 +11,104 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/R1"
+            android:id="@+id/createclinictitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Make changes for R1"
+            android:text="Δημιουργία φυσιοθεραπευτηρίου:"
+            android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/nameinputlayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameinputtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:text="Εισαγωγή ονόματος:"
+            app:layout_constraintBottom_toTopOf="@+id/nameinputlayout"
+            app:layout_constraintStart_toStartOf="@+id/nameinputlayout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameinputlayout"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/addressinputlayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createclinictitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameinput"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="Όνομα..." />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/afminputtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:text="Εισαγωγή ΑΦΜ:"
+            app:layout_constraintBottom_toTopOf="@+id/afminputlayout"
+            app:layout_constraintStart_toStartOf="@+id/afminputlayout" />
+
+        <TextView
+            android:id="@+id/addressinputtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:text="Εισαγωγή διεύθυνσης:"
+            app:layout_constraintBottom_toTopOf="@+id/addressinputlayout"
+            app:layout_constraintStart_toStartOf="@+id/addressinputlayout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/afminputlayout"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/clinicsubmitbutton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addressinputlayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/afminput"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="ΑΦΜ..." />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addressinputlayout"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addressinput"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:hint="Διεύθυνση..." />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/clinicsubmitbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:text="Υποβολή"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/afminputlayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
