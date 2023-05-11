@@ -11,16 +11,138 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/R2"
+            android:id="@+id/header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Make changes for R2"
+            android:text="@string/creation_provision"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.050000012" />
+
+        <Button
+            android:id="@+id/buttonCreation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/creation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header"
+            app:layout_constraintVertical_bias="0.841" />
+
+        <TextView
+            android:id="@+id/textView_code"
+            android:layout_width="150dp"
+            android:layout_height="25dp"
+            android:text="@string/text_code"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.175"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.175" />
+
+        <EditText
+            android:id="@+id/editText_code"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/code"
+            android:inputType="textPersonName"
+            android:text="@string/space"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.222"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_code"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView_name"
+            android:layout_width="265dp"
+            android:layout_height="38dp"
+            android:text="@string/text_name_provision"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.315"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_code"
+            app:layout_constraintVertical_bias="0.106" />
+
+        <EditText
+            android:id="@+id/editText_name"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/name_provision"
+            android:inputType="textPersonName"
+            android:text="@string/space"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_name"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView_description"
+            android:layout_width="150dp"
+            android:layout_height="25dp"
+            android:text="@string/text_description"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.185"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_name"
+            app:layout_constraintVertical_bias="0.16000003" />
+
+        <EditText
+            android:id="@+id/editText_description"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/description"
+            android:inputType="textPersonName"
+            android:text="@string/space"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.227"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_description"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView_price"
+            android:layout_width="150dp"
+            android:layout_height="25dp"
+            android:text="@string/text_price"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.176"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_description"
+            app:layout_constraintVertical_bias="0.27" />
+
+        <EditText
+            android:id="@+id/editText_price"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:digits="0123456789"
+            android:ems="10"
+            android:hint="@string/price"
+            android:inputType="textPersonName"
+            android:text="@string/space"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_price"
+            app:layout_constraintVertical_bias="0.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
