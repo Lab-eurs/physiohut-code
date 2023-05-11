@@ -31,7 +31,7 @@ import java.util.List;
  * Use the {@link DoctorFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DoctorFragment extends Fragment {
+public class DoctorFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -88,7 +88,6 @@ public class DoctorFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_doctor, container, false);
     }
 
-    ListView listView;
     String app_list[] = {"Ραντεβού #1","Ραντεβού #2","Ραντεβού #3","Ραντεβού #4","Ραντεβού #5","Ραντεβού #6","Ραντεβού #7","Ραντεβού #8","Ραντεβού #9","Ραντεβού #10"};
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -106,7 +105,7 @@ public class DoctorFragment extends Fragment {
         th.setup();
 
         TabHost.TabSpec ts = th.newTabSpec("Ασθενής");
-        ts.setContent(R.id.patient);
+        ts.setContent(R.id.appointment);
         ts.setIndicator("Ασθενής");
         th.addTab(ts);
 
@@ -169,8 +168,19 @@ public class DoctorFragment extends Fragment {
 
         // Find the search view and set its listener
         searchView = view.findViewById(R.id.search_view);
-        searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
+        searchView.setOnQueryTextListener(this);
 
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        System.out.println("submit");
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        System.out.println("change");
+        return false;
+    }
 }

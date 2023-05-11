@@ -29,6 +29,73 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <SearchView
+                            android:id="@+id/searchView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:iconifiedByDefault="false"
+                            android:queryHint="Search..."
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/btnR7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:backgroundTint="@color/button"
+                            android:clickable="true"
+                            android:contentDescription="@string/appointment_request"
+                            android:focusable="true"
+                            android:src="@drawable/envelop"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/searchView2" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/btnR8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:backgroundTint="@color/button"
+                            android:clickable="true"
+                            android:contentDescription="@string/create_appointment"
+                            android:focusable="true"
+                            android:src="@android:drawable/ic_input_add"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/listView" />
+
+                        <ListView
+                            android:id="@+id/listView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="135dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btnR7">
+
+                        </ListView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/appointment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -40,8 +107,8 @@
 
                         <Button
                             android:id="@+id/btnR4"
-                            android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:backgroundTint="@color/button"
                             android:text="@string/showHistory"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -50,46 +117,35 @@
                             app:layout_constraintTop_toBottomOf="@+id/list_view" />
 
 
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/btnR7"
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:clickable="true"
-                            android:backgroundTint="@color/button"
-                            android:contentDescription="@string/appointment_request"
-                            android:src="@drawable/envelop"
-                            android:focusable="true"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.053" />
-
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/btnR8"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="50dp"
-                            android:backgroundTint="@color/button"
-                            android:clickable="true"
-                            android:contentDescription="@string/create_appointment"
-                            android:focusable="true"
-                            android:src="@android:drawable/ic_input_add"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.96" />
-
                         <SearchView
                             android:id="@+id/search_view"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:queryHint="Search..."
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:iconifiedByDefault="false"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:layout_editor_absoluteX="8dp" />
+                            android:queryHint="Search..."
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        </SearchView>
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/btnR3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|end"
+                            android:layout_marginEnd="16dp"
+                            android:backgroundTint="@color/button"
+                            android:clickable="true"
+                            android:contentDescription="@string/add_patient"
+                            android:focusable="true"
+                            android:src="@android:drawable/ic_input_add"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/list_view" />
 
                         <ListView
                             android:id="@+id/list_view"
@@ -100,72 +156,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/search_view" />
-
-                        <ListView
-                            android:id="@+id/listView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="200dp"
-                            app:layout_constraintBottom_toTopOf="@+id/btnR8"
-                            android:layout_marginTop="24dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="1.0" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/date"
-                    android:id="@+id/patient"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Make Changes for R5"
-                            android:textSize="30sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <Button
-                            android:id="@+id/btnR4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/button"
-                            android:text="@string/showHistory"
-                            app:layout_constraintBottom_toTopOf="@+id/textView"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/btnR3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|end"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="50dp"
-                            android:backgroundTint="@color/button"
-                            android:clickable="true"
-                            android:contentDescription="@string/add_patient"
-                            android:focusable="true"
-                            android:src="@android:drawable/ic_input_add"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.953" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

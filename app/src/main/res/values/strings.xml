@@ -45,7 +45,6 @@
     <string name="address">Διεύθυνηση...</string>
     <string name="submition">Υποβολή</string>
     <string name="creation">Δημιουργία</string>
-    <string name="space">  </string>
     <string name="creation_provision">Δημιουργία Παροχής:</string>
     <string name="text_code">Εισαγώγη κωδικού:</string>
     <string name="text_name_provision"> Εισαγωγή ονόματος παροχής:</string>
@@ -56,4 +55,5 @@
     <string name="code">Κωδικός...</string>
     <string name="description"> Περιγραφή...</string>
     <string name="space">   </string>
+    <string name="spinner_title">Patients spinner</string>
 </resources>
