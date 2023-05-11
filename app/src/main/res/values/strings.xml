@@ -56,4 +56,19 @@
     <string name="description"> Περιγραφή...</string>
     <string name="space">   </string>
     <string name="spinner_title">Patients spinner</string>
+    <string name="sortBy">Ταξινόμηση Κατά :</string>
+    <string name="dateOfAppointment">Ημερομηνία:</string>
+    <string name="locationOfAppointment">Περιοχή:</string>
+    <string name="timeOfAppointmentString">Ώρα:</string>
+    <string name="arrowDescription">Arrow to expand view</string>
+    <string name="profilePicDescr">Patient profile picture</string>
+    <string name="patientName">name</string>
+
+    <string-array name="sortBySpinner">
+        <item>Όνομα Α-Ζ</item>
+        <item>Όνομα Ζ-Α</item>
+        <item>Ημερομηνία αύξουσα</item>
+        <item>Ημερομηνία φθήνουσα</item>
+    </string-array>
+
 </resources>
