@@ -1,5 +1,9 @@
 package com.example.physiohut;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,8 +15,16 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputLayout;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,5 +97,176 @@ public class R9Fragment extends Fragment {
                 return false;
             }
         });
+        //koumpi calendar
+        Button calendarbtn = view.findViewById(R.id.calendarbutton);
+        calendarbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopup();
+            }
+        });
+        TextInputLayout comment = view.findViewById(R.id.commentr9);
+        EditText commentEditText = comment.getEditText();
+        Button submit = view.findViewById(R.id.submitbutton);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String comment = commentEditText.getText().toString();
+                //pop-up
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                builder.setTitle("Επιβεβαίωση Ραντεβού");
+                builder.setMessage("Ημερομηνία: "+selectedDate+"\n"+"Ώρα: "+time+"\n"+"Σχόλιο: "+comment);
+                builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(), "Ραντεβού έκλεισε για "+time +", " + selectedDate, Toast.LENGTH_LONG).show();
+                        //bash dedomenwn kwdikas
+                    }
+                });
+                builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(), "Κάτι πήγε λάθος", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                //}
+
+            }
+        });
+
     }
+    private String selectedDate;
+    //dhmiourgia custom calendar pop-up
+    private void showPopup(){
+        Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.calendarforr9);
+        dialog.show();
+
+
+        CalendarView calendarView = dialog.findViewById(R.id.calendarView);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
+                selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+            }
+        });
+
+        //koumpi wres
+        Button select = dialog.findViewById(R.id.buttoncal);
+        select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                showHourPopup(selectedDate);
+            }
+        });
+    }
+
+   String time;
+    private void showHourPopup(String date){
+        Dialog hourDialog = new Dialog(getContext());
+        hourDialog.setContentView(R.layout.hoursforr9);
+        hourDialog.show();
+
+        TextView textView = hourDialog.findViewById(R.id.day2);
+       textView.setText(date);
+
+        Button firstButton = hourDialog.findViewById(R.id.button);
+        Button secondButton = hourDialog.findViewById(R.id.button2);
+        Button thirdButton = hourDialog.findViewById(R.id.button3);
+        Button fourthButton = hourDialog.findViewById(R.id.button4);
+        Button fifthButton = hourDialog.findViewById(R.id.button5);
+        Button sixthButton = hourDialog.findViewById((R.id.button6));
+        Button submitButton = hourDialog.findViewById(R.id.submitbutton1);
+
+        firstButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstButton.setBackgroundColor(getResources().getColor(R.color.button));
+                secondButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                thirdButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fourthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fifthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                sixthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                time = "9:00 - 11:00";
+            }
+        });
+
+        secondButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                secondButton.setBackgroundColor(getResources().getColor(R.color.button));
+                thirdButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fourthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fifthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                sixthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                time = "11:00 - 13:00";
+            }
+        });
+
+        thirdButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                secondButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                thirdButton.setBackgroundColor(getResources().getColor(R.color.button));
+                fourthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fifthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                sixthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                time = "13:00 - 15:00";
+            }
+        });
+
+        fourthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                secondButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                thirdButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fourthButton.setBackgroundColor(getResources().getColor(R.color.button));
+                fifthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                sixthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                time = "15:00 - 17:00";
+            }
+        });
+
+        fifthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                secondButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                thirdButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fourthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fifthButton.setBackgroundColor(getResources().getColor(R.color.button));
+                sixthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                time = "17:00 - 19:00";
+            }
+        });
+
+        sixthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                secondButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                thirdButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fourthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                fifthButton.setBackgroundColor(getResources().getColor(R.color.grey));
+                sixthButton.setBackgroundColor(getResources().getColor(R.color.button));
+                time = "19:00 - 21:00";
+            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hourDialog.dismiss();
+            }
+        });
+
+
+    }
+
 }
