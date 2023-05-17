@@ -12,7 +12,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     Context context;
@@ -20,7 +19,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     public void setFilteredList(ArrayList<Appointments> filteredList){
         this.arrayList = filteredList;
-        notifyDataSetChanged();
     }
 
     public Adapter(Context context, ArrayList<Appointments> arrayList){

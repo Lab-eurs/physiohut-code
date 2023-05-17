@@ -68,51 +68,42 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
 
         //Spinner init.
         spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this); //Spinner set index=0 ?.
+        spinner.setOnItemSelectedListener(this); //Spinner initial index value.
 
         searchViewR7 = view.findViewById(R.id.searchR7);
-        searchViewR7.clearFocus(); //removes cursor from search.
+        searchViewR7.clearFocus(); //removes cursor from search - prevents a bug in lower APIs.
         searchViewR7.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (query.isEmpty()){
-                    searchViewR7.clearFocus();
+                    searchViewR7.clearFocus(); //Removes focus from search after submitting a query.
                 }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                //sortBy(spinner.getSelectedItemPosition(),recArrayList);
                 filterList(newText);
                 return true;
+            }
+        });
+
+        //Sort-by routine.
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sortBy(position,recArrayList); //Sends the index of the selected spinner item & returns a sorted list.
+                String query = searchViewR7.getQuery().toString(); //Get search query from search.
+                filterList(query); //Filters main list - also used to update spinner after search.
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
         return view;
     }
 
-    //Function used to search recyclerview
-    private void filterList(String text) {
-
-        ArrayList<Appointments> filteredList = new ArrayList<>();
-
-        for(Appointments item : recArrayList){
-            if(item.getPatientName().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
-            }
-        }
-
-        if (filteredList.isEmpty()){
-            Toast.makeText(getContext(),"no data found",Toast.LENGTH_SHORT).show();
-        } else {
-
-            int itemPos = spinner.getSelectedItemPosition();
-            sortBy(itemPos,filteredList);
-            myAdapter.setFilteredList(filteredList);
-            myAdapter.notifyDataSetChanged();
-
-        }
-
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -131,36 +122,19 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
 
         //RecyclerView contents in ArrayList. 
         recArrayList = new ArrayList<>();
-        getData(recArrayList); //Insert List with dummy data till i connect the DB.
+        getData(recArrayList); //Insert List with dummy data.
 
         //RecyclerView setup and init.
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewR7);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        //Sort-by routine.
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //EDW EINAI TO BUG ME TO SEARCH
-                //String idkpos = Integer.toString(position);
-                //Toast.makeText(getContext(),"the id is:" + idkpos,Toast.LENGTH_SHORT).show();
-                sortBy(position,recArrayList); //Sends the index of the selected spinner item & returns a sorted list.
-                // myAdapter.setFilteredList(recArrayList);//idk about that
-                myAdapter.notifyDataSetChanged(); //update recyclerView.
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // myAdapter.notifyDataSetChanged();//idk if it's doing anything to be honest.
-            }
-        });
 
         myAdapter = new Adapter(getContext(),recArrayList);
         recyclerView.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
 
     }
-    //Inserts data to the recyclerView's main list
+
+    //Inserts dummy data to the recyclerView's main list - TODO:update the list using DB.
     public static void getData(ArrayList<Appointments> arrayList){
         arrayList.add(new Appointments("Giwrgos giorgou", "11/4/2023", "thessaloniki", "13:00PM"));
         arrayList.add(new Appointments("Antreas nikou", "14/2/2023", "thessaloniki", "13:00PM"));
@@ -169,7 +143,7 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
         arrayList.add(new Appointments("Giwrgos giorgou", "12/1/2023", "thessaloniki", "13:00PM"));
         arrayList.add(new Appointments("Vaggelis evaggelou", "11/4/2023", "thessaloniki", "13:00PM"));
     }
-    //rts the recyclerView's list in the context of the spinners index.
+    //sorts the recyclerView's list in the context of the spinner's index.
     public static void sortBy(int position, ArrayList<Appointments> arrayList){
         arrayList.sort((o1, o2) -> {
 
@@ -189,20 +163,34 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
                 //Date Descending !TODO NEEDS FIXING
                 return o2.appointmentDate.compareToIgnoreCase(o1.appointmentDate);
             }
-
         });
+    }
+
+    //Function used to search recyclerview
+    private void filterList(String text) {
+
+        ArrayList<Appointments> filteredList = new ArrayList<>();
+
+        for(Appointments item : recArrayList){
+            if(item.getPatientName().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+
+        if (filteredList.isEmpty()){
+            Toast.makeText(getContext(),"no data found",Toast.LENGTH_SHORT).show();
+        } else {
+            sortBy(spinner.getSelectedItemPosition(),filteredList);
+        }
+        myAdapter.setFilteredList(filteredList); //set and empty list if it doesn't find results.
+        myAdapter.notifyDataSetChanged();
 
     }
-    //not really needed but ok. show's the spinner's selection
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        String index = Integer.toString(position);
-        Toast.makeText(parent.getContext(),text + "at: index" + index,Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }
