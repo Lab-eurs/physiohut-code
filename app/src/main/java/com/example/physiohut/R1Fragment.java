@@ -23,6 +23,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.w3c.dom.Text;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link R1Fragment#newInstance} factory method to
@@ -112,10 +114,31 @@ public class R1Fragment extends Fragment {
                 String name = nameText.getText().toString();
                 String afm = afmText.getText().toString();
                 String address = addressText.getText().toString();
-                    //popUp
-                    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+
+                boolean flag=true;
+
+                //κενα πεδια
+                if(name.isEmpty()){
+                    nameText.requestFocus();
+                    nameText.setError("Το πεδίο Όνομα Φυσιοθεραπευτηρίου είναι κενό");
+                    flag=false;
+                }
+                if (afm.length()!=9){
+                    afmText.requestFocus();
+                    afmText.setError("Το πεδίο ΑΦΜ έχει λάθος δεδομένα");
+                    flag=false;
+                }
+                if (address.isEmpty()){
+                    addressText.requestFocus();
+                    addressText.setError("Το πεδίο Διεύθυνση είναι κενό");
+                    flag=false;
+                }
+                    //popUp xwris kena pedia
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                builder.setCancelable(true);
+                if (flag==true) {
                     builder.setTitle("Υποβολή Φυσιοθεραπευτηρίου");
-                    builder.setMessage("Όνομα: "+name+"\n"+"Διεύθυνση: "+address+"\n"+"ΑΦΜ: "+afm);
+                    builder.setMessage("Όνομα: " + name + "\n" + "Διεύθυνση: " + address + "\n" + "ΑΦΜ: " + afm);
                     builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -131,6 +154,21 @@ public class R1Fragment extends Fragment {
                     });
                     AlertDialog dialog = builder.create();
                     dialog.show();
+
+                }else {//popup me kena
+                    builder.setTitle("Υποβολή Φυσιοθεραπευτηρίου");
+                    builder.setMessage("Όνομα: " + name + "\n" + "Διεύθυνση: " + address + "\n" + "ΑΦΜ: " + afm);
+
+                    builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(getContext(), "Λανθασμένα δεδομένα", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                }
                 //}
 
 

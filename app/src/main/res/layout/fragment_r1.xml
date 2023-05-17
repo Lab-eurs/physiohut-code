@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
-            android:text="Εισαγωγή ονόματος:"
+            android:text="Εισαγωγή ονόματος παροχής:"
             app:layout_constraintBottom_toTopOf="@+id/nameinputlayout"
             app:layout_constraintStart_toStartOf="@+id/nameinputlayout" />
 
@@ -79,6 +79,7 @@
                 android:id="@+id/afminput"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
+                android:digits="0123456789"
                 android:hint="ΑΦΜ..." />
         </com.google.android.material.textfield.TextInputLayout>
 
