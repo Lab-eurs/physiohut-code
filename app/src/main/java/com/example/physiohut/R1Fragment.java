@@ -79,6 +79,8 @@ public class R1Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_r1, container, false);
     }
 
+    private final String myIP = "192.168.80.30";
+    private int id = 0;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -142,8 +144,17 @@ public class R1Fragment extends Fragment {
                     builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Navigation.findNavController(view).navigate(R.id.action_r1Fragment_to_psfFragment);
-                            //bash dedomenwn kwdikas
+                            id ++;
+                            String url = "http://"+myIP+"/physiohut/r1.php?id="+id+ "&afm="+afm+"&name="+name+"&address="+address;
+                            try{
+                                R1DataLog r1DataLog = new R1DataLog();
+                                System.out.println(url);
+                                r1DataLog.physioLog(url);
+                                Toast.makeText(getContext(),"AFM: "+afm +" Name: "+name+" Address: "+address,Toast.LENGTH_SHORT).show();
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
                         }
                     });
                     builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
