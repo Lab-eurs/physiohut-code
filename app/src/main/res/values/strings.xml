@@ -63,6 +63,7 @@
     <string name="arrowDescription">Arrow to expand view</string>
     <string name="profilePicDescr">Patient profile picture</string>
     <string name="patientName">name</string>
+    <string name="expandButtonR7ContentDescription">Expand button</string>
 
     <string-array name="sortBySpinner">
         <item>Όνομα Α-Ζ</item>
