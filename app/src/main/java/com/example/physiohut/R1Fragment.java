@@ -79,7 +79,7 @@ public class R1Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_r1, container, false);
     }
 
-    private final String myIP = "192.168.80.30";
+    private final String myIP = "192.168.1.3";
     private int id = 0;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
