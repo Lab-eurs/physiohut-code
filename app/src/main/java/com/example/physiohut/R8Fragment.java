@@ -22,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +79,7 @@ public class R8Fragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -86,10 +90,19 @@ public class R8Fragment extends Fragment {
 
     }
     private List<String> text = new ArrayList<String>();
+    private PatientList plist;
+    private final String myIP = "192.168.179.235";
     private String provisionsList;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Spinner dropDown = (Spinner) view.findViewById(R.id.PatientSpinner);
+        plist = new PatientList(myIP);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_dropdown_item, plist.getAllPatients());
+        System.out.println(plist);
+        dropDown.setAdapter(arrayAdapter);
 
         //------------------------koumpi gia popup paroxwn------------------------------------------------------------
         Button provisionBtn = view.findViewById(R.id.ProvitionsBtn);
