@@ -41,8 +41,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         holder.patientNameR7.setText(appointmentsClass.patientName);
         holder.dateOfAppointmentDataR7.setText(appointmentsClass.appointmentDate);
-        holder.locationOfAppointmentDataR7.setText(appointmentsClass.appointmentArea);
-        holder.timeOfAppointmentDataR7.setText(appointmentsClass.appointmentTime);
+        //holder.locationOfAppointmentDataR7.setText(appointmentsClass.appointmentArea);
+        //holder.timeOfAppointmentDataR7.setText(appointmentsClass.appointmentTime);
 
         holder.expandButtonR7.setOnClickListener(view -> {
             if(arrayList.get(position).isVisible){

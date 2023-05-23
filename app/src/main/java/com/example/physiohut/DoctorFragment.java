@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TabHost;
 
@@ -22,10 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DoctorFragment#newInstance} factory method to
@@ -46,6 +42,8 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     private ArrayAdapter adapter;
     private SearchView searchView;
     private ArrayList<Doctor> doctorArrayList = new ArrayList<>();
+
+    private final String myIP = "192.168.1.69";
 
     public DoctorFragment() {
         // Required empty public constructor
@@ -89,13 +87,20 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     }
 
     String app_list[] = {"Ραντεβού #1","Ραντεβού #2","Ραντεβού #3","Ραντεβού #4","Ραντεβού #5","Ραντεβού #6","Ραντεβού #7","Ραντεβού #8","Ραντεβού #9","Ραντεβού #10"};
+
+    private AppointmentsList cbl;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        cbl = new AppointmentsList(myIP);
+
         listView =  view.findViewById(R.id.listView);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getParentFragment().getContext(), R.layout.activity_listview, R.id.textView, app_list);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getParentFragment().getContext(), R.layout.activity_listview, R.id.textView, cbl.getNames());
         listView.setAdapter(arrayAdapter);
+
+
+
 
 
 
