@@ -74,7 +74,9 @@ public class R3Fragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_r3, container, false);
     }
-
+    private  final String myIP = "172.21.3.181";
+    private int id=0;
+    private int doc_id=0;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -162,8 +164,19 @@ public class R3Fragment extends Fragment {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Toast myToast = Toast.makeText(getActivity(), "H υποβολή ασθενή έγινε!", Toast.LENGTH_SHORT);
                             myToast.show();
-                            Navigation.findNavController(view).navigate(R.id.action_r3Fragment_to_doctorFragment);
+                            //Navigation.findNavController(view).navigate(R.id.action_r3Fragment_to_doctorFragment);
                             //εδω θα γίνει η αποστολή των δεδομένων στην ΒΔ
+                            id++;
+                            doc_id++;
+                            String url = "http://"+myIP+"/physiohut/r3.php?id="+id+"&doc_id="+doc_id+"&NAME="+name+"&address="+address +"&amka="+amka;
+                            try{
+                                R3DataLog r1DataLog = new R3DataLog();
+                                System.out.println(url);
+                                r1DataLog.physioLog(url);
+                                Toast.makeText(getContext(),"NAME: "+name +" Address: "+address+" Amka: "+amka,Toast.LENGTH_SHORT).show();
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
                         }
                     });
                     builder.show();
