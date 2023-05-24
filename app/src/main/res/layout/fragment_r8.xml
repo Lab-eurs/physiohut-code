@@ -23,15 +23,10 @@
 
         <Spinner
             android:id="@+id/PatientSpinner"
-            android:layout_width="201dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="44dp"
-            android:accessibilityLiveRegion="polite"
-            android:alpha="@dimen/material_emphasis_medium"
-            android:autofillHints="Patients"
-            android:contentDescription="username_hint"
-            android:labelFor="@id/PatientSpinner"
-            android:prompt="@string/spinner_title"
+            android:layout_width="153dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -71,7 +71,6 @@ public class R8Fragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +78,6 @@ public class R8Fragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
@@ -90,18 +88,20 @@ public class R8Fragment extends Fragment {
 
     }
     private List<String> text = new ArrayList<String>();
-    private PatientList plist;
     private final String myIP = "192.168.179.235";
+    private PatientList patientList;
     private String provisionsList;
+    private static final R8DataFetcher dbFetcher = new R8DataFetcher();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        patientList = new PatientList(myIP);
         super.onViewCreated(view, savedInstanceState);
 
-        Spinner dropDown = (Spinner) view.findViewById(R.id.PatientSpinner);
-        plist = new PatientList(myIP);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_dropdown_item, plist.getAllPatients());
-        System.out.println(plist);
+        Spinner dropDown = (Spinner) getView().findViewById(R.id.PatientSpinner);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item,patientList.getAllPatients());
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        System.out.println(patientList.getAllPatients());
         dropDown.setAdapter(arrayAdapter);
 
         //------------------------koumpi gia popup paroxwn------------------------------------------------------------
