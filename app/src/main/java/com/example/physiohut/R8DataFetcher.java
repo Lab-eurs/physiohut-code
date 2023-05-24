@@ -51,29 +51,40 @@ public class R8DataFetcher {
     }
 
 
-    ArrayList<Provision> populateProvitionList(String url) throws Exception {
-        ArrayList<Provision> prolist = new ArrayList<>();
+    public ArrayList<Provision> populateProvitionList(String ip){
+        StrictMode.ThreadPolicy policy = new
+                StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        //ip grafeio 172.23.240.1
         OkHttpClient client = new OkHttpClient().newBuilder().build();
-        RequestBody body = RequestBody.create("",MediaType.parse("text/plain"));
-        Request request = new Request.Builder().url(url).method("POST",body).build();
-        Response response = client.newCall(request).execute();
-        String data = response.body().string();
-        try{
-            JSONArray json = new JSONArray(data);
-            for (int i=0; i<json.length();i++){
-                JSONObject provisionJSON = json.getJSONObject(i);
-                JSONObject provision = (JSONObject) provisionJSON.get("provision");
-                System.out.println(provision);
-                int prov_id =  Integer.parseInt((String) provision.get("id"));
-                String code = (String) provision.get("CODE");
-                String description = (String) provision.get("description");
-                Double price = Double.parseDouble((String) provision.get("price"));
-                prolist.add(new Provision(prov_id,code,description,price));
+        RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
+        String url = "http://" + ip + "/physiohutDBServices/PopulateList.php";
+        Request request = new Request.Builder().url(url).method("GET",null).build();
+        Response response;
+        System.out.println("THE URL IS -->" + url);
+        ArrayList<Provision> provisions = new ArrayList<>();
+        try {
+            response = client.newCall(request).execute();
+            assert response.body() != null;
+            String data = response.body().string();
+            System.out.println("THE RESPONSE IS: " + data);
+            JSONObject json = new JSONObject(data);
+            Iterator<String> keys = json.keys();
+            while (keys.hasNext()){
+                String code = keys.next();
+                String prov_id = json.getJSONObject(code).getString("ids").toString();
+                String description = json.getJSONObject(code).getString("descriptions").toString();
+                String price = json.getJSONObject(code).getString("prices").toString();
+                provisions.add(new Provision(prov_id,code,description,price));
             }
-        }catch (JSONException e){
-            e.printStackTrace();
+
+            return provisions;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         }
-        return prolist;
     }
 
     public void logR8(String url) throws Exception {

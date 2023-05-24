@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -109,7 +111,7 @@ public class R8Fragment extends Fragment {
         provisionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showProvisionPopUp();
+                Navigation.findNavController(view).navigate(R.id.action_r8Fragment_to_provisionFragment);
             }
         });
 
@@ -169,54 +171,13 @@ public class R8Fragment extends Fragment {
         });
 
     }
+
     //--------------------------------------------Popup Paroxwn------------------------------------------
-    private void showProvisionPopUp(){
-        Dialog provisionDialog = new Dialog(getContext());
-        provisionDialog.setContentView(R.layout.fragment_provision);
-        provisionDialog.show();
-
-        CheckBox checkBox = provisionDialog.findViewById(R.id.checkBox);
-        CheckBox checkBox2 = provisionDialog.findViewById(R.id.checkBox2);
-        CheckBox checkBox3 = provisionDialog.findViewById(R.id.checkBox3);
-        CheckBox checkBox4 = provisionDialog.findViewById(R.id.checkBox4);
-        CheckBox checkBox5 = provisionDialog.findViewById(R.id.checkBox5);
-
-        Button provisionBtn = provisionDialog.findViewById(R.id.provisionSubmit);
-        provisionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(checkBox.isChecked()){
-                    text.add(checkBox.getText().toString());
-                }else{
-                    text.remove(checkBox.getText().toString());
-                }
-                if(checkBox2.isChecked()){
-                    text.add(checkBox2.getText().toString());
-                }else{
-                    text.remove(checkBox2.getText().toString());
-                }
-                if(checkBox3.isChecked()){
-                    text.add(checkBox3.getText().toString());
-                }else {
-                    text.remove(checkBox3.getText().toString());
-                }
-                if(checkBox4.isChecked()){
-                    text.add(checkBox4.getText().toString());
-                }else{
-                    text.remove(checkBox4.getText().toString());
-                }
-                if(checkBox5.isChecked()){
-                    text.add(checkBox5.getText().toString());
-                }else{
-                    text.remove(checkBox4.getText().toString());
-                }
-                provisionsList = TextUtils.join(", ", text);
-                TextView textView = getActivity().findViewById(R.id.Provisions);
-                textView.setText(provisionsList);
-                provisionDialog.dismiss();
-            }
-        });
-    }
+//    private void showProvisionPopUp(){
+//        Dialog provisionDialog = new Dialog(getContext());
+//        provisionDialog.setContentView(R.layout.fragment_provision);
+//        provisionDialog.show();
+//    }
     //----------------------------------------------------PopUp Calendar-----------------------------------------------
     private String selectedDate;
     private void showDialog(){

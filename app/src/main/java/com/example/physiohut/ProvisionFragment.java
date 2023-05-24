@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -80,6 +82,8 @@ public class ProvisionFragment extends Fragment {
     }
 
     List<String> provitions = new ArrayList<String>();
+    private static final R8DataFetcher dbFetcher = new R8DataFetcher();
+    private final String myIP = "192.168.179.235";
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -98,60 +102,51 @@ public class ProvisionFragment extends Fragment {
             }
         });
 
-        CheckBox checkBox = view.findViewById(R.id.checkBox);
-        CheckBox checkBox2 = view.findViewById(R.id.checkBox2);
-        CheckBox checkBox3 = view.findViewById(R.id.checkBox3);
-        CheckBox checkBox4 = view.findViewById(R.id.checkBox4);
-        CheckBox checkBox5 = view.findViewById(R.id.checkBox5);
+        ArrayList<Provision> provisions = dbFetcher.populateProvitionList(myIP);
+        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recyclerProv);
+        recyclerView.setAdapter(new ProvisionFragment.MyProvAdapter(provisions));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
 
+    // MyAdapter class
+    public class MyProvAdapter extends RecyclerView.Adapter<ProvisionFragment.MyViewHolder> {
 
-        Bundle bundle = new Bundle();
-        R8Fragment r8Fragment = new R8Fragment();
-        r8Fragment.setArguments(bundle);
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        // Remove the previous R8Fragment instance before adding the new one
-        fragmentManager.popBackStackImmediate(R8Fragment.class.getSimpleName(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        // Add the new R8Fragment instance
-        transaction.replace(R.id.fragmentContainerView, r8Fragment);
+        private ArrayList<Provision> dataList;
 
-        Button provisionBtn = view.findViewById(R.id.provisionSubmit);
-        provisionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(checkBox.isChecked()){
-                    provitions.add(checkBox.getText().toString());
-                }else{
-                    provitions.remove(checkBox.getText().toString());
-                }
-                if(checkBox2.isChecked()){
-                    provitions.add(checkBox2.getText().toString());
-                }else{
-                    provitions.remove(checkBox2.getText().toString());
-                }
-                if(checkBox3.isChecked()){
-                    provitions.add(checkBox3.getText().toString());
-                }else {
-                    provitions.remove(checkBox3.getText().toString());
-                }
-                if(checkBox4.isChecked()){
-                    provitions.add(checkBox4.getText().toString());
-                }else{
-                    provitions.remove(checkBox4.getText().toString());
-                }
-                if(checkBox5.isChecked()){
-                    provitions.add(checkBox5.getText().toString());
-                }else{
-                    provitions.remove(checkBox4.getText().toString());
-                }
-                String provisionsList = TextUtils.join(", ", provitions);
-                bundle.putString("List",provisionsList);
-                // Add the transaction to the back stack
-                transaction.addToBackStack(null);
-                // Commit the transaction
-                transaction.commit();
-                Navigation.findNavController(view).navigate(R.id.action_provisionFragment_to_r8Fragment);
-            }
-        });
+        public MyProvAdapter(ArrayList<Provision> dataList) {
+            this.dataList = dataList;
+        }
+
+        @NonNull
+        @Override
+        public ProvisionFragment.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_for_provision, parent, false);
+            return new ProvisionFragment.MyViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ProvisionFragment.MyViewHolder holder, int position) {
+            // Get the data for the current position
+            //Patient data = dataList.get(position);
+
+            // Update the view holder with the new data
+            holder.textParoxi.setText(dataList.get(position).getName());
+        }
+
+        @Override
+        public int getItemCount() {
+            return dataList.size();
+        }
+    }
+
+    // MyViewHolder class
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+
+        private final CheckBox  textParoxi;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            textParoxi = (CheckBox) itemView.findViewById(R.id.checkBox);
+        }
     }
 }
