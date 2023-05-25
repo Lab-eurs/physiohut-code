@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,6 +82,11 @@ public class R9Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_r9, container, false);
     }
 
+    private final String myIP = "192.168.2.101";
+    private int patient_id = 0;
+    private int doctor_id=0;
+    private int pending_id=0;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -107,11 +114,15 @@ public class R9Fragment extends Fragment {
         });
         TextInputLayout comment = view.findViewById(R.id.commentr9);
         EditText commentEditText = comment.getEditText();
+
         Button submit = view.findViewById(R.id.submitbutton);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String comment = commentEditText.getText().toString();
+                patient_id++;
+                doctor_id++;
+                pending_id++;
                 //pop-up
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                 builder.setTitle("Επιβεβαίωση Ραντεβού");
@@ -120,7 +131,14 @@ public class R9Fragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Toast.makeText(getContext(), "Ραντεβού έκλεισε για "+time +", " + selectedDate, Toast.LENGTH_LONG).show();
-                        //bash dedomenwn kwdikas
+                        String url = "http://" + myIP + "/physiohut/R9log.php?pending_id=" + pending_id + "&patient_id="+ patient_id +"&doctor_id=" + doctor_id + "&comment=" + comment + "&created_at=" + time + selectedDate;
+                        try {
+                            R9log r9log = new R9log();
+                            r9log.logHistory(url);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        commentEditText.setText("");
                     }
                 });
                 builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
@@ -268,5 +286,4 @@ public class R9Fragment extends Fragment {
 
 
     }
-
 }
