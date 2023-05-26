@@ -160,6 +160,7 @@ public class R9Fragment extends Fragment {
     private void showPopup(){
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.calendarforr9);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
         dialog.show();
 
 
@@ -186,6 +187,7 @@ public class R9Fragment extends Fragment {
     private void showHourPopup(String date){
         Dialog hourDialog = new Dialog(getContext());
         hourDialog.setContentView(R.layout.hoursforr9);
+        hourDialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
         hourDialog.show();
 
         TextView textView = hourDialog.findViewById(R.id.day2);
