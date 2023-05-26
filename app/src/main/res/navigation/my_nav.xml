@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_doctorFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_doctorFragment_to_provisionFragment"
+            app:destination="@id/provisionFragment" />
     </fragment>
     <fragment
         android:id="@+id/patientFragment"
@@ -166,5 +169,8 @@
         <action
             android:id="@+id/action_r8Fragment_to_provisionFragment"
             app:destination="@id/provisionFragment" />
+        <action
+            android:id="@+id/action_r8Fragment_self"
+            app:destination="@id/r8Fragment" />
     </fragment>
 </navigation>

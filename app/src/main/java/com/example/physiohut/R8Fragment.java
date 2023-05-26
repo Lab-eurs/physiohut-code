@@ -3,11 +3,14 @@ package com.example.physiohut;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -81,18 +85,32 @@ public class R8Fragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    ArrayList<String> myPList = new ArrayList<>();
+    TextView textProv;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_r8, container, false);
+        container.removeAllViews();
+        View rootView = inflater.inflate(R.layout.fragment_r8, container, false);
 
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            myPList = bundle.getStringArrayList("provisionList");
+        }else{
+            myPList.add(" ");
+        }
+        textProv = rootView.findViewById(R.id.Provisions);
+        textProv.setText(myPList+"");
+        return  rootView;
     }
     private List<String> text = new ArrayList<String>();
     private final String myIP = "192.168.179.235";
     private PatientList patientList;
-    private String provisionsList;
+    private String name;
+    private int ap_id=0;
+    private int doctor_id=0;
+    private int patient_id=0;
     private static final R8DataFetcher dbFetcher = new R8DataFetcher();
 
     @Override
@@ -100,18 +118,39 @@ public class R8Fragment extends Fragment {
         patientList = new PatientList(myIP);
         super.onViewCreated(view, savedInstanceState);
 
+        //------------------------- Populate DropDown with patients ---------------------------------------------------
         Spinner dropDown = (Spinner) getView().findViewById(R.id.PatientSpinner);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item,patientList.getAllPatients());
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         System.out.println(patientList.getAllPatients());
         dropDown.setAdapter(arrayAdapter);
+        dropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                name = dropDown.getSelectedItem().toString();
+                System.out.println(name);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         //------------------------koumpi gia popup paroxwn------------------------------------------------------------
         Button provisionBtn = view.findViewById(R.id.ProvitionsBtn);
         provisionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_r8Fragment_to_provisionFragment);
+
+                ProvisionFragment provisionFragment = new ProvisionFragment();
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.r8Fragment, provisionFragment);
+                transaction.addToBackStack("tag");
+
+                transaction.commit();
             }
         });
 
@@ -156,7 +195,18 @@ public class R8Fragment extends Fragment {
                 builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        ap_id++;
+                        doctor_id++;
+                        patient_id++;
                         Toast.makeText(getContext(), "Ραντεβού έκλεισε για: "+time+ selectedDate, Toast.LENGTH_LONG).show();
+                        String url = "http://"+myIP+"/physiohutDBServices/R8logFile.php?ap_id="+ap_id+"&doctor_id="+doctor_id+"&patient_id="+patient_id+"&comment="+comment+"&provision="+myPList+"&created_at="+selectedDate+time;
+                        try{
+                            R8DataFetcher r8DataFetcher = new R8DataFetcher();
+                            r8DataFetcher.logR8(url);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        commentEditText.setText("");
                     }
                 });
                 builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {

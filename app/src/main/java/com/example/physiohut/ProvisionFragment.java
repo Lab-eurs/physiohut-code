@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,10 +79,13 @@ public class ProvisionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        container.removeAllViews();
         return inflater.inflate(R.layout.fragment_provision, container, false);
     }
 
     List<String> provitions = new ArrayList<String>();
+    ArrayList<Provision> provisions;
+    ArrayList<Provision> adapterProv = new ArrayList<>();
     private static final R8DataFetcher dbFetcher = new R8DataFetcher();
     private final String myIP = "192.168.179.235";
     @Override
@@ -95,21 +99,56 @@ public class ProvisionFragment extends Fragment {
                 switch (item.getItemId()) {
                     case R.id.back:
                     case R.id.home:
-                        Navigation.findNavController(view).navigate(R.id.action_provisionFragment_to_r8Fragment);
+                        Navigation.findNavController(view).navigate(R.id.action_r8Fragment_self);
                         break;
                 }
                 return false;
             }
         });
 
-        ArrayList<Provision> provisions = dbFetcher.populateProvitionList(myIP);
+        provisions = dbFetcher.populateProvitionList(myIP);
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recyclerProv);
-        recyclerView.setAdapter(new ProvisionFragment.MyProvAdapter(provisions));
+        recyclerView.setAdapter(new ProvisionFragment.MyProvAdapter(getAdapterProv()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        Button okbtn = view.findViewById(R.id.provisionSubmit);
+        okbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<String> provisionsName = new ArrayList<>();
+                for(int i=0;i<adapterProv.size();i++){
+                    if(adapterProv.get(i).isSelected()){
+                        provisionsName.add(adapterProv.get(i).getName());
+                    }
+                    System.out.println(adapterProv.get(i).isSelected());
+                }
+                System.out.println(provisionsName);
+
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("provisionList", provisionsName);
+
+                R8Fragment r8Fragment = new R8Fragment();
+                r8Fragment.setArguments(bundle);
+
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.container, r8Fragment);
+                transaction.addToBackStack("tag");
+
+                transaction.commit();
+            }
+        });
+    }
+    private ArrayList<Provision> getAdapterProv(){
+        for(int i=0; i<provisions.size();i++){
+            adapterProv.add(new Provision(provisions.get(i).getName(), false));
+        }
+        return adapterProv;
     }
 
     // MyAdapter class
-    public class MyProvAdapter extends RecyclerView.Adapter<ProvisionFragment.MyViewHolder> {
+    public class MyProvAdapter extends RecyclerView.Adapter<MyProvAdapter.MyViewHolder> {
 
         private ArrayList<Provision> dataList;
 
@@ -119,34 +158,56 @@ public class ProvisionFragment extends Fragment {
 
         @NonNull
         @Override
-        public ProvisionFragment.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_for_provision, parent, false);
-            return new ProvisionFragment.MyViewHolder(view);
+            return new MyViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ProvisionFragment.MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             // Get the data for the current position
             //Patient data = dataList.get(position);
-
+            Provision provision = dataList.get(position);
             // Update the view holder with the new data
             holder.textParoxi.setText(dataList.get(position).getName());
+            holder.textParoxi.setChecked(provision.isSelected());
         }
 
         @Override
         public int getItemCount() {
             return dataList.size();
         }
-    }
 
-    // MyViewHolder class
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private final CheckBox  textParoxi;
+            private final CheckBox textParoxi;
 
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            textParoxi = (CheckBox) itemView.findViewById(R.id.checkBox);
+            public MyViewHolder(View itemView) {
+                super(itemView);
+                textParoxi = (CheckBox) itemView.findViewById(R.id.checkBox);
+
+                textParoxi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        boolean isChecked = ((CheckBox) view).isChecked();
+
+                        if (isChecked) {
+                            dataList.get(getAdapterPosition()).setSelected(true);
+                        } else {
+                            dataList.get(getAdapterPosition()).setSelected(false);
+                        }
+                        notifyDataSetChanged();
+                        for (int i = 0; i < dataList.size(); i++) {
+                            Log.d("TAG", dataList.toString());
+                        }
+                    }
+                });
+            }
+
         }
     }
+
+
+    // MyViewHolder class
+
 }

@@ -4,30 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/r8Fragment"
     tools:context=".R8Fragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <TextView
             android:id="@+id/Provisions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:layout_marginBottom="12dp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/TextR8"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ProvitionsBtn" />
-
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Spinner
             android:id="@+id/PatientSpinner"
-            android:layout_width="153dp"
-            android:layout_height="75dp"
+            android:layout_width="156dp"
+            android:layout_height="43dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.464"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,10 +38,9 @@
             android:id="@+id/ProvitionsBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="18dp"
             android:backgroundTint="@color/button"
             android:text="Επιλέξτε παροχές"
-            app:layout_constraintBottom_toTopOf="@+id/Provisions"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,13 +51,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Επιλέξτε ημερομηνία και ώρα:"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.511"
+            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.379" />
+            app:layout_constraintVertical_bias="0.45" />
 
         <Button
             android:id="@+id/Calendar"
@@ -64,43 +66,59 @@
             android:backgroundTint="#F6F2F2"
             android:hint="Ημέρα/Μήνας/΄Ετος/Ώρα"
             app:icon="@drawable/iconfinder_calendar_date_event_month_115762"
-            app:iconTint="@color/black"
             app:iconGravity="end"
+            app:iconTint="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextR8"
-            app:layout_constraintVertical_bias="0.346" />
+            app:layout_constraintVertical_bias="0.172" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
-            android:layout_width="284dp"
-            android:layout_height="121dp"
-            android:layout_marginBottom="180dp"
+            android:layout_width="273dp"
+            android:layout_height="71dp"
+            android:layout_marginBottom="104dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintHorizontal_bias="0.456"
             app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Σχόλιο"
                 android:gravity="start"
-                android:textAlignment="viewStart"/>
+                android:backgroundTint="@color/white"
+                android:hint="Σχόλιο"
+                android:textAlignment="viewStart" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/Submitbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_width="122dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="58dp"
             android:backgroundTint="@color/button"
             android:text="Υποβολή"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            app:layout_constraintVertical_bias="0.963" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Οι παροχές που Επιλέξατε είναι:"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/Provisions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ProvitionsBtn"
+            app:layout_constraintVertical_bias="0.794" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

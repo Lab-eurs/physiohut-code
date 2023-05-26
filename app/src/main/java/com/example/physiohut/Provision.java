@@ -9,6 +9,7 @@ public class Provision {
     private String name;
     private String description;
     private double price;
+    private boolean isSelected;
 
     public Provision(int id, String name, String description, double price) {
         this.id = id;
@@ -24,6 +25,17 @@ public class Provision {
         this.prov_price = prov_price;
     }
 
+    public Provision(String name, boolean isSelected){
+        this.name = name;
+        this.isSelected = isSelected;
+    }
+
+    public boolean isSelected(){ return isSelected; }
+    public void setSelected(boolean selected){ isSelected = selected; }
+    @Override
+    public String toString(){
+        return "Provision Class" + "name= "+ name + "isSelected= " + isSelected;
+    }
     public double getPrice() {
         return price;
     }
