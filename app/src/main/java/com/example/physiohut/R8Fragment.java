@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -221,19 +222,17 @@ public class R8Fragment extends Fragment {
         });
 
     }
-
-    //--------------------------------------------Popup Paroxwn------------------------------------------
-//    private void showProvisionPopUp(){
-//        Dialog provisionDialog = new Dialog(getContext());
-//        provisionDialog.setContentView(R.layout.fragment_provision);
-//        provisionDialog.show();
-//    }
     //----------------------------------------------------PopUp Calendar-----------------------------------------------
     private String selectedDate;
     private void showDialog(){
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.calendar);
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
+
+        int width = (int) (getContext().getResources().getDisplayMetrics().widthPixels * 0.8);
+        int height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        dialog.getWindow().setLayout(width, height);
         dialog.show();
 
 
