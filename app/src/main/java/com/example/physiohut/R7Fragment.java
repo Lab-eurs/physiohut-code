@@ -143,6 +143,7 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sortBy(position,recArrayList); //Sends the index of the selected spinner item & returns a sorted list.
+                filterList(searchViewR7.getQuery().toString());
                 myAdapter.notifyDataSetChanged(); //update recyclerView.
             }
 
@@ -150,6 +151,7 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
         recArrayList = dbFetcher.fetchAppointmentsFromDB(); //Fetch data from DB
         myAdapter = new Adapter(getContext(),recArrayList);
         recyclerView.setAdapter(myAdapter);
@@ -160,15 +162,13 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
     //Sorts the recyclerView's list by the spinners index value.
     public static void sortBy(int position, ArrayList<Appointments> arrayList){
         arrayList.sort((o1, o2) -> {
-
             if (position == 0) {
                 //A-Z sort
                 return o1.getPatientName().compareToIgnoreCase(o2.getPatientName());
-
-            } else {
+            }
+            else {
                 //Z-A sort
                 return o2.getPatientName().compareToIgnoreCase(o1.getPatientName());
-
             }
         });
 

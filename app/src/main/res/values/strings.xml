@@ -68,8 +68,6 @@
     <string-array name="sortBySpinner">
         <item>Όνομα Α-Ζ</item>
         <item>Όνομα Ζ-Α</item>
-        <item>Ημερομηνία αύξουσα</item>
-        <item>Ημερομηνία φθήνουσα</item>
     </string-array>
 
 </resources>
