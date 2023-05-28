@@ -43,7 +43,7 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     private SearchView searchView;
     private ArrayList<Doctor> doctorArrayList = new ArrayList<>();
 
-    private final String myIP = "192.168.1.69";
+    private final String myIP = "192.168.1.4";
 
     public DoctorFragment() {
         // Required empty public constructor
@@ -91,9 +91,8 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     private AppointmentsList cbl;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         cbl = new AppointmentsList(myIP);
+        super.onViewCreated(view, savedInstanceState);
 
         listView =  view.findViewById(R.id.listView);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getParentFragment().getContext(), R.layout.activity_listview, R.id.textView, cbl.getNames());

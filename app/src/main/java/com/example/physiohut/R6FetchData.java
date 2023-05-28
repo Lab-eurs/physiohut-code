@@ -26,20 +26,21 @@ public class R6FetchData {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create("",
                 MediaType.parse("text/plain"));
-        Request request = new Request.Builder().url(url).method("GET",
+        Request request = new Request.Builder().url(url).method("POST",
                 body).build();
+        System.out.println("The URL is --> "+ url);
         Response response = client.newCall(request).execute();
         String data = response.body().string();
-        //System.out.println("My Response: " + data);
+        System.out.println("My Response: " + data);
         try {
             JSONObject json = new JSONObject(data);
             Iterator<String> keys = json.keys();
             while(keys.hasNext()) {
-                String doctor_id = keys.next();
-                String patients_id = json.get(doctor_id).toString();
-                String patientName = json.get(doctor_id).toString();
-                String appointmentDate = json.get(doctor_id).toString();
-                cbList.add(new Appointments(patientName, appointmentDate, patients_id, doctor_id));
+                String name = keys.next();
+                String patients_id = json.getJSONObject(name).getString("ids").toString();
+                String doctor_id = json.getJSONObject(name).getString("doctors").toString();
+                String created_at = json.getJSONObject(name).getString("created_at").toString();
+                cbList.add(new Appointments(name, created_at, patients_id, doctor_id));
             }
         } catch (JSONException e) {
             e.printStackTrace();
