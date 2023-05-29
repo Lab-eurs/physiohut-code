@@ -8,10 +8,10 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="301dp"
+        android:layout_height="49dp"
         android:layout_margin="8dp"
-
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,7 +19,7 @@
 
         <TextView
             android:id="@+id/textImerominia"
-            android:layout_width="wrap_content"
+            android:layout_width="77dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:dividerHeight="8dp"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:dividerHeight="8dp"
-            android:textAlignment="textEnd"
+            android:gravity="left"
             android:textColor="@color/black"
             android:textSize="20sp"></TextView>
 

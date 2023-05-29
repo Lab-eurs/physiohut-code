@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -101,13 +102,14 @@ public class R4Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_r4, container, false);
     }
 
-    private final String myIP = "172.20.10.2";
+    private final String myIP = "192.168.205.51";
+    private static final R4DB dbfetcher = new R4DB();
+    ArrayList<Provision> provisions;
+    ArrayList<Provision> adapterProv = new ArrayList<>();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        ArrayList<Provision> provisions = new ArrayList<>();
 
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -157,19 +159,26 @@ public class R4Fragment extends Fragment {
 //        //dates.add("29-03-2023    ");
 //        //dates.add("22-04-2023    ");
 //        // dates.add("19-05-2023    ");
-        String url = "http://"+myIP+"/physiohut/populatePatientHistory.php";
-        try{
-            R4DB dbFETCHER = new R4DB();
-            provisions = dbFETCHER.PopulateRecycleView(url);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        String url = "http://"+myIP+"/physiohut/populatePatientHistory.php";
+//        try{
+//            R4DB dbFETCHER = new R4DB();
+//            provisions = dbFETCHER.PopulateRecycleView(url);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
 
+        provisions = dbfetcher.PopulateRecycleView(myIP);
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycler_main);
-        recyclerView.setAdapter(new MyAdapter(provisions));
+        recyclerView.setAdapter(new MyAdapter(getAdapterProv()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
+    }
+    private ArrayList<Provision> getAdapterProv(){
+        for(int i=0; i<provisions.size();i++){
+            adapterProv.add(new Provision(provisions.get(i).getName(),provisions.get(i).getDate()));
+        }
+        return adapterProv;
     }
 
     // MyAdapter class
@@ -177,7 +186,7 @@ public class R4Fragment extends Fragment {
 
         private ArrayList<Provision> dataList;
 
-        public MyAdapter(ArrayList<Provision> provisions) {
+        public MyAdapter(ArrayList<Provision> dataList) {
             this.dataList = dataList;
         }
 
