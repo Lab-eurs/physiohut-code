@@ -11,7 +11,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,21 +18,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProvisionFragment#newInstance} factory method to
+ * Use the {@link ProvisionPatients#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProvisionFragment extends Fragment {
+public class ProvisionPatients extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,7 +39,7 @@ public class ProvisionFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ProvisionFragment() {
+    public ProvisionPatients() {
         // Required empty public constructor
     }
 
@@ -54,11 +49,11 @@ public class ProvisionFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProvisionFragment.
+     * @return A new instance of fragment ProvisionPatients.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProvisionFragment newInstance(String param1, String param2) {
-        ProvisionFragment fragment = new ProvisionFragment();
+    public static ProvisionPatients newInstance(String param1, String param2) {
+        ProvisionPatients fragment = new ProvisionPatients();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -80,10 +75,9 @@ public class ProvisionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         container.removeAllViews();
-        return inflater.inflate(R.layout.fragment_provision, container, false);
+        return inflater.inflate(R.layout.fragment_provision_patients, container, false);
     }
 
-    List<String> provitions = new ArrayList<String>();
     ArrayList<Provision> provisions;
     ArrayList<Provision> adapterProv = new ArrayList<>();
     private static final R8DataFetcher dbFetcher = new R8DataFetcher();
@@ -99,7 +93,7 @@ public class ProvisionFragment extends Fragment {
                 switch (item.getItemId()) {
                     case R.id.back:
                     case R.id.home:
-                        Navigation.findNavController(view).navigate(R.id.action_r8Fragment_self);
+                        Navigation.findNavController(view).navigate(R.id.action_doctorFragment_self);
                         break;
                 }
                 return false;
@@ -108,7 +102,7 @@ public class ProvisionFragment extends Fragment {
 
         provisions = dbFetcher.populateProvitionList(myIP);
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recyclerProv);
-        recyclerView.setAdapter(new ProvisionFragment.MyProvAdapter(getAdapterProv()));
+        recyclerView.setAdapter(new ProvisionPatients.MyProvAdapter(getAdapterProv()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         Button okbtn = view.findViewById(R.id.provisionSubmit);
@@ -123,20 +117,7 @@ public class ProvisionFragment extends Fragment {
                     System.out.println(adapterProv.get(i).isSelected());
                 }
                 System.out.println(provisionsName);
-
-                Bundle bundle = new Bundle();
-                bundle.putStringArrayList("provisionList", provisionsName);
-
-                R8Fragment r8Fragment = new R8Fragment();
-                r8Fragment.setArguments(bundle);
-
-                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.container, r8Fragment);
-                transaction.addToBackStack("tag");
-
-                transaction.commit();
+                Navigation.findNavController(view).navigate(R.id.action_doctorFragment_self);
             }
         });
     }
@@ -148,7 +129,7 @@ public class ProvisionFragment extends Fragment {
     }
 
     // MyAdapter class
-    public class MyProvAdapter extends RecyclerView.Adapter<MyProvAdapter.MyViewHolder> {
+    public class MyProvAdapter extends RecyclerView.Adapter<ProvisionPatients.MyProvAdapter.MyViewHolder> {
 
         private ArrayList<Provision> dataList;
 
@@ -158,13 +139,13 @@ public class ProvisionFragment extends Fragment {
 
         @NonNull
         @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public ProvisionPatients.MyProvAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_for_provision, parent, false);
-            return new MyViewHolder(view);
+            return new ProvisionPatients.MyProvAdapter.MyViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ProvisionPatients.MyProvAdapter.MyViewHolder holder, int position) {
             // Get the data for the current position
             //Patient data = dataList.get(position);
             Provision provision = dataList.get(position);
@@ -206,8 +187,4 @@ public class ProvisionFragment extends Fragment {
 
         }
     }
-
-
-    // MyViewHolder class
-
 }

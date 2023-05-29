@@ -44,8 +44,11 @@
             android:id="@+id/action_doctorFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
         <action
-            android:id="@+id/action_doctorFragment_to_provisionFragment"
-            app:destination="@id/provisionFragment" />
+            android:id="@+id/action_doctorFragment_self2"
+            app:destination="@id/doctorFragment" />
+        <action
+            android:id="@+id/action_doctorFragment_to_provisionPatients"
+            app:destination="@id/provisionPatients" />
     </fragment>
     <fragment
         android:id="@+id/patientFragment"
@@ -173,4 +176,9 @@
             android:id="@+id/action_r8Fragment_self"
             app:destination="@id/r8Fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/provisionPatients"
+        android:name="com.example.physiohut.ProvisionPatients"
+        android:label="fragment_provision_patients"
+        tools:layout="@layout/fragment_provision_patients" />
 </navigation>
