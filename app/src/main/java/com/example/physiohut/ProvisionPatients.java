@@ -22,6 +22,7 @@ import android.widget.CheckBox;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,6 +81,7 @@ public class ProvisionPatients extends Fragment {
 
     ArrayList<Provision> provisions;
     ArrayList<Provision> adapterProv = new ArrayList<>();
+    int id = 0;
     private static final R8DataFetcher dbFetcher = new R8DataFetcher();
     private final String myIP = "192.168.179.235";
     @Override
@@ -109,14 +111,20 @@ public class ProvisionPatients extends Fragment {
         okbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                id++;
                 ArrayList<String> provisionsName = new ArrayList<>();
                 for(int i=0;i<adapterProv.size();i++){
                     if(adapterProv.get(i).isSelected()){
                         provisionsName.add(adapterProv.get(i).getName());
                     }
-                    System.out.println(adapterProv.get(i).isSelected());
                 }
-                System.out.println(provisionsName);
+                String url = "http://"+myIP+"/physiohutDBServices/katagrafiR8.php?ap_id="+id+"&provision="+provisionsName;
+                try{
+                    R8DataFetcher r8DataFetcher = new R8DataFetcher();
+                    r8DataFetcher.katagrafiR8(url);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 Navigation.findNavController(view).navigate(R.id.action_doctorFragment_self);
             }
         });

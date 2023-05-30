@@ -30,6 +30,9 @@ public class Provision {
         this.isSelected = isSelected;
     }
 
+    public String getProv_id(){
+        return prov_id;
+    }
     public boolean isSelected(){ return isSelected; }
     public void setSelected(boolean selected){ isSelected = selected; }
     @Override

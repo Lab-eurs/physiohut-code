@@ -86,8 +86,15 @@ public class R8DataFetcher {
             throw new RuntimeException(e);
         }
     }
-
     public void logR8(String url) throws Exception {
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
+        Request request = new Request.Builder().url(url).method("POST",body).build();
+        Response response = client.newCall(request).execute();
+        System.out.println("My Response: "+ response);
+    }
+
+    public void katagrafiR8(String url) throws Exception {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
         Request request = new Request.Builder().url(url).method("POST",body).build();

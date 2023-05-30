@@ -189,16 +189,16 @@ public class R8Fragment extends Fragment {
             public void onClick(View view) {
                 //--------------------------------------popup epivevaiwshs----------------------------------------------
                 String comment = commentEditText.getText().toString();
-
+                ap_id++;
+                doctor_id++;
+                patient_id++;
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                 builder.setTitle("Επιβεβαίωση Ραντεβού");
                 builder.setMessage("Ημερομηνία: "+ selectedDate+ "\n" + "Ώρα: "+ time+"\n"+"Σχόλιο: "+comment);
                 builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ap_id++;
-                        doctor_id++;
-                        patient_id++;
+
                         Toast.makeText(getContext(), "Ραντεβού έκλεισε για: "+time+ selectedDate, Toast.LENGTH_LONG).show();
                         String url = "http://"+myIP+"/physiohutDBServices/R8logFile.php?ap_id="+ap_id+"&doctor_id="+doctor_id+"&patient_id="+patient_id+"&comment="+comment+"&provision="+myPList+"&created_at="+selectedDate+time;
                         try{
@@ -276,7 +276,7 @@ public class R8Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 time = "9:00- 11:00 ";
-                calendarButton.setText(date+time);
+                calendarButton.setText(date+" "+time);
                 calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
@@ -286,7 +286,7 @@ public class R8Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 time = "11:00- 13:00";
-                calendarButton.setText(date+time);
+                calendarButton.setText(date+" "+time);
                 calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
@@ -296,7 +296,7 @@ public class R8Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 time = "13:00- 15:00";
-                calendarButton.setText(date+time);
+                calendarButton.setText(date+" "+time);
                 calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
@@ -306,7 +306,7 @@ public class R8Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 time = "17:00- 19:00";
-                calendarButton.setText(date+time);
+                calendarButton.setText(date+" "+time);
                 calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
@@ -316,8 +316,8 @@ public class R8Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 time = "19:00- 21:00";
-                calendarButton.setText(date+time);
-                calendarButton.setBackgroundColor(getResources().getColor(R.color.black));
+                calendarButton.setText(date+" "+time);
+                calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
         });
