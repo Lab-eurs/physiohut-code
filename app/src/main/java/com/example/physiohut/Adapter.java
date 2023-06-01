@@ -15,13 +15,13 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     Context context;
-    ArrayList<Appointments> arrayList;
+    ArrayList<PendingAppointmentsR7> arrayList;
 
-    public void setFilteredList(ArrayList<Appointments> filteredList){
+    public void setFilteredList(ArrayList<PendingAppointmentsR7> filteredList){
         this.arrayList = filteredList;
     }
 
-    public Adapter(Context context, ArrayList<Appointments> arrayList){
+    public Adapter(Context context, ArrayList<PendingAppointmentsR7> arrayList){
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -35,7 +35,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
-        Appointments appointmentsClass = arrayList.get(position);
+        PendingAppointmentsR7 appointmentsClass = arrayList.get(position);
 
         holder.patientNameR7.setText(appointmentsClass.getPatientName());
         holder.dateOfAppointmentDataR7.setText(appointmentsClass.getAppointmentDate());

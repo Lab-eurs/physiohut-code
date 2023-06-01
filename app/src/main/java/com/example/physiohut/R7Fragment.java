@@ -27,7 +27,7 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     //Declarations
-    private ArrayList<Appointments> recArrayList;
+    private ArrayList<PendingAppointmentsR7> recArrayList;
     private static final R7DataFetcher dbFetcher = new R7DataFetcher();
     private Adapter myAdapter;
     private Spinner spinner;
@@ -95,9 +95,9 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
     @SuppressLint("NotifyDataSetChanged")
     private void filterList(String text) {
 
-        ArrayList<Appointments> filteredList = new ArrayList<>();
+        ArrayList<PendingAppointmentsR7> filteredList = new ArrayList<>();
 
-        for(Appointments item : recArrayList) {
+        for(PendingAppointmentsR7 item : recArrayList) {
             if (item.getPatientName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
@@ -131,7 +131,7 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
 
         //Main RecyclerView ArrayList.
         recArrayList = new ArrayList<>();
-
+        recArrayList = dbFetcher.fetchAppointmentsFromDB(); //Fetch data from DB
 
         //RecyclerView setup and init.
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewR7);
@@ -152,7 +152,7 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
             }
         });
 
-        recArrayList = dbFetcher.fetchAppointmentsFromDB(); //Fetch data from DB
+
         myAdapter = new Adapter(getContext(),recArrayList);
         recyclerView.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
@@ -160,7 +160,7 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
     }
 
     //Sorts the recyclerView's list by the spinners index value.
-    public static void sortBy(int position, ArrayList<Appointments> arrayList){
+    public static void sortBy(int position, ArrayList<PendingAppointmentsR7> arrayList){
         arrayList.sort((o1, o2) -> {
             if (position == 0) {
                 //A-Z sort
