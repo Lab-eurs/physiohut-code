@@ -131,7 +131,7 @@ public class R9Fragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Toast.makeText(getContext(), "Ραντεβού έκλεισε για "+time +", " + selectedDate, Toast.LENGTH_LONG).show();
-                        String url = "http://" + myIP + "/physiohut/R9log.php?pending_id=" + pending_id + "&patient_id="+ patient_id +"&doctor_id=" + doctor_id + "&comment=" + comment + "&created_at=" + time + selectedDate;
+                        String url = "http://" + myIP + "/physiohut/R9log.php?pending_id=" + pending_id + "&patient_id="+ patient_id +"&doctor_id=" + doctor_id + "&comment=" + comment + "&created_at=" + selectedDate + "&created_at_time=" + time;
                         try {
                             R9log r9log = new R9log();
                             r9log.logHistory(url);
