@@ -79,8 +79,10 @@ public class R1Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_r1, container, false);
     }
 
+
+    //bash
     private final String myIP = "192.168.1.3";
-    private int id = 0;
+    private String id = "0";
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -144,7 +146,8 @@ public class R1Fragment extends Fragment {
                     builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            id ++;
+                            //bash
+                            id = afm;
                             String url = "http://"+myIP+"/physiohut/r1.php?id="+id+ "&afm="+afm+"&name="+name+"&address="+address;
                             try{
                                 R1DataLog r1DataLog = new R1DataLog();
