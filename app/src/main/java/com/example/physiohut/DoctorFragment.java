@@ -28,6 +28,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,7 +96,7 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     }
 
     ArrayList<String> app_list = new ArrayList<>();
-    String app_list[] = {"Ραντεβού #1","Ραντεβού #2","Ραντεβού #3","Ραντεβού #4","Ραντεβού #5","Ραντεβού #6","Ραντεβού #7","Ραντεβού #8","Ραντεβού #9","Ραντεβού #10"};
+
 
     private AppointmentsList cbl;
     @Override

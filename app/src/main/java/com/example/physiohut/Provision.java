@@ -7,8 +7,7 @@ public class Provision {
     private String prov_id;
     private String prov_price;
     private String name;
-    private String prov_id;
-    private String prov_price;
+
     private String date;
     private String description;
     private double price;
