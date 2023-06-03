@@ -12,18 +12,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     Context context;
-    ArrayList<Appointments> arrayList;
+    ArrayList<PendingAppointmentsR7> arrayList;
 
-    public void setFilteredList(ArrayList<Appointments> filteredList){
+    public void setFilteredList(ArrayList<PendingAppointmentsR7> filteredList){
         this.arrayList = filteredList;
-        notifyDataSetChanged();
     }
 
-    public Adapter(Context context, ArrayList<Appointments> arrayList){
+    public Adapter(Context context, ArrayList<PendingAppointmentsR7> arrayList){
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -37,12 +35,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
-        Appointments appointmentsClass = arrayList.get(position);
+        PendingAppointmentsR7 appointmentsClass = arrayList.get(position);
 
-        holder.patientNameR7.setText(appointmentsClass.patientName);
-        holder.dateOfAppointmentDataR7.setText(appointmentsClass.appointmentDate);
-        //holder.locationOfAppointmentDataR7.setText(appointmentsClass.appointmentArea);
-        //holder.timeOfAppointmentDataR7.setText(appointmentsClass.appointmentTime);
+        holder.patientNameR7.setText(appointmentsClass.getPatientName());
+        holder.dateOfAppointmentDataR7.setText(appointmentsClass.getAppointmentDate());
+        holder.locationOfAppointmentDataR7.setText(appointmentsClass.getAppointmentArea());
+        holder.timeOfAppointmentDataR7.setText(appointmentsClass.getAppointmentTime());
 
         holder.expandButtonR7.setOnClickListener(view -> {
             if(arrayList.get(position).isVisible){
