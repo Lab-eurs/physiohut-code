@@ -191,13 +191,13 @@ public class R2Fragment extends Fragment {
                   myToast.show();
                  // Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
                   //σε αυτό το σημείο θα αποστέλω τα δεδομένα στη ΒΔ
-                  id++;
-                  String url= "http://"+myIP+"/physiohut/r2.php?id="+id+"&CODE="+sCode+"&description="+sDescription+"&price="+sPrice;
+                  String url = NetworkConstants.getUrlOfFile("r2.php")+"?CODE="+sCode+"&description="+sDescription+"&price="+sPrice;;
+
                   try {
                       R2DataLog r2DataLog = new R2DataLog() ;
                       System.out.println(url);
                       r2DataLog.physioLog(url);
-                      Toast.makeText(getContext(), "CODE: "+sCode+"descprtion: "+sDescription+"price: "+sPrice,Toast.LENGTH_SHORT).show();
+                      Toast.makeText(getContext(), "CODE: "+sCode+"description: "+sDescription+"price: "+sPrice,Toast.LENGTH_SHORT).show();
                   }catch (Exception e){
                       e.printStackTrace();
                   }

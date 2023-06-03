@@ -20,6 +20,7 @@ public class R2DataLog {
                 body).build();
         Response response = client.newCall(request).execute();
         System.out.println("My Response: " + response);
+        response.close();
 
     }
 }

@@ -20,6 +20,7 @@ public class R1DataLog {
         Request request = new Request.Builder().url(url).method("POST",
                 body).build();
         Response response = client.newCall(request).execute();
+        response.close();
         System.out.println("My Response: " + response);
 
     }
