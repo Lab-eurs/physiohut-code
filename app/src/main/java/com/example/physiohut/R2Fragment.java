@@ -74,7 +74,8 @@ public class R2Fragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_r2, container, false);
     }
-
+ private final String myIP= "172.21.3.181";
+    private int id =0;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -188,9 +189,18 @@ public class R2Fragment extends Fragment {
               public void onClick(DialogInterface dialogInterface, int i) {
                   Toast myToast= Toast.makeText(getActivity(),"H υποβολή έγινε!",Toast.LENGTH_SHORT);
                   myToast.show();
-                  Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
+                 // Navigation.findNavController(view).navigate(R.id.action_r2Fragment_to_psfFragment);
                   //σε αυτό το σημείο θα αποστέλω τα δεδομένα στη ΒΔ
-
+                  id++;
+                  String url= "http://"+myIP+"/physiohut/r2.php?id="+id+"&CODE="+sCode+"&description="+sDescription+"&price="+sPrice;
+                  try {
+                      R2DataLog r2DataLog = new R2DataLog() ;
+                      System.out.println(url);
+                      r2DataLog.physioLog(url);
+                      Toast.makeText(getContext(), "CODE: "+sCode+"descprtion: "+sDescription+"price: "+sPrice,Toast.LENGTH_SHORT).show();
+                  }catch (Exception e){
+                      e.printStackTrace();
+                  }
 
               }
           });
