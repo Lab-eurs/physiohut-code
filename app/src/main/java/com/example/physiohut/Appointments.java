@@ -5,8 +5,10 @@ public class Appointments {
 
     String patientName;
     String appointmentDate;
-    String appointmentArea;
-    String appointmentTime;
+    String patients_id;
+
+    String doctor_id;
+
 
     boolean isVisible = false;
 
@@ -14,10 +16,14 @@ public class Appointments {
         return patientName;
     }
 
-    public Appointments(String patientName, String appointmentDate, String appointmentArea, String appointmentTime) {
+    public Appointments(String patientName, String appointmentDate, String patients_id, String doctor_id) {
         this.patientName = patientName;
         this.appointmentDate = appointmentDate;
-        this.appointmentArea = appointmentArea;
-        this.appointmentTime = appointmentTime;
+        this.patients_id = patients_id;
+        this.doctor_id = doctor_id;
+    }
+
+    public String getName(){
+        return patientName;
     }
 }
