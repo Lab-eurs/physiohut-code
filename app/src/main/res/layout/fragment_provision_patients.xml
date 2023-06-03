@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/container"
-    android:tag="test"
-    tools:context=".ProvisionFragment">
+    tools:context=".ProvisionPatients">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,9 +38,9 @@
             android:id="@+id/recyclerProv"
             android:layout_width="0dp"
             android:layout_height="195dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/provisionSubmit"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
@@ -50,13 +48,13 @@
             android:id="@+id/provisionSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp"
             android:backgroundTint="@color/button"
             android:text="ΟΚ"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerProv"
+            app:layout_constraintVertical_bias="0.032" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>

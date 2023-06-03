@@ -3,18 +3,25 @@ package com.example.physiohut;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -22,6 +29,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +38,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,7 +78,6 @@ public class R8Fragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,26 +86,72 @@ public class R8Fragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    ArrayList<String> myPList = new ArrayList<>();
+    TextView textProv;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_r8, container, false);
+        container.removeAllViews();
+        View rootView = inflater.inflate(R.layout.fragment_r8, container, false);
 
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            myPList = bundle.getStringArrayList("provisionList");
+        }else{
+            myPList.add(" ");
+        }
+        textProv = rootView.findViewById(R.id.Provisions);
+        textProv.setText(myPList+"");
+        return  rootView;
     }
     private List<String> text = new ArrayList<String>();
-    private String provisionsList;
+    private final String myIP = "192.168.179.235";
+    private PatientList patientList;
+    private String name;
+    private int ap_id=0;
+    private int doctor_id=0;
+    private int patient_id=0;
+    private static final R8DataFetcher dbFetcher = new R8DataFetcher();
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        patientList = new PatientList(myIP);
         super.onViewCreated(view, savedInstanceState);
+
+        //------------------------- Populate DropDown with patients ---------------------------------------------------
+        Spinner dropDown = (Spinner) getView().findViewById(R.id.PatientSpinner);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item,patientList.getAllPatients());
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        System.out.println(patientList.getAllPatients());
+        dropDown.setAdapter(arrayAdapter);
+        dropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                name = dropDown.getSelectedItem().toString();
+                System.out.println(name);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         //------------------------koumpi gia popup paroxwn------------------------------------------------------------
         Button provisionBtn = view.findViewById(R.id.ProvitionsBtn);
         provisionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showProvisionPopUp();
+
+                ProvisionFragment provisionFragment = new ProvisionFragment();
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.r8Fragment, provisionFragment);
+                transaction.addToBackStack("tag");
+
+                transaction.commit();
             }
         });
 
@@ -134,14 +189,25 @@ public class R8Fragment extends Fragment {
             public void onClick(View view) {
                 //--------------------------------------popup epivevaiwshs----------------------------------------------
                 String comment = commentEditText.getText().toString();
-
+                ap_id++;
+                doctor_id++;
+                patient_id++;
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                 builder.setTitle("Επιβεβαίωση Ραντεβού");
                 builder.setMessage("Ημερομηνία: "+ selectedDate+ "\n" + "Ώρα: "+ time+"\n"+"Σχόλιο: "+comment);
                 builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
                         Toast.makeText(getContext(), "Ραντεβού έκλεισε για: "+time+ selectedDate, Toast.LENGTH_LONG).show();
+                        String url = "http://"+myIP+"/physiohutDBServices/R8logFile.php?ap_id="+ap_id+"&doctor_id="+doctor_id+"&patient_id="+patient_id+"&comment="+comment+"&provision="+myPList+"&created_at="+selectedDate+time;
+                        try{
+                            R8DataFetcher r8DataFetcher = new R8DataFetcher();
+                            r8DataFetcher.logR8(url);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        commentEditText.setText("");
                     }
                 });
                 builder.setNegativeButton("Ακύρωση", new DialogInterface.OnClickListener() {
@@ -156,60 +222,17 @@ public class R8Fragment extends Fragment {
         });
 
     }
-    //--------------------------------------------Popup Paroxwn------------------------------------------
-    private void showProvisionPopUp(){
-        Dialog provisionDialog = new Dialog(getContext());
-        provisionDialog.setContentView(R.layout.fragment_provision);
-        provisionDialog.show();
-
-        CheckBox checkBox = provisionDialog.findViewById(R.id.checkBox);
-        CheckBox checkBox2 = provisionDialog.findViewById(R.id.checkBox2);
-        CheckBox checkBox3 = provisionDialog.findViewById(R.id.checkBox3);
-        CheckBox checkBox4 = provisionDialog.findViewById(R.id.checkBox4);
-        CheckBox checkBox5 = provisionDialog.findViewById(R.id.checkBox5);
-
-        Button provisionBtn = provisionDialog.findViewById(R.id.provisionSubmit);
-        provisionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(checkBox.isChecked()){
-                    text.add(checkBox.getText().toString());
-                }else{
-                    text.remove(checkBox.getText().toString());
-                }
-                if(checkBox2.isChecked()){
-                    text.add(checkBox2.getText().toString());
-                }else{
-                    text.remove(checkBox2.getText().toString());
-                }
-                if(checkBox3.isChecked()){
-                    text.add(checkBox3.getText().toString());
-                }else {
-                    text.remove(checkBox3.getText().toString());
-                }
-                if(checkBox4.isChecked()){
-                    text.add(checkBox4.getText().toString());
-                }else{
-                    text.remove(checkBox4.getText().toString());
-                }
-                if(checkBox5.isChecked()){
-                    text.add(checkBox5.getText().toString());
-                }else{
-                    text.remove(checkBox4.getText().toString());
-                }
-                provisionsList = TextUtils.join(", ", text);
-                TextView textView = getActivity().findViewById(R.id.Provisions);
-                textView.setText(provisionsList);
-                provisionDialog.dismiss();
-            }
-        });
-    }
     //----------------------------------------------------PopUp Calendar-----------------------------------------------
     private String selectedDate;
     private void showDialog(){
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.calendar);
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
+
+        int width = (int) (getContext().getResources().getDisplayMetrics().widthPixels * 0.8);
+        int height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        dialog.getWindow().setLayout(width, height);
         dialog.show();
 
 
@@ -253,7 +276,7 @@ public class R8Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 time = "9:00- 11:00 ";
-                calendarButton.setText(date+time);
+                calendarButton.setText(date+" "+time);
                 calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
@@ -263,7 +286,7 @@ public class R8Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 time = "11:00- 13:00";
-                calendarButton.setText(date+time);
+                calendarButton.setText(date+" "+time);
                 calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
@@ -273,7 +296,7 @@ public class R8Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 time = "13:00- 15:00";
-                calendarButton.setText(date+time);
+                calendarButton.setText(date+" "+time);
                 calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
@@ -283,7 +306,7 @@ public class R8Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 time = "17:00- 19:00";
-                calendarButton.setText(date+time);
+                calendarButton.setText(date+" "+time);
                 calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
@@ -293,8 +316,8 @@ public class R8Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 time = "19:00- 21:00";
-                calendarButton.setText(date+time);
-                calendarButton.setBackgroundColor(getResources().getColor(R.color.black));
+                calendarButton.setText(date+" "+time);
+                calendarButton.setTextColor(getResources().getColor(R.color.black));
                 hourDialog.dismiss();
             }
         });
