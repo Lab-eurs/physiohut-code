@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -101,6 +102,10 @@ public class R4Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_r4, container, false);
     }
 
+    private final String myIP = "192.168.205.51";
+    private static final R4DB dbfetcher = new R4DB();
+    ArrayList<Provision> provisions;
+    ArrayList<Provision> adapterProv = new ArrayList<>();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -120,57 +125,69 @@ public class R4Fragment extends Fragment {
             }
         });
 
-        ArrayList<String> provisions = new ArrayList<>();
-        provisions.add("Παροχη#1");
-        provisions.add("Παροχη#2");
-        provisions.add("Παροχη#3");
-        provisions.add("Παροχη#4");
-        provisions.add("Παροχη#5");
-        provisions.add("Παροχη#6");
-        provisions.add("Παροχη#7");
-        provisions.add("Παροχη#8");
-        provisions.add("Παροχη#9");
-        provisions.add("Παροχη#10");
-        provisions.add("Παροχη#11");
-        provisions.add("Παροχη#12");
-        provisions.add("Παροχη#13");
-        provisions.add("Παροχη#14");
-        provisions.add("Παροχη#15");
-        provisions.add("Παροχη#16");
-        ArrayList<String> dates = new ArrayList<>();
-        dates.add("22-01-2021    ");
-        dates.add("02-02-2021    ");
-        dates.add("08-02-2021    ");
-        dates.add("30-06-2021    ");
-        dates.add("14-07-2021    ");
-        dates.add("20-09-2021    ");
-        dates.add("27-12-2021    ");
-        dates.add("10-03-2022    ");
-        dates.add("20-04-2022    ");
-        dates.add("06-05-2022    ");
-        dates.add("17-05-2022    ");
-        dates.add("04-08-2022    ");
-        dates.add("11-11-2022    ");
-        dates.add("29-03-2023    ");
-        dates.add("22-04-2023    ");
-        dates.add("19-05-2023    ");
+//        // ArrayList<String> provisions = new ArrayList<>();
+//        provisions.add("Παροχη#1");
+//        provisions.add("Παροχη#2");
+//        provisions.add("Παροχη#3");
+//        provisions.add("Παροχη#4");
+//        provisions.add("Παροχη#5");
+//        provisions.add("Παροχη#6");
+//        provisions.add("Παροχη#7");
+//        provisions.add("Παροχη#8");
+//        provisions.add("Παροχη#9");
+//        provisions.add("Παροχη#10");
+//        provisions.add("Παροχη#11");
+//        provisions.add("Παροχη#12");
+//        provisions.add("Παροχη#13");
+//        provisions.add("Παροχη#14");
+//        provisions.add("Παροχη#15");
+//        provisions.add("Παροχη#16");
+//        ArrayList<String> dates = new ArrayList<>();
+//        dates.add("22-01-2021    ");
+//        dates.add("02-02-2021    ");
+//        dates.add("08-02-2021    ");
+//        dates.add("30-06-2021    ");
+//        dates.add("14-07-2021    ");
+//        dates.add("20-09-2021    ");
+//        dates.add("27-12-2021    ");
+//        dates.add("10-03-2022    ");
+//        dates.add("20-04-2022    ");
+//        dates.add("06-05-2022    ");
+//        dates.add("17-05-2022    ");
+//        dates.add("04-08-2022    ");
+//        //dates.add("11-11-2022    ");
+//        //dates.add("29-03-2023    ");
+//        //dates.add("22-04-2023    ");
+//        // dates.add("19-05-2023    ");
+//        String url = "http://"+myIP+"/physiohut/populatePatientHistory.php";
+//        try{
+//            R4DB dbFETCHER = new R4DB();
+//            provisions = dbFETCHER.PopulateRecycleView(url);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
 
+        provisions = dbfetcher.PopulateRecycleView(myIP);
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycler_main);
-        recyclerView.setAdapter(new MyAdapter(provisions,dates));
+        recyclerView.setAdapter(new MyAdapter(getAdapterProv()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
+    }
+    private ArrayList<Provision> getAdapterProv(){
+        for(int i=0; i<provisions.size();i++){
+            adapterProv.add(new Provision(provisions.get(i).getName(),provisions.get(i).getDate()));
+        }
+        return adapterProv;
     }
 
     // MyAdapter class
     private class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-        private ArrayList<String> dataList;
-        private ArrayList<String> dateList;
+        private ArrayList<Provision> dataList;
 
-        public MyAdapter(ArrayList<String> dataList,ArrayList<String> dates) {
+        public MyAdapter(ArrayList<Provision> dataList) {
             this.dataList = dataList;
-            this.dateList = dates;
         }
 
         @NonNull
@@ -184,10 +201,10 @@ public class R4Fragment extends Fragment {
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             // Get the data for the current position
             //Patient data = dataList.get(position);
-
+            Provision p = dataList.get(position);
             // Update the view holder with the new data
-            holder.textHmeromhnia.setText(dateList.get(position));
-            holder.textParoxi.setText(dataList.get(position));
+            holder.textHmeromhnia.setText(p.getDate());
+            holder.textParoxi.setText(p.getName());
         }
 
         @Override

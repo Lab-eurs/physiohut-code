@@ -4,6 +4,9 @@ public class Provision {
 
     private int id;
     private String name;
+    private String prov_id;
+    private String prov_price;
+    private String date;
     private String description;
     private double price;
 
@@ -14,12 +17,25 @@ public class Provision {
         this.price = price;
     }
 
+    public Provision(String prov_id,String date,String name, String description, String prov_price){
+        this.prov_id = prov_id;
+        this.date = date;
+        this.name = name;
+        this.description = description;
+        this.prov_price = prov_price;
+    }
+
+    public Provision(String name,String date){
+        this.name = name;
+        this.date = date;
+    }
+
     public double getPrice() {
         return price;
     }
 
     public String getDate(){
-        return "2022/05/23";
+        return date;
     }
 
     public String getDescription(){
