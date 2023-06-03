@@ -46,6 +46,7 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     private ArrayAdapter adapter;
     private SearchView searchView;
     private ArrayList<Doctor> doctorArrayList = new ArrayList<>();
+    private final String ip = "192.168.1.66";
 
     public DoctorFragment() {
         // Required empty public constructor
@@ -92,13 +93,6 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        listView =  view.findViewById(R.id.listView);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getParentFragment().getContext(), R.layout.activity_listview, R.id.textView, app_list);
-        listView.setAdapter(arrayAdapter);
-
-
-
 
 
         TabHost th = (TabHost) view.findViewById(R.id.patientandoc);
@@ -159,16 +153,56 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
             }
         });
 
-
-        // Find the list view and set its adapter
+        // Find the list view, create dataArray, ArrayList and set url
         listView = view.findViewById(R.id.list_view);
-        ArrayList<String> itemList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, itemList);
+        ArrayList<String> dataArray = new ArrayList<>();
+        String url= "http://"+ip+"/GetPatientsNames.php?";
+
+        //take the data with OkHttpHandler class and put them in dataArray
+       try {
+            OkHttpHandler okHttpHandler = new OkHttpHandler();
+            dataArray = okHttpHandler.getPatientNames(url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Put the data in the listView
+        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, dataArray);
         listView.setAdapter(adapter);
 
-        // Find the search view and set its listener
+        // Find the search view and set its listener and set an extra arrayList for the search
         searchView = view.findViewById(R.id.search_view);
-        searchView.setOnQueryTextListener(this);
+        ArrayList<String> finalDataArray = dataArray;
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterData(newText);
+                return true;
+            }
+
+            private void filterData(String query) {
+                List<String> filteredDataList = new ArrayList<>();
+
+                // Filter the original data list based on the query
+                for (String item : finalDataArray) {
+                    if (item.toLowerCase().contains(query.toLowerCase())) {
+                        filteredDataList.add(item);
+                    }
+                }
+
+                // Update the adapter with the filtered data
+                adapter.clear();
+                adapter.addAll(filteredDataList);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+
 
     }
 
