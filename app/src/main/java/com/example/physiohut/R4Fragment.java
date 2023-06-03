@@ -103,6 +103,7 @@ public class R4Fragment extends Fragment {
     }
 
     private final String myIP = "192.168.205.51";
+    private final int doc_id = 1;
     private static final R4DB dbfetcher = new R4DB();
     ArrayList<Provision> provisions;
     ArrayList<Provision> adapterProv = new ArrayList<>();
@@ -124,7 +125,7 @@ public class R4Fragment extends Fragment {
                 return false;
             }
         });
-
+        int patientID = 1;
 //        // ArrayList<String> provisions = new ArrayList<>();
 //        provisions.add("Παροχη#1");
 //        provisions.add("Παροχη#2");
@@ -160,16 +161,20 @@ public class R4Fragment extends Fragment {
 //        //dates.add("22-04-2023    ");
 //        // dates.add("19-05-2023    ");
 //        String url = "http://"+myIP+"/physiohut/populatePatientHistory.php";
-//        try{
-//            R4DB dbFETCHER = new R4DB();
-//            provisions = dbFETCHER.PopulateRecycleView(url);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        TextView patientTitleTextV = (TextView) view.findViewById(R.id.textHistory);
+        patientTitleTextV.setText("Ιστορικό Ασθενή " + patientID);
 
-        provisions = dbfetcher.PopulateRecycleView(myIP);
+        try{
+            R4DB dbFETCHER = new R4DB();
+            provisions = dbFETCHER.PopulateRecycleView(doc_id,patientID);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        provisions = dbfetcher.PopulateRecycleView(doc_id,patientID);
+        System.out.println("THE PROVISIONS ARE " + provisions);
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycler_main);
-        recyclerView.setAdapter(new MyAdapter(getAdapterProv()));
+        recyclerView.setAdapter(new MyAdapter(provisions));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
@@ -193,7 +198,7 @@ public class R4Fragment extends Fragment {
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_history_layout, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_provision_row, parent, false);
             return new MyViewHolder(view);
         }
 
@@ -203,8 +208,10 @@ public class R4Fragment extends Fragment {
             //Patient data = dataList.get(position);
             Provision p = dataList.get(position);
             // Update the view holder with the new data
-            holder.textHmeromhnia.setText(p.getDate());
-            holder.textParoxi.setText(p.getName());
+            holder.getDateTextView().setText(p.getDate());
+            //TODO: put logic here that trims the text to 12 chars max or some amount
+            holder.getDescriptionTextView().setText(p.getDescription());
+            holder.getPriceTextView().setText(String.valueOf(p.getPrice()) + "$");
         }
 
         @Override
@@ -216,12 +223,30 @@ public class R4Fragment extends Fragment {
     // MyViewHolder class
     private static class MyViewHolder extends RecyclerView.ViewHolder {
 
+        private final TextView priceText;
+        private final TextView descriptionText;
+        private final TextView dateText;
         private TextView textHmeromhnia, textParoxi;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            priceText = (TextView) itemView.findViewById(R.id.priceTextV);
+            descriptionText = (TextView) itemView.findViewById(R.id.descriptionTextV);
+            dateText = (TextView) itemView.findViewById(R.id.dateTextV);
             textHmeromhnia = itemView.findViewById(R.id.textImerominia);
             textParoxi = itemView.findViewById(R.id.textParoxi);
+        }
+
+        public TextView getPriceTextView(){
+            return priceText;
+        }
+
+        public TextView getDescriptionTextView(){
+            return descriptionText;
+        }
+
+        public TextView getDateTextView(){
+            return dateText;
         }
     }
 }

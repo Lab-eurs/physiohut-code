@@ -23,25 +23,32 @@ public class OkHttpHandler {
         StrictMode.setThreadPolicy(policy);
     }
 
-    ArrayList<String> getPatientNames(String url) throws Exception {
-        ArrayList<String> patientNames = new ArrayList<>();
+    ArrayList<Patient> getPatientNames(String url) throws Exception {
+        ArrayList<Patient> patients = new ArrayList<>();
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
         Request request = new Request.Builder().url(url).method("POST", body).build();
         Response response = client.newCall(request).execute();
         String data = response.body().string();
-
+        System.out.println("DATA RETURNED FROM POST: ");
         try {
             JSONObject json = new JSONObject(data);
             JSONArray patientsArray = json.getJSONArray("patients");
             for (int i = 0; i < patientsArray.length(); i++) {
-                String name = patientsArray.getString(i);
-                patientNames.add(name);
+//                String name = patientsArray.getString(i);
+                JSONObject jsonObj = patientsArray.getJSONObject(i);
+                String id = jsonObj.getString("id");
+                String name = jsonObj.getString("name");
+                String address = jsonObj.getString("address");
+                String amka = jsonObj.getString("amka");
+                String doc_id = jsonObj.getString("doc_id");
+
+                patients.add(new Patient(id,doc_id,name,address,amka));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return patientNames;
+        return patients;
     }
 }

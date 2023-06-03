@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -47,12 +48,12 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     private String mParam2;
 
     private ListView listView;
-    private ArrayAdapter adapter;
+    private PatientAdapter adapter;
     private SearchView searchView;
     private ArrayList<Doctor> doctorArrayList = new ArrayList<>();
-    private final String ip = "192.168.1.66";
+//    private final String ip = "192.168.1.66";
 
-    private final String myIP = "192.168.1.4";
+//    private final String myIP = "192.168.1.4";
 
     public DoctorFragment() {
         // Required empty public constructor
@@ -101,7 +102,7 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     private AppointmentsList cbl;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        cbl = new AppointmentsList(myIP);
+        cbl = new AppointmentsList(NetworkConstants.ip);
         super.onViewCreated(view, savedInstanceState);
 
         listView =  view.findViewById(R.id.listView);
@@ -176,10 +177,9 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
         });
 
         // Find the list view, create dataArray, ArrayList and set url
-        listView = view.findViewById(R.id.list_view);
-        ArrayList<String> dataArray = new ArrayList<>();
-        String url= "http://"+ip+"/GetPatientsNames.php?";
-
+        RecyclerView listView = (RecyclerView) view.findViewById(R.id.list_view);
+        ArrayList<Patient> dataArray = new ArrayList<>();
+        String url = NetworkConstants.getUrlOfFile("GetPatientsNames.php");
         //take the data with OkHttpHandler class and put them in dataArray
        try {
             OkHttpHandler okHttpHandler = new OkHttpHandler();
@@ -189,44 +189,46 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
         }
 
         //Put the data in the listView
-        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, dataArray);
+        adapter = new PatientAdapter(dataArray,requireContext());
         // Find the list view and set its adapter
-        listView = view.findViewById(R.id.list_view);
-        ArrayList<String> itemList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, itemList);
+//        listView = view.findViewById(R.id.list_view);
+//        ArrayList<String> itemList = new ArrayList<>();
+//        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, itemList);
         listView.setAdapter(adapter);
+        listView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Find the search view and set its listener and set an extra arrayList for the search
         searchView = view.findViewById(R.id.search_view);
-        ArrayList<String> finalDataArray = dataArray;
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterData(newText);
-                return true;
-            }
-
-            private void filterData(String query) {
-                List<String> filteredDataList = new ArrayList<>();
-
-                // Filter the original data list based on the query
-                for (String item : finalDataArray) {
-                    if (item.toLowerCase().contains(query.toLowerCase())) {
-                        filteredDataList.add(item);
-                    }
-                }
-
-                // Update the adapter with the filtered data
-                adapter.clear();
-                adapter.addAll(filteredDataList);
-                adapter.notifyDataSetChanged();
-            }
-        });
+//        ArrayList<String> finalDataArray = dataArray;
+        ArrayList<Patient> finalDataArray = dataArray;
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                filterData(newText);
+//                return true;
+//            }
+//
+//            private void filterData(String query) {
+//                List<Patient> filteredDataList = new ArrayList<>();
+//
+//                // Filter the original data list based on the query
+//                for (Patient item : finalDataArray) {
+//                    if (item.getName().toLowerCase().contains(query.toLowerCase())) {
+//                        filteredDataList.add(item);
+//                    }
+//                }
+//
+//                // Update the adapter with the filtered data
+//                adapter.clear();
+//                adapter.addAll(filteredDataList);
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
 
 
 
@@ -243,6 +245,7 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
         System.out.println("change");
         return false;
     }
+
 
     public class CustomDoctorAdapter extends ArrayAdapter<String> {
 
@@ -283,5 +286,91 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
         }
     }
 
+    public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientViewHolder> implements View.OnClickListener{
 
+        private ArrayList<Patient> patients;
+        Context mContext;
+        public PatientAdapter(ArrayList<Patient> data,Context context) {
+            super();
+            this.mContext = context;
+            this.patients = data;
+        }
+        public ArrayList<Patient> getPatients(){
+            return patients;
+        }
+
+
+
+        @Override
+        public void onClick(View v) {
+            int position=(Integer) v.getTag();
+            Object object= patients.get(position);
+            Patient patient =(Patient)object;
+            System.out.println("Clicked on patient:" + patient.getName());
+        }
+
+        @NonNull
+        @Override
+        public PatientViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(getContext())
+                    .inflate(R.layout.recycler_patient_row, parent, false);
+
+            return new PatientViewHolder(view);
+
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
+                Patient p = patients.get(position);
+                holder.getPatientNameText().setText(p.getName());
+                holder.getIdText().setText(p.getId());
+                holder.getShowHistoryBtn().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //TODO with patient id navigate to R4 fragment
+                        System.out.println("CLICKED ON PATIENT: " + p.getName());
+                    }
+                });
+        }
+
+        @Override
+        public int getItemCount() {
+            return this.patients.size();
+        }
+
+        public class PatientViewHolder extends RecyclerView.ViewHolder {
+
+            private final TextView patientNameText;
+            private final TextView idText;
+            private final Button showHistoryBtn;
+
+            public TextView getPatientNameText() {
+                return patientNameText;
+            }
+
+            public TextView getIdText() {
+                return idText;
+            }
+
+            public Button getShowHistoryBtn() {
+                return showHistoryBtn;
+            }
+
+            public PatientViewHolder(View view) {
+                super(view);
+                // Define click listener for the ViewHolder's View
+
+                patientNameText = (TextView) view.findViewById(R.id.nameOfPatient);
+                idText = (TextView) view.findViewById(R.id.patientId);
+                showHistoryBtn = (Button) view.findViewById(R.id.showHistoryBtn);
+
+            }
+
+
+
+
+
+        }
+    }
 }
+

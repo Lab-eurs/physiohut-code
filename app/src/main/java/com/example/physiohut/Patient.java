@@ -18,7 +18,9 @@ public class Patient {
         this.address = address;
         this.AMKA = AMKA;
     }
-
+    public String getId(){
+        return id;
+    }
     public String getName() {
         return name;
     }

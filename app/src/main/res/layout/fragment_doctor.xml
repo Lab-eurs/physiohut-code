@@ -5,6 +5,7 @@
     android:id="@+id/doctorhome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/provision_recycler_border"
     tools:context=".DoctorFragment">
 
 
@@ -80,8 +81,9 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/list_view" />
 
-                        <ListView
+                        <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/list_view"
+                            style="@style/provision_recycler_view"
                             android:layout_width="411dp"
                             android:layout_height="478dp"
                             android:layout_below="@id/search_view"
