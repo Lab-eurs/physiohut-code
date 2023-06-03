@@ -74,9 +74,7 @@ public class R3Fragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_r3, container, false);
     }
-    private  final String myIP = "172.21.3.181";
-    private int id=0;
-    private int doc_id=0;
+    private int doc_id=1;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -99,18 +97,18 @@ public class R3Fragment extends Fragment {
         buttonSubmission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean check =false;
+                boolean validationFailed =false;
                 EditText editTextName = getActivity().findViewById(R.id.editText_name);
                 String name = String.valueOf(editTextName.getText());
                 if (name.isEmpty()) {
                     editTextName.requestFocus();
                     editTextName.setError("Το πεδίο Όνομαεπωνύμο είναι κενό!");
-                    check = true;
+                    validationFailed = true;
                 }
                else  if (name.length() <= 8) {
                     editTextName.requestFocus();
                     editTextName.setError("Το πεδίο Όνομαεπωνύμο  έχει λάθος δεδομένα!");
-                    check = true;
+                    validationFailed = true;
                 }
 
                 EditText editTextAddress = getActivity().findViewById(R.id.editText_address);
@@ -118,12 +116,12 @@ public class R3Fragment extends Fragment {
                 if (address.isEmpty()) {
                     editTextAddress.requestFocus();
                     editTextAddress.setError("Το πεδίο Διεύθυνση είναι κενό!");
-                     check= true;
+                     validationFailed= true;
                 }
                else  if (address.length() <=4 ) {
                     editTextAddress.requestFocus();
                     editTextAddress.setError("Το πεδίο Διεύθυνση έχει λάθος δεδομένα!");
-                    check = true;
+                    validationFailed = true;
                 }
 
                 EditText editTextAmka = getActivity().findViewById(R.id.editText_amka);
@@ -131,19 +129,19 @@ public class R3Fragment extends Fragment {
                 if (amka.isEmpty()) {
                     editTextAmka.requestFocus();
                     editTextAmka.setError("Το πεδίο AMKA  είναι κενό!");
-                    check = true;
+                    validationFailed = true;
                 }
 
                else if(amka.length()!=11)
                 {
                     editTextAmka.requestFocus();
                     editTextAmka.setError("Το πεδίο AMKA  έχει λάθος δεδομένα!");
-                    check=true;
+                    validationFailed=true;
                 }
                 editTextAmka.setText("   ");
                 editTextAddress.setText("   ");
                 editTextName.setText("   ");
-                if (check == false)
+                if (!validationFailed)
                 //pop up message
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -166,9 +164,7 @@ public class R3Fragment extends Fragment {
                             myToast.show();
                             //Navigation.findNavController(view).navigate(R.id.action_r3Fragment_to_doctorFragment);
                             //εδω θα γίνει η αποστολή των δεδομένων στην ΒΔ
-                            id++;
-                            doc_id++;
-                            String url = "http://"+myIP+"/physiohut/r3.php?id="+id+"&doc_id="+doc_id+"&NAME="+name+"&address="+address +"&amka="+amka;
+                            String url = NetworkConstants.getUrlOfFile("r3.php") + "?doc_id="+doc_id+"&NAME="+name+"&address="+address +"&amka="+amka;
                             try{
                                 R3DataLog r1DataLog = new R3DataLog();
                                 System.out.println(url);
@@ -180,7 +176,7 @@ public class R3Fragment extends Fragment {
                         }
                     });
                     builder.show();
-                } else if (check) {
+                } else if (validationFailed) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setCancelable(true);
                     builder.setTitle("Επιβεβαίωση ασθενή");
