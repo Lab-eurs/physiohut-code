@@ -78,11 +78,7 @@ public class R1Fragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_r1, container, false);
     }
-
-
-    //bash
-    private final String myIP = "192.168.1.3";
-    private String id = "0";
+    
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -119,36 +115,36 @@ public class R1Fragment extends Fragment {
                 String afm = afmText.getText().toString();
                 String address = addressText.getText().toString();
 
-                boolean flag=true;
+                boolean validationPassed=true;
 
                 //κενα πεδια
                 if(name.isEmpty()){
                     nameText.requestFocus();
                     nameText.setError("Το πεδίο Όνομα Φυσιοθεραπευτηρίου είναι κενό");
-                    flag=false;
+                    validationPassed=false;
                 }
                 if (afm.length()!=9){
                     afmText.requestFocus();
                     afmText.setError("Το πεδίο ΑΦΜ έχει λάθος δεδομένα");
-                    flag=false;
+                    validationPassed=false;
                 }
                 if (address.isEmpty()){
                     addressText.requestFocus();
                     addressText.setError("Το πεδίο Διεύθυνση είναι κενό");
-                    flag=false;
+                    validationPassed=false;
                 }
                     //popUp xwris kena pedia
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                 builder.setCancelable(true);
-                if (flag==true) {
+                if (validationPassed) {
                     builder.setTitle("Υποβολή Φυσιοθεραπευτηρίου");
                     builder.setMessage("Όνομα: " + name + "\n" + "Διεύθυνση: " + address + "\n" + "ΑΦΜ: " + afm);
                     builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //bash
-                            id = afm;
-                            String url = "http://"+myIP+"/physiohut/r1.php?id="+id+ "&afm="+afm+"&name="+name+"&address="+address;
+
+                            String url = NetworkConstants.getUrlOfFile("r1.php") +"?afm="+afm+"&name="+name+"&address="+address;
                             try{
                                 R1DataLog r1DataLog = new R1DataLog();
                                 System.out.println(url);

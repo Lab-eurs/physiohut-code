@@ -19,17 +19,13 @@ public class R10DataFetcher {
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        //ip grafeio 172.23.240.1
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
-        String ip = "172.23.240.1";
-        String folder = "physiohut_backend";
-        String filename = "get_patient_provisions.php";
         int patientID = 1;
-        String url = "http://" + ip + "/" + folder + "/" + filename + "/" + patientID;
+        String url = NetworkConstants.getUrlOfFile("get_patient_provisions.php") + "/" + patientID;
         Request request = new Request.Builder().url(url).method("GET",null).build();
         Response response;
-        System.out.println("THE URL IS -->" + url);
+        System.out.println("HTTP: GET " + url);
         ArrayList<Provision> provisions = new ArrayList<>();
         try {
             response = client.newCall(request).execute();
