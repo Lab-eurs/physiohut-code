@@ -3,7 +3,7 @@ package com.example.physiohut.R4;
 import android.os.*;
 
 import com.example.physiohut.NetworkConstants;
-import com.example.physiohut.Provision;
+import com.example.physiohut.model.Provision;
 
 import org.json.*;
 
@@ -25,7 +25,7 @@ public class R4DataFetcher {
         System.out.println("POPULATING RECYCLERVIEW");
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
-        String url = NetworkConstants.getUrlOfFile("populatePatientHistory.php");
+        String url = NetworkConstants.getUrlOfFile("r4-populatePatientHistory.php");
         Request request = new Request.Builder().url(url).method("GET",null).build();
         Response response;
         System.out.println("THE URL IS -->" + url);
@@ -35,7 +35,9 @@ public class R4DataFetcher {
             assert response.body() != null;
             String data = response.body().string();
             System.out.println("THE RESPONSE IS: " + data);
+
             JSONObject json = new JSONObject(data);
+            if(!json.keys().hasNext())return new ArrayList<>();
             Iterator<String> keys = json.keys();
             while (keys.hasNext()){
                 String code = keys.next();

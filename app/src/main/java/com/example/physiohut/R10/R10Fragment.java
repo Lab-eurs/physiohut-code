@@ -19,7 +19,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.physiohut.Provision;
+import com.example.physiohut.AuthenticateUser;
+import com.example.physiohut.model.Provision;
 import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -149,7 +150,7 @@ public class R10Fragment extends Fragment  {
         TextView totalAmount = (TextView) getView().findViewById(R.id.payment_amount);
         //TODO:  get this somehow from the DB(when users are implemented it will be seen
         //TODO: πρέπει κάπου να βάλουμε κάποια ημερομηνία για να μπει στο UI
-        int currentPatient = 1;
+        int currentPatient = AuthenticateUser.patientID;
         ArrayList<Provision> provData = dbFetcher.fetchProvisionsFromDbForPatient(currentPatient);
         Double paidAmount = provData.stream().reduce(0.0,(acc,curr)-> acc + curr.getPrice(),Double::sum);
         totalAmount.setText( paidAmount + "$");

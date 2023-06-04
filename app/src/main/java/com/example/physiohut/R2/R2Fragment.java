@@ -75,8 +75,6 @@ public class R2Fragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_r2, container, false);
     }
- private final String myIP= "172.21.3.181";
-    private int id =0;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

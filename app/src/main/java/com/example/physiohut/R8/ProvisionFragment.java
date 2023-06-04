@@ -1,4 +1,4 @@
-package com.example.physiohut;
+package com.example.physiohut.R8;
 
 import android.os.Bundle;
 
@@ -19,8 +19,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 
-import com.example.physiohut.R8.R8DataFetcher;
-import com.example.physiohut.R8.R8Fragment;
+import com.example.physiohut.R;
+import com.example.physiohut.model.Provision;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -103,8 +103,12 @@ public class ProvisionFragment extends Fragment {
                 return false;
             }
         });
-
-        provisions = dbFetcher.populateProvitionList(myIP);
+        try{
+            provisions = dbFetcher.fetchProvisions();
+        }catch (Exception e){
+            provisions = new ArrayList<>();
+        }
+//        provisions = dbFetcher.fetchProvisions();
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recyclerProv);
         recyclerView.setAdapter(new ProvisionFragment.MyProvAdapter(getAdapterProv()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

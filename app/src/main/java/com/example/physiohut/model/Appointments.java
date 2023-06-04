@@ -1,4 +1,4 @@
-package com.example.physiohut;
+package com.example.physiohut.model;
 
 public class Appointments {
 
@@ -16,6 +16,10 @@ public class Appointments {
 
     String doctor_id;
 
+
+    public String getAppointmentDate(){
+        return appointmentDate;
+    }
 
     boolean isVisible = false;
 

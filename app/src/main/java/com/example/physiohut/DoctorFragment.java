@@ -12,21 +12,26 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.example.physiohut.R5.OkHttpHandler;
+import com.example.physiohut.R6.AppointmentsList;
+import com.example.physiohut.model.Appointments;
+import com.example.physiohut.model.Doctor;
+import com.example.physiohut.model.Patient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +52,7 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     private String mParam1;
     private String mParam2;
 
-    private ListView listView;
+    private RecyclerView listView;
     private PatientAdapter adapter;
     private SearchView searchView;
     private ArrayList<Doctor> doctorArrayList = new ArrayList<>();
@@ -102,20 +107,30 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     private AppointmentsList cbl;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        cbl = new AppointmentsList(NetworkConstants.ip);
+        int patientID = 1;
+        cbl = new AppointmentsList(patientID);
         super.onViewCreated(view, savedInstanceState);
 
         listView =  view.findViewById(R.id.listView);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getParentFragment().getContext(), R.layout.activity_listview, R.id.textView, cbl.getNames());
-        listView.setAdapter(arrayAdapter);
+        ArrayAdapter<Appointments> arrayAdapter = new ArrayAdapter<Appointments>(getParentFragment().getContext(), R.layout.activity_listview, R.id.textView, cbl.getAppointmentList());
+//        listView.setAdapter(arrayAdapter);
         app_list.add("Ραντεβού #1");
         app_list.add("Ραντεβού #2");
         app_list.add("Ραντεβού #3");
         app_list.add("Ραντεβού #4");
         app_list.add("Ραντεβού #5");
-        listView =(ListView) view.findViewById(R.id.listView);
-        CustomDoctorAdapter customDoctorAdapter = new CustomDoctorAdapter(getContext(), app_list);
-        listView.setAdapter(customDoctorAdapter);
+        listView =(RecyclerView) view.findViewById(R.id.listView);
+//        CustomDoctorAdapter customDoctorAdapter = new CustomDoctorAdapter(getContext(), app_list);
+        ArrayList<Appointments> appointments = new ArrayList<>();
+        appointments.add(new Appointments("Giannhs","15/12/2023","1","1"));
+        appointments.add(new Appointments("Giannhs Karagiannhs","12/05/2008","1","1"));
+        appointments.add(new Appointments("Giannhs Karamitsos","15/12/2023","1","1"));
+        appointments.add(new Appointments("Giannhs Karamitsos","15/12/2023","1","1"));
+        appointments.add(new Appointments("Giannhs Karamitsos","15/12/2023","1","1"));
+        RecyclerAdapter rcAdapter = new RecyclerAdapter(appointments);
+        listView.setAdapter(rcAdapter);
+        listView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
 
         TabHost th = (TabHost) view.findViewById(R.id.patientandoc);
@@ -179,7 +194,7 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
         // Find the list view, create dataArray, ArrayList and set url
         RecyclerView listView = (RecyclerView) view.findViewById(R.id.list_view);
         ArrayList<Patient> dataArray = new ArrayList<>();
-        String url = NetworkConstants.getUrlOfFile("GetPatientsNames.php");
+        String url = NetworkConstants.getUrlOfFile("get_patients_of_doctor.php") + "?doc_id=" + AuthenticateUser.doctorID;
         //take the data with OkHttpHandler class and put them in dataArray
        try {
             OkHttpHandler okHttpHandler = new OkHttpHandler();
@@ -234,6 +249,55 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
 
     }
 
+
+
+
+    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.AppointmentViewHolder>{
+
+        private ArrayList<Appointments> appointments;
+        public RecyclerAdapter(ArrayList<Appointments> appointments){this.appointments = appointments;};
+
+        @NonNull
+        @Override
+        public AppointmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.recycler_appointment_row, parent, false);
+            return new AppointmentViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull AppointmentViewHolder holder, int position) {
+            Appointments a = appointments.get(position);
+            holder.getDateTextV().setText(a.getAppointmentDate());
+            holder.getPatientTextV().setText(a.getPatientName());
+        }
+
+        @Override
+        public int getItemCount() {
+            return appointments.size();
+        }
+
+        public class AppointmentViewHolder extends RecyclerView.ViewHolder{
+            private final TextView patientTextV;
+            private final TextView dateTextV;
+            public AppointmentViewHolder(View view){
+                super(view);
+                patientTextV = (TextView) view.findViewById(R.id.patientOfAppointment);
+                dateTextV = (TextView) view.findViewById(R.id.dateOfAppointment);
+            }
+
+            public TextView getPatientTextV(){
+                return patientTextV;
+            }
+
+            public TextView getDateTextV(){
+                return dateTextV;
+            }
+        }
+    }
+
+
+
     @Override
     public boolean onQueryTextSubmit(String s) {
         System.out.println("submit");
@@ -245,6 +309,7 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
         System.out.println("change");
         return false;
     }
+
 
 
     public class CustomDoctorAdapter extends ArrayAdapter<String> {

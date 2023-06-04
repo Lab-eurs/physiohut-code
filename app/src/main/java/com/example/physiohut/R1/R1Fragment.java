@@ -145,7 +145,7 @@ public class R1Fragment extends Fragment {
                             try{
                                 R1DataFetcher r1DataFetcher = new R1DataFetcher();
                                 System.out.println(url);
-                                r1DataFetcher.physioLog(url);
+                                r1DataFetcher.createDoctor(url);
                                 Toast.makeText(getContext(),"AFM: "+afm +" Name: "+name+" Address: "+address,Toast.LENGTH_SHORT).show();
                             }catch (Exception e){
                                 e.printStackTrace();

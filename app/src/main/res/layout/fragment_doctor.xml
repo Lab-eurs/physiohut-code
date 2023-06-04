@@ -85,7 +85,7 @@
                             android:id="@+id/list_view"
                             style="@style/provision_recycler_view"
                             android:layout_width="411dp"
-                            android:layout_height="478dp"
+                            android:layout_height="450dp"
                             android:layout_below="@id/search_view"
                             android:layout_marginTop="2dp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +137,7 @@
                             android:id="@+id/btnR8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="0dp"
                             android:layout_marginEnd="16dp"
                             android:backgroundTint="@color/button"
                             android:clickable="true"
@@ -147,17 +147,21 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/listView" />
 
-                        <ListView
+                        <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/listView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_marginBottom="135dp"
+                            style="@style/provision_recycler_view"
+                            android:layout_width="411dp"
+                            android:layout_height="420dp"
+                            android:layout_marginBottom="100dp"
+                            android:background="@drawable/provision_recycler_border"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/btnR7">
+                            app:layout_constraintTop_toBottomOf="@+id/btnR7"
+                            app:layout_constraintVertical_bias="0.435">
 
-                        </ListView>
+                        </androidx.recyclerview.widget.RecyclerView>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

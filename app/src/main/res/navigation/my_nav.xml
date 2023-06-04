@@ -115,7 +115,7 @@
     </fragment>
     <fragment
         android:id="@+id/provisionFragment"
-        android:name="com.example.physiohut.ProvisionFragment"
+        android:name="com.example.physiohut.R8.ProvisionFragment"
         android:label="fragment_provision"
         tools:layout="@layout/fragment_provision" >
         <action

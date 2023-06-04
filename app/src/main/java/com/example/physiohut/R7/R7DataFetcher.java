@@ -5,6 +5,7 @@ import static java.lang.Integer.*;
 import android.os.StrictMode;
 
 import com.example.physiohut.NetworkConstants;
+import com.example.physiohut.model.Appointment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +20,21 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 public class R7DataFetcher {
+
+
+    public ArrayList<Appointment> fetchAppointmentsOfDoctor(int doctorID){
+        return new ArrayList<>();
+    }
+    public void markAppointmentAsAccepted(){
+
+    }
+
+    public void markAppointmentAsRejected(){
+
+    }
+    public void markAppointmentAsCompleted(){
+
+    }
 
     public ArrayList<PendingAppointmentsR7> fetchAppointmentsFromDB() {
         //ping url http://localhost/physiohut_backend/read.php
@@ -38,7 +54,6 @@ public class R7DataFetcher {
         String docId = Integer.toString(PendingAppointmentsR7.getDoctor_id());
         System.out.println(docId);
         String url = NetworkConstants.getUrlOfFile("physiohut-pendingAppointments-script.php")  + "/?doctor_id=" + String.valueOf(docID.getDoctor_id());
-//        String url = "http://" + ip + "/" + folder + "/" + filename + "/?doctor_id=" + String.valueOf(docID.getDoctor_id());
         Request request = new Request.Builder().url(url).method("GET",null).build();
         Response response;
 

@@ -3,7 +3,7 @@ package com.example.physiohut.R10;
 import android.os.StrictMode;
 
 import com.example.physiohut.NetworkConstants;
-import com.example.physiohut.Provision;
+import com.example.physiohut.model.Provision;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,21 +11,18 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import okhttp3.*;
 public class R10DataFetcher {
 
     public ArrayList<Provision> fetchProvisionsFromDbForPatient(long id) {
-        //ping url http://localhost/physiohut_backend/get_patient_provisions.php/1
+        //ping url http://localhost/physiohut-backend/get_patient_provisions.php/1
         StrictMode.ThreadPolicy policy = new
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
-        RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
-        int patientID = 1;
-        String url = NetworkConstants.getUrlOfFile("get_patient_provisions.php") + "/" + patientID;
+        String url = NetworkConstants.getUrlOfFile("get_patient_provisions.php") + "/" + id;
         Request request = new Request.Builder().url(url).method("GET",null).build();
         Response response;
         System.out.println("HTTP: GET " + url);

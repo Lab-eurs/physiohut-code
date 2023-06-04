@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import com.example.physiohut.R8.R8DataFetcher;
+import com.example.physiohut.model.Provision;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -116,7 +117,7 @@ public class ProvisionPatients extends Fragment {
                         provisionsName.add(adapterProv.get(i).getName());
                     }
                 }
-                String url = "http://"+myIP+"/physiohutDBServices/katagrafiR8.php?ap_id="+id+"&provision="+provisionsName;
+                String url = NetworkConstants.getUrlOfFile("r8-katagrafi.php") + "?ap_id="+id+"&provision="+provisionsName;
                 try{
                     R8DataFetcher r8DataFetcher = new R8DataFetcher();
                     r8DataFetcher.katagrafiR8(url);

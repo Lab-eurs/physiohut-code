@@ -2,6 +2,8 @@ package com.example.physiohut.R1;
 
 import android.os.StrictMode;
 
+import com.example.physiohut.AuthenticateUser;
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -13,15 +15,16 @@ public class R1DataFetcher {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
-    public void physioLog(String url) throws Exception{
+    public void createDoctor(String url) throws Exception{
     OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create("",
                 MediaType.parse("text/plain"));
         Request request = new Request.Builder().url(url).method("POST",
                 body).build();
         Response response = client.newCall(request).execute();
-        response.close();
-        System.out.println("My Response: " + response);
+        String idOfDoctor = response.body().string();
+        //setting this for use in other places
+        AuthenticateUser.setDoctorID(Integer.parseInt(idOfDoctor));
 
     }
 }

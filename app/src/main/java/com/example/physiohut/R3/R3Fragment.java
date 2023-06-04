@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.physiohut.AuthenticateUser;
 import com.example.physiohut.NetworkConstants;
 import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -74,7 +75,7 @@ public class R3Fragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_r3, container, false);
     }
-    private int doc_id=1;
+    private int doc_id= AuthenticateUser.doctorID;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

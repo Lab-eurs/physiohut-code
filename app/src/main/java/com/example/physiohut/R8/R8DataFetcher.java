@@ -3,8 +3,8 @@ package com.example.physiohut.R8;
 import android.os.StrictMode;
 
 import com.example.physiohut.NetworkConstants;
-import com.example.physiohut.Patient;
-import com.example.physiohut.Provision;
+import com.example.physiohut.model.Patient;
+import com.example.physiohut.model.Provision;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +27,46 @@ public class R8DataFetcher {
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
+
+    public ArrayList<Patient> fetchPatients(int doctorID){
+//        String url =
+        return new ArrayList<>();
+    }
+
+    public ArrayList<Provision> fetchProvisions() throws  Exception{
+        ArrayList<Provision> provisions = new ArrayList<>();
+        String url = NetworkConstants.getUrlOfFile("r8-fetch-provisions.php");
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        RequestBody body = RequestBody.create("",
+                MediaType.parse("text/plain"));
+        Request request = new Request.Builder().url(url).method("POST",
+                body).build();
+        Response response = client.newCall(request).execute();
+        String data = response.body().string();
+        JSONArray json = new JSONArray(data);
+        for(int i =0; i< json.length(); i++){
+            JSONObject provisionJSON = json.getJSONObject(i);
+            JSONObject provision = (JSONObject) provisionJSON.get("provision");
+            System.out.println(provision);
+            int prov_id =  Integer.parseInt((String) provision.get("id"));
+            String code = (String) provision.get("CODE");
+            String description = (String) provision.get("description");
+            Double price = Double.parseDouble((String) provision.get("price"));
+            provisions.add(new Provision(prov_id,code,description,price));
+        }
+
+        return provisions;
+    }
+
+    public void markSessionAsCompleted(){
+
+    }
+
+    public void createAppointment(int doctorID,String patientName,ArrayList<String> provisionCodes,String dateScheduledFor){
+        System.out.println("CREATING APPOINTMENT WITH: " + doctorID + patientName + provisionCodes + dateScheduledFor);
+    }
+
+
 
     public ArrayList<Patient> populateDropDown(String url) throws Exception{
         ArrayList<Patient> plist = new ArrayList<>();

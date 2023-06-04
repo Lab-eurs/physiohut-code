@@ -5,6 +5,7 @@
     <string name="home">Home</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="input_doctor_psf">Εισαγωγή Ονόματος Γιατρού</string>
     <string name="go_to_doctor">Go to Doctor</string>
     <string name="go_to_patient">Go to Patient</string>
     <string name="go_to_psf">Go to PSF</string>
@@ -27,6 +28,7 @@
     <string name="total_payments">Συνολικά έχετε πληρώσει:</string>
     <string name="default_total">0$</string>
     <string name="sort_by">Ταξινόμηση Κατά:</string>
+
     <string-array name="sort_choices_array">
         <item>Επιλογές:</item>
         <item>Αύξον Κόστος</item>
@@ -36,14 +38,15 @@
     </string-array>
     <string name="katagrafitext">Καταγραφή Ενεργειών</string>
     <string name="history_text">Ιστορικό Ασθενή #1:</string>
-    <string name="import_amka">Εισαγωγή ΑΜΚΑ:</string>
+    <string name="input_amka">Εισαγωγή ΑΜΚΑ:</string>
+    <string name="input_afm">Εισαγωγή ΑΦΜ:</string>
     <string name="addition_patient">Προσθήκη Ασθενή</string>
     <string name="import_name">Εισαγωγή ονοματεπωνύμου:</string>
     <string name="name">Ονοματεπώνυμο...</string>
-    <string name="import_address">Εισαγωγή διεύθυνησης:</string>
+    <string name="input_address">Εισαγωγή διεύθυνησης:</string>
     <string name="amka">ΑΜΚΑ...</string>
     <string name="address">Διεύθυνηση...</string>
-    <string name="submition">Υποβολή</string>
+    <string name="btn_submit_text">Υποβολή</string>
     <string name="creation">Δημιουργία</string>
     <string name="creation_provision">Δημιουργία Παροχής:</string>
     <string name="text_code">Εισαγώγη κωδικού:</string>

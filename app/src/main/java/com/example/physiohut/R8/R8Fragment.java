@@ -26,9 +26,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.physiohut.NetworkConstants;
-import com.example.physiohut.ProvisionFragment;
 import com.example.physiohut.R;
+import com.example.physiohut.model.Patient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -100,7 +99,6 @@ public class R8Fragment extends Fragment {
         return  rootView;
     }
     private List<String> text = new ArrayList<String>();
-    private final String myIP = "192.168.179.235";
     private PatientList patientList;
     private String name;
     private int ap_id=0;
@@ -108,14 +106,17 @@ public class R8Fragment extends Fragment {
     private int patient_id=1;
     private static final R8DataFetcher dbFetcher = new R8DataFetcher();
 
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         patientList = new PatientList();
         super.onViewCreated(view, savedInstanceState);
 
+        //TODO customArrayViewAdapter
         //------------------------- Populate DropDown with patients ---------------------------------------------------//
         Spinner dropDown = (Spinner) getView().findViewById(R.id.PatientSpinner);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item,patientList.getAllPatients());
+        ArrayAdapter<Patient> arrayAdapter = new ArrayAdapter<Patient>(requireContext(),android.R.layout.simple_spinner_item,patientList.getAllPatients());
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         System.out.println(patientList.getAllPatients());
         dropDown.setAdapter(arrayAdapter);
@@ -190,11 +191,11 @@ public class R8Fragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
+                        System.out.println("DATA FOR APPOINTMENT: "+ time + selectedDate + myPList + patient_id + comment);
                         Toast.makeText(getContext(), "Ραντεβού έκλεισε για: "+time+ selectedDate, Toast.LENGTH_LONG).show();
-                        String url = NetworkConstants.getUrlOfFile("R8logFile.php") + "?doctor_id="+doctor_id+"&patient_id="+patient_id+"&comment="+comment+"&provision="+myPList+"&created_at="+selectedDate+time;
                         try{
                             R8DataFetcher r8DataFetcher = new R8DataFetcher();
-                            r8DataFetcher.logR8(url);
+                            r8DataFetcher.createAppointment(doctor_id,name,myPList,selectedDate+time);
                         }catch (Exception e){
                             e.printStackTrace();
                         }

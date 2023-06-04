@@ -14,7 +14,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.physiohut.Provision;
+import com.example.physiohut.R10.R10Fragment;
+import com.example.physiohut.model.Provision;
 import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -127,40 +128,6 @@ public class R4Fragment extends Fragment {
             }
         });
         int patientID = 1;
-//        // ArrayList<String> provisions = new ArrayList<>();
-//        provisions.add("Παροχη#1");
-//        provisions.add("Παροχη#2");
-//        provisions.add("Παροχη#3");
-//        provisions.add("Παροχη#4");
-//        provisions.add("Παροχη#5");
-//        provisions.add("Παροχη#6");
-//        provisions.add("Παροχη#7");
-//        provisions.add("Παροχη#8");
-//        provisions.add("Παροχη#9");
-//        provisions.add("Παροχη#10");
-//        provisions.add("Παροχη#11");
-//        provisions.add("Παροχη#12");
-//        provisions.add("Παροχη#13");
-//        provisions.add("Παροχη#14");
-//        provisions.add("Παροχη#15");
-//        provisions.add("Παροχη#16");
-//        ArrayList<String> dates = new ArrayList<>();
-//        dates.add("22-01-2021    ");
-//        dates.add("02-02-2021    ");
-//        dates.add("08-02-2021    ");
-//        dates.add("30-06-2021    ");
-//        dates.add("14-07-2021    ");
-//        dates.add("20-09-2021    ");
-//        dates.add("27-12-2021    ");
-//        dates.add("10-03-2022    ");
-//        dates.add("20-04-2022    ");
-//        dates.add("06-05-2022    ");
-//        dates.add("17-05-2022    ");
-//        dates.add("04-08-2022    ");
-//        //dates.add("11-11-2022    ");
-//        //dates.add("29-03-2023    ");
-//        //dates.add("22-04-2023    ");
-//        // dates.add("19-05-2023    ");
 //        String url = "http://"+myIP+"/physiohut/populatePatientHistory.php";
         TextView patientTitleTextV = (TextView) view.findViewById(R.id.textHistory);
         patientTitleTextV.setText("Ιστορικό Ασθενή " + patientID);
@@ -185,6 +152,69 @@ public class R4Fragment extends Fragment {
             adapterProv.add(new Provision(provisions.get(i).getName(),provisions.get(i).getDate()));
         }
         return adapterProv;
+    }
+
+
+
+    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ProvisionHistoryViewHolder>{
+
+
+        public RecyclerAdapter(ArrayList<Provision> data){
+            this.localData = data;
+        }
+
+        private ArrayList<Provision> localData;
+        @NonNull
+        @Override
+        public ProvisionHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.recycler_history_layout, parent, false);
+
+            return new ProvisionHistoryViewHolder(view);
+
+        }
+
+
+        @Override
+        public void onBindViewHolder(@NonNull ProvisionHistoryViewHolder holder, int position) {
+            Provision p = localData.get(position);
+            holder.getDateTextView().setText(p.getDate());
+            //TODO: put logic here that trims the text to 12 chars max or some amount
+            holder.getProvisionTextView().setText(p.getDescription());
+//            holder.getPriceTextView().setText(String.valueOf(p.getPrice()) + "$");
+
+
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return localData.size();
+        }
+
+        public class ProvisionHistoryViewHolder extends RecyclerView.ViewHolder {
+
+            private final TextView provisionText;
+            private final TextView dateText;
+
+            public ProvisionHistoryViewHolder(View view) {
+                super(view);
+                // Define click listener for the ViewHolder's View
+
+                provisionText = (TextView) view.findViewById(R.id.textParoxi);
+                dateText = (TextView) view.findViewById(R.id.textImerominia);
+
+            }
+
+
+
+           public TextView getProvisionTextView() {return provisionText;}
+
+            public TextView getDateTextView(){
+                return dateText;
+            }
+
+        }
     }
 
     // MyAdapter class

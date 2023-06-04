@@ -1,14 +1,14 @@
-package com.example.physiohut;
+package com.example.physiohut.R5;
 
 import android.os.StrictMode;
+
+import com.example.physiohut.model.Patient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -23,7 +23,7 @@ public class OkHttpHandler {
         StrictMode.setThreadPolicy(policy);
     }
 
-    ArrayList<Patient> getPatientNames(String url) throws Exception {
+    public ArrayList<Patient> getPatientNames(String url) throws Exception {
         ArrayList<Patient> patients = new ArrayList<>();
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
