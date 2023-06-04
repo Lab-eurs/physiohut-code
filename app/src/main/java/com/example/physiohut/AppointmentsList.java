@@ -8,7 +8,7 @@ public class AppointmentsList {
     ArrayList<Appointments> cbList = new ArrayList<Appointments>();
 
     public AppointmentsList(String ip) {
-        String url= "http://"+ip+"/PhysiohutDB/get_user_name.php";
+        String url = NetworkConstants.getUrlOfFile("get_user_name.php");
         try {
             R6FetchData r6FetchData = new R6FetchData();
             cbList = r6FetchData.populateDropDown(url);

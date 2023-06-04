@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PatientList {
-    ArrayList<Patient> plist = new ArrayList<Patient>();
-    public PatientList(String ip){
-        String url = "http://"+ip+"/physiohutDBServices/populateDropDown.php";
+    private ArrayList<Patient> plist = new ArrayList<Patient>();
+    public PatientList(){
+        String url = NetworkConstants.getUrlOfFile("populateDropdown.php");
+//        String url = "http://"+ip+"/physiohutDBServices/populateDropDown.php";
         try{
             R8DataFetcher r8DataFetcher = new R8DataFetcher();
             plist = r8DataFetcher.populateDropDown(url);

@@ -59,7 +59,7 @@ public class R8DataFetcher {
         //ip grafeio 172.23.240.1
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
-        String url = "http://" + ip + "/physiohutDBServices/PopulateList.php";
+        String url = NetworkConstants.getUrlOfFile("PopulateList.php");
         Request request = new Request.Builder().url(url).method("GET",null).build();
         Response response;
         System.out.println("THE URL IS -->" + url);

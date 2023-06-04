@@ -28,16 +28,15 @@ public class R7DataFetcher {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
 
-        String ip = "192.168.2.4";
-        String folder = "physiohut_backend";
-        String filename = "physiohut-pendingAppointments-script.php";
+//        String filename = "physiohut-pendingAppointments-script.php";
         PendingAppointmentsR7 docID = new PendingAppointmentsR7();
         if(docID.getDoctor_id() == 0) {
             docID.setDoctor_id(1);
         }
         String docId = Integer.toString(PendingAppointmentsR7.getDoctor_id());
         System.out.println(docId);
-        String url = "http://" + ip + "/" + folder + "/" + filename + "/?doctor_id=" + String.valueOf(docID.getDoctor_id());
+        String url = NetworkConstants.getUrlOfFile("physiohut-pendingAppointments-script.php")  + "/?doctor_id=" + String.valueOf(docID.getDoctor_id());
+//        String url = "http://" + ip + "/" + folder + "/" + filename + "/?doctor_id=" + String.valueOf(docID.getDoctor_id());
         Request request = new Request.Builder().url(url).method("GET",null).build();
         Response response;
 

@@ -110,16 +110,16 @@ public class R8Fragment extends Fragment {
     private PatientList patientList;
     private String name;
     private int ap_id=0;
-    private int doctor_id=0;
-    private int patient_id=0;
+    private int doctor_id=1;
+    private int patient_id=1;
     private static final R8DataFetcher dbFetcher = new R8DataFetcher();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        patientList = new PatientList(myIP);
+        patientList = new PatientList();
         super.onViewCreated(view, savedInstanceState);
 
-        //------------------------- Populate DropDown with patients ---------------------------------------------------
+        //------------------------- Populate DropDown with patients ---------------------------------------------------//
         Spinner dropDown = (Spinner) getView().findViewById(R.id.PatientSpinner);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item,patientList.getAllPatients());
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -189,9 +189,6 @@ public class R8Fragment extends Fragment {
             public void onClick(View view) {
                 //--------------------------------------popup epivevaiwshs----------------------------------------------
                 String comment = commentEditText.getText().toString();
-                ap_id++;
-                doctor_id++;
-                patient_id++;
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                 builder.setTitle("Επιβεβαίωση Ραντεβού");
                 builder.setMessage("Ημερομηνία: "+ selectedDate+ "\n" + "Ώρα: "+ time+"\n"+"Σχόλιο: "+comment);
@@ -200,7 +197,7 @@ public class R8Fragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         Toast.makeText(getContext(), "Ραντεβού έκλεισε για: "+time+ selectedDate, Toast.LENGTH_LONG).show();
-                        String url = "http://"+myIP+"/physiohutDBServices/R8logFile.php?ap_id="+ap_id+"&doctor_id="+doctor_id+"&patient_id="+patient_id+"&comment="+comment+"&provision="+myPList+"&created_at="+selectedDate+time;
+                        String url = NetworkConstants.getUrlOfFile("R8logFile.php") + "?doctor_id="+doctor_id+"&patient_id="+patient_id+"&comment="+comment+"&provision="+myPList+"&created_at="+selectedDate+time;
                         try{
                             R8DataFetcher r8DataFetcher = new R8DataFetcher();
                             r8DataFetcher.logR8(url);
