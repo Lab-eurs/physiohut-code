@@ -1,4 +1,4 @@
-package com.example.physiohut;
+package com.example.physiohut.R1;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -7,9 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,11 +17,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.physiohut.NetworkConstants;
+import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputLayout;
-
-import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -146,9 +143,9 @@ public class R1Fragment extends Fragment {
 
                             String url = NetworkConstants.getUrlOfFile("r1.php") +"?afm="+afm+"&name="+name+"&address="+address;
                             try{
-                                R1DataLog r1DataLog = new R1DataLog();
+                                R1DataFetcher r1DataFetcher = new R1DataFetcher();
                                 System.out.println(url);
-                                r1DataLog.physioLog(url);
+                                r1DataFetcher.physioLog(url);
                                 Toast.makeText(getContext(),"AFM: "+afm +" Name: "+name+" Address: "+address,Toast.LENGTH_SHORT).show();
                             }catch (Exception e){
                                 e.printStackTrace();

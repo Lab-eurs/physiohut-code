@@ -1,8 +1,10 @@
-package com.example.physiohut;
+package com.example.physiohut.R7;
 
 import static java.lang.Integer.*;
 
 import android.os.StrictMode;
+
+import com.example.physiohut.NetworkConstants;
 
 import org.json.JSONArray;
 import org.json.JSONException;

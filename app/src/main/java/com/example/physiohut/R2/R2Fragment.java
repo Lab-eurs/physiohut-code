@@ -1,4 +1,4 @@
-package com.example.physiohut;
+package com.example.physiohut.R2;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +18,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.physiohut.NetworkConstants;
+import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
@@ -194,7 +195,7 @@ public class R2Fragment extends Fragment {
                   String url = NetworkConstants.getUrlOfFile("r2.php")+"?CODE="+sCode+"&description="+sDescription+"&price="+sPrice;;
 
                   try {
-                      R2DataLog r2DataLog = new R2DataLog() ;
+                      R2DataFetcher r2DataLog = new R2DataFetcher() ;
                       System.out.println(url);
                       r2DataLog.physioLog(url);
                       Toast.makeText(getContext(), "CODE: "+sCode+"description: "+sDescription+"price: "+sPrice,Toast.LENGTH_SHORT).show();

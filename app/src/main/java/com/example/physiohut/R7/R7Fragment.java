@@ -1,4 +1,4 @@
-package com.example.physiohut;
+package com.example.physiohut.R7;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;

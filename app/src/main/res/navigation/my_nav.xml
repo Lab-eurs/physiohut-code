@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/r1Fragment"
-        android:name="com.example.physiohut.R1Fragment"
+        android:name="com.example.physiohut.R1.R1Fragment"
         android:label="fragment_r1"
         tools:layout="@layout/fragment_r1" >
         <action
@@ -97,7 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/r2Fragment"
-        android:name="com.example.physiohut.R2Fragment"
+        android:name="com.example.physiohut.R2.R2Fragment"
         android:label="fragment_r2"
         tools:layout="@layout/fragment_r2" >
         <action
@@ -106,7 +106,7 @@
     </fragment>
     <fragment
         android:id="@+id/r9Fragment"
-        android:name="com.example.physiohut.R9Fragment"
+        android:name="com.example.physiohut.R9.R9Fragment"
         android:label="fragment_r9"
         tools:layout="@layout/fragment_r9" >
         <action
@@ -124,7 +124,7 @@
     </fragment>
     <fragment
         android:id="@+id/r10Fragment"
-        android:name="com.example.physiohut.R10Fragment"
+        android:name="com.example.physiohut.R10.R10Fragment"
         android:label="fragment_r10"
         tools:layout="@layout/fragment_r10" >
         <action
@@ -133,7 +133,7 @@
     </fragment>
     <fragment
         android:id="@+id/r4Fragment"
-        android:name="com.example.physiohut.R4Fragment"
+        android:name="com.example.physiohut.R4.R4Fragment"
         android:label="fragment_r4"
         tools:layout="@layout/fragment_r4" >
         <action
@@ -142,7 +142,7 @@
     </fragment>
     <fragment
         android:id="@+id/r3Fragment"
-        android:name="com.example.physiohut.R3Fragment"
+        android:name="com.example.physiohut.R3.R3Fragment"
         android:label="fragment_r3"
         tools:layout="@layout/fragment_r3" >
         <action
@@ -154,7 +154,7 @@
     </fragment>
     <fragment
         android:id="@+id/r7Fragment"
-        android:name="com.example.physiohut.R7Fragment"
+        android:name="com.example.physiohut.R7.R7Fragment"
         android:label="fragment_r7"
         tools:layout="@layout/fragment_r7" >
         <action
@@ -163,7 +163,7 @@
     </fragment>
     <fragment
         android:id="@+id/r8Fragment"
-        android:name="com.example.physiohut.R8Fragment"
+        android:name="com.example.physiohut.R8.R8Fragment"
         android:label="fragment_r8"
         tools:layout="@layout/fragment_r8" >
         <action

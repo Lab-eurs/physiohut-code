@@ -1,4 +1,4 @@
-package com.example.physiohut;
+package com.example.physiohut.R10;
 
 import android.os.Bundle;
 
@@ -19,9 +19,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.physiohut.Provision;
+import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;

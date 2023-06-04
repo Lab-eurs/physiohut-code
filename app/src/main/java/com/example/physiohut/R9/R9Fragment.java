@@ -1,6 +1,5 @@
-package com.example.physiohut;
+package com.example.physiohut.R9;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -18,15 +17,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputLayout;
-
-import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -133,8 +129,8 @@ public class R9Fragment extends Fragment {
                         Toast.makeText(getContext(), "Ραντεβού έκλεισε για "+time +", " + selectedDate, Toast.LENGTH_LONG).show();
                         String url = "http://" + myIP + "/physiohut/R9log.php?pending_id=" + pending_id + "&patient_id="+ patient_id +"&doctor_id=" + doctor_id + "&comment=" + comment + "&created_at=" + selectedDate + "&created_at_time=" + time;
                         try {
-                            R9log r9log = new R9log();
-                            r9log.logHistory(url);
+                            R9DataFetcher r9DataFetcher = new R9DataFetcher();
+                            r9DataFetcher.logHistory(url);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

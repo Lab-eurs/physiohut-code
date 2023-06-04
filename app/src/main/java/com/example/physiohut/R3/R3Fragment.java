@@ -1,4 +1,4 @@
-package com.example.physiohut;
+package com.example.physiohut.R3;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,16 +9,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.Toast;
 
+import com.example.physiohut.NetworkConstants;
+import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
@@ -166,7 +166,7 @@ public class R3Fragment extends Fragment {
                             //εδω θα γίνει η αποστολή των δεδομένων στην ΒΔ
                             String url = NetworkConstants.getUrlOfFile("r3.php") + "?doc_id="+doc_id+"&NAME="+name+"&address="+address +"&amka="+amka;
                             try{
-                                R3DataLog r1DataLog = new R3DataLog();
+                                R3DataFetcher r1DataLog = new R3DataFetcher();
                                 System.out.println(url);
                                 r1DataLog.physioLog(url);
                                 Toast.makeText(getContext(),"NAME: "+name +" Address: "+address+" Amka: "+amka,Toast.LENGTH_SHORT).show();

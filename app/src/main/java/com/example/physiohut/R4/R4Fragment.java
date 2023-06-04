@@ -1,4 +1,4 @@
-package com.example.physiohut;
+package com.example.physiohut.R4;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,10 +14,11 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.physiohut.Provision;
+import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -104,7 +105,7 @@ public class R4Fragment extends Fragment {
 
     private final String myIP = "192.168.205.51";
     private final int doc_id = 1;
-    private static final R4DB dbfetcher = new R4DB();
+    private static final R4DataFetcher dbfetcher = new R4DataFetcher();
     ArrayList<Provision> provisions;
     ArrayList<Provision> adapterProv = new ArrayList<>();
 
@@ -165,7 +166,7 @@ public class R4Fragment extends Fragment {
         patientTitleTextV.setText("Ιστορικό Ασθενή " + patientID);
 
         try{
-            R4DB dbFETCHER = new R4DB();
+            R4DataFetcher dbFETCHER = new R4DataFetcher();
             provisions = dbFETCHER.PopulateRecycleView(doc_id,patientID);
         }catch (Exception e){
             e.printStackTrace();

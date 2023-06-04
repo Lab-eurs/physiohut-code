@@ -1,4 +1,4 @@
-package com.example.physiohut;
+package com.example.physiohut.R7;
 
 public class PendingAppointmentsR7 {
 
@@ -10,7 +10,7 @@ public class PendingAppointmentsR7 {
     private String appointmentArea;
     private String appointmentTime;
 
-    boolean isVisible = false;
+    public boolean isVisible = false;
 
     public PendingAppointmentsR7() {
         //empty constructor

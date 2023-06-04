@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.physiohut.R4.R4Fragment;
+
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
