@@ -28,10 +28,6 @@ public class R8DataFetcher {
         StrictMode.setThreadPolicy(policy);
     }
 
-    public ArrayList<Patient> fetchPatients(int doctorID){
-//        String url =
-        return new ArrayList<>();
-    }
 
     public ArrayList<Provision> fetchProvisions() throws  Exception{
         ArrayList<Provision> provisions = new ArrayList<>();
@@ -46,13 +42,13 @@ public class R8DataFetcher {
         JSONArray json = new JSONArray(data);
         for(int i =0; i< json.length(); i++){
             JSONObject provisionJSON = json.getJSONObject(i);
-            JSONObject provision = (JSONObject) provisionJSON.get("provision");
-            System.out.println(provision);
-            int prov_id =  Integer.parseInt((String) provision.get("id"));
-            String code = (String) provision.get("CODE");
-            String description = (String) provision.get("description");
-            Double price = Double.parseDouble((String) provision.get("price"));
-            provisions.add(new Provision(prov_id,code,description,price));
+            System.out.println(provisionJSON);
+            int id =  Integer.parseInt((String) provisionJSON.get("id"));
+            String code = (String) provisionJSON.get("CODE");
+            String description = (String) provisionJSON.get("description");
+            Double price = Double.parseDouble((String) provisionJSON.get("price"));
+            provisions.add(new Provision(id,code,description,price));
+            System.out.println("ID: " + provisions.get(i).getId());
         }
 
         return provisions;
@@ -62,10 +58,62 @@ public class R8DataFetcher {
 
     }
 
-    public void createAppointment(int doctorID,String patientName,ArrayList<String> provisionCodes,String dateScheduledFor){
-        System.out.println("CREATING APPOINTMENT WITH: " + doctorID + patientName + provisionCodes + dateScheduledFor);
+    //not tested yet should work, paizei na thelei list<int>
+    public void createAppointment(int doctorID,int patientID,ArrayList<String> provisionCodes,String dateScheduledFor){
+        System.out.println("CREATING APPOINTMENT WITH: " + doctorID + patientID + provisionCodes + dateScheduledFor);
+        String provCodes = provisionCodes.stream().reduce("",(acc,el)->acc + "&prov_codes["+provisionCodes.indexOf(el)+"]"+"=" + el);
+        String url = NetworkConstants.getUrlOfFile("r8-create-appointment.php") + "?doctor_id="+doctorID + "&patient_id="+patientID + provCodes + "&date="+dateScheduledFor;
+        System.out.println("SENDING HTTP GET TO: " + url);
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        Request request = new Request.Builder().url(url).method("GET",
+                null).build();
+        Response response = null;
+        try{
+            response = client.newCall(request).execute();
+            String data = response.body().string();
+            System.out.println("CREATING APPOINTMENT RESPONSE: " + data);
+            response.close();
+        }catch (Exception e){
+
+        }finally{
+            if(response!=null)response.close();
+        }
+
+
+
+
     }
 
+
+
+    public ArrayList<Patient> getPatientsOfDoctor(int doctorID) throws Exception {
+        ArrayList<Patient> patients = new ArrayList<>();
+        String url = NetworkConstants.getUrlOfFile("r5-get_patients_of_doctor.php") + "?doc_id="+doctorID;
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
+        Request request = new Request.Builder().url(url).method("POST", body).build();
+        Response response = client.newCall(request).execute();
+        String data = response.body().string();
+        System.out.println("DATA RETURNED FROM POST: ");
+        try {
+            JSONObject json = new JSONObject(data);
+            JSONArray patientsArray = json.getJSONArray("patients");
+            for (int i = 0; i < patientsArray.length(); i++) {
+                JSONObject jsonObj = patientsArray.getJSONObject(i);
+                String id = jsonObj.getString("id");
+                String name = jsonObj.getString("name");
+                String address = jsonObj.getString("address");
+                String amka = jsonObj.getString("amka");
+                String doc_id = jsonObj.getString("doc_id");
+
+                patients.add(new Patient(id,doc_id,name,address,amka));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return patients;
+    }
 
 
     public ArrayList<Patient> populateDropDown(String url) throws Exception{

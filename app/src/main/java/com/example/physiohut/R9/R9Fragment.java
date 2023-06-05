@@ -79,8 +79,7 @@ public class R9Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_r9, container, false);
     }
 
-    //TODO
-    private int patient_id = 1;
+    private int patient_id = AuthenticateUser.patientID;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -115,9 +114,6 @@ public class R9Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String comment = commentEditText.getText().toString();
-//                patient_id++;
-//                doctor_id++;
-//                pending_id++;
                 //pop-up
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                 builder.setTitle("Επιβεβαίωση Ραντεβού");

@@ -32,6 +32,8 @@ public class Provision {
         this.isSelected = isSelected;
     }
 
+    public int getId(){return id;}
+
     public String getProv_id(){
         return prov_id;
     }

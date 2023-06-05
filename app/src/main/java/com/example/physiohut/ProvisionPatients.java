@@ -172,7 +172,7 @@ public class ProvisionPatients extends Fragment {
 
             public MyViewHolder(View itemView) {
                 super(itemView);
-                textParoxi = (CheckBox) itemView.findViewById(R.id.checkBox);
+                textParoxi = (CheckBox) itemView.findViewById(R.id.selectProvision);
 
                 textParoxi.setOnClickListener(new View.OnClickListener() {
                     @Override

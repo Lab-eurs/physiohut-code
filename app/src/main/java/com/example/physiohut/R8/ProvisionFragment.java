@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.example.physiohut.R;
 import com.example.physiohut.model.Provision;
@@ -108,9 +109,9 @@ public class ProvisionFragment extends Fragment {
         }catch (Exception e){
             provisions = new ArrayList<>();
         }
-//        provisions = dbFetcher.fetchProvisions();
+        System.out.println("PROVISIONS GOT FROM DB:" + provisions);
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recyclerProv);
-        recyclerView.setAdapter(new ProvisionFragment.MyProvAdapter(getAdapterProv()));
+        recyclerView.setAdapter(new ProvisionFragment.MyProvAdapter(provisions));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         Button okbtn = view.findViewById(R.id.provisionSubmit);
@@ -118,13 +119,15 @@ public class ProvisionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ArrayList<String> provisionsName = new ArrayList<>();
-                for(int i=0;i<adapterProv.size();i++){
-                    if(adapterProv.get(i).isSelected()){
-                        provisionsName.add(adapterProv.get(i).getName());
+                for(int i=0;i<provisions.size();i++){
+                    Provision p = provisions.get(i);
+                    if(p.isSelected()){
+                        System.out.println("Prov: " +p.getName() + "ID: " + p.getId());
+                        provisionsName.add(String.valueOf(provisions.get(i).getId()));
                     }
-                    System.out.println(adapterProv.get(i).isSelected());
+//                    System.out.println(adapterProv.get(i).isSelected());
                 }
-                System.out.println(provisionsName);
+                System.out.println("Those submitted" + provisionsName);
 
                 Bundle bundle = new Bundle();
                 bundle.putStringArrayList("provisionList", provisionsName);
@@ -141,12 +144,6 @@ public class ProvisionFragment extends Fragment {
                 transaction.commit();
             }
         });
-    }
-    private ArrayList<Provision> getAdapterProv(){
-        for(int i=0; i<provisions.size();i++){
-            adapterProv.add(new Provision(provisions.get(i).getName(), false));
-        }
-        return adapterProv;
     }
 
     // MyAdapter class
@@ -170,9 +167,11 @@ public class ProvisionFragment extends Fragment {
             // Get the data for the current position
             //Patient data = dataList.get(position);
             Provision provision = dataList.get(position);
+
             // Update the view holder with the new data
-            holder.textParoxi.setText(dataList.get(position).getName());
-            holder.textParoxi.setChecked(provision.isSelected());
+            holder.checkBoxparoxi.setText(provision.getName());
+            holder.checkBoxparoxi.setChecked(provision.isSelected());
+            holder.codeParoxi.setText(provision.getName());
         }
 
         @Override
@@ -182,13 +181,14 @@ public class ProvisionFragment extends Fragment {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
-            private final CheckBox textParoxi;
+            private final CheckBox checkBoxparoxi;
+            private final TextView codeParoxi;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
-                textParoxi = (CheckBox) itemView.findViewById(R.id.checkBox);
-
-                textParoxi.setOnClickListener(new View.OnClickListener() {
+                checkBoxparoxi = (CheckBox) itemView.findViewById(R.id.selectProvision);
+                codeParoxi = (TextView) itemView.findViewById(R.id.provisionName);
+                checkBoxparoxi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         boolean isChecked = ((CheckBox) view).isChecked();

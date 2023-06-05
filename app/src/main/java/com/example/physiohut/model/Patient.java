@@ -1,5 +1,7 @@
 package com.example.physiohut.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,12 @@ public class Patient {
         this.address = address;
         this.AMKA = AMKA;
     }
+
+
+    public String toString() {
+        return name + "-"  + id;
+    }
+
     public String getId(){
         return id;
     }

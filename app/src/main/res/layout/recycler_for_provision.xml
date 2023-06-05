@@ -3,17 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="60dp">
 
     <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="match_parent"
+        android:id="@+id/selectProvision"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         app:buttonIcon="@drawable/baseline_description_24"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.659"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/provisionName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Provision Code"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/selectProvision"
+        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.517" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

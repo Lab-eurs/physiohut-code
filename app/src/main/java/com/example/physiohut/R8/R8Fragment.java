@@ -26,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.physiohut.AuthenticateUser;
 import com.example.physiohut.R;
 import com.example.physiohut.model.Patient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -102,7 +103,7 @@ public class R8Fragment extends Fragment {
     private PatientList patientList;
     private String name;
     private int ap_id=0;
-    private int doctor_id=1;
+    private int doctor_id=AuthenticateUser.doctorID;
     private int patient_id=1;
     private static final R8DataFetcher dbFetcher = new R8DataFetcher();
 
@@ -110,7 +111,7 @@ public class R8Fragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        patientList = new PatientList();
+        patientList = new PatientList(AuthenticateUser.doctorID);
         super.onViewCreated(view, savedInstanceState);
 
         //TODO customArrayViewAdapter
@@ -118,13 +119,14 @@ public class R8Fragment extends Fragment {
         Spinner dropDown = (Spinner) getView().findViewById(R.id.PatientSpinner);
         ArrayAdapter<Patient> arrayAdapter = new ArrayAdapter<Patient>(requireContext(),android.R.layout.simple_spinner_item,patientList.getAllPatients());
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        System.out.println(patientList.getAllPatients());
         dropDown.setAdapter(arrayAdapter);
         dropDown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 name = dropDown.getSelectedItem().toString();
                 System.out.println(name);
+                patient_id = Integer.parseInt(name.split("-")[1]);
+                System.out.println("ASTHENIS ID: " + patient_id);
             }
 
             @Override
@@ -191,11 +193,12 @@ public class R8Fragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
+
                         System.out.println("DATA FOR APPOINTMENT: "+ time + selectedDate + myPList + patient_id + comment);
                         Toast.makeText(getContext(), "Ραντεβού έκλεισε για: "+time+ selectedDate, Toast.LENGTH_LONG).show();
                         try{
                             R8DataFetcher r8DataFetcher = new R8DataFetcher();
-                            r8DataFetcher.createAppointment(doctor_id,name,myPList,selectedDate+time);
+                            r8DataFetcher.createAppointment(doctor_id,patient_id,myPList,selectedDate);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -232,7 +235,24 @@ public class R8Fragment extends Fragment {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
-                selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                String monthStr;
+//                This might not be needed but it works now
+                if(month+1 < 10){
+                    monthStr = "0" + String.valueOf(month+1);
+
+                }else{
+                    monthStr = String.valueOf(month+1);
+                }
+
+                String dayStr;
+
+                if(dayOfMonth < 10){
+                    dayStr = "0" + String.valueOf(dayOfMonth);
+
+                }else{
+                    dayStr = String.valueOf(dayOfMonth);
+                }
+                selectedDate = year + "-" + monthStr + "-" + dayStr;
             }
         });
 
