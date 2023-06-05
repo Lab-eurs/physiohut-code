@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.physiohut.AuthenticateUser;
 import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputLayout;
@@ -78,10 +79,8 @@ public class R9Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_r9, container, false);
     }
 
-    private final String myIP = "192.168.2.101";
-    private int patient_id = 0;
-    private int doctor_id=0;
-    private int pending_id=0;
+    //TODO
+    private int patient_id = 1;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -116,9 +115,9 @@ public class R9Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String comment = commentEditText.getText().toString();
-                patient_id++;
-                doctor_id++;
-                pending_id++;
+//                patient_id++;
+//                doctor_id++;
+//                pending_id++;
                 //pop-up
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
                 builder.setTitle("Επιβεβαίωση Ραντεβού");
@@ -126,11 +125,11 @@ public class R9Fragment extends Fragment {
                 builder.setPositiveButton("Υποβολή", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getContext(), "Ραντεβού έκλεισε για "+time +", " + selectedDate, Toast.LENGTH_LONG).show();
-                        String url = "http://" + myIP + "/physiohut/R9log.php?pending_id=" + pending_id + "&patient_id="+ patient_id +"&doctor_id=" + doctor_id + "&comment=" + comment + "&created_at=" + selectedDate + "&created_at_time=" + time;
+
                         try {
                             R9DataFetcher r9DataFetcher = new R9DataFetcher();
-                            r9DataFetcher.logHistory(url);
+                            r9DataFetcher.requestAppointment(patient_id,selectedDate);
+                            Toast.makeText(getContext(), "Ραντεβού έκλεισε για "+time +", " + selectedDate, Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -164,7 +163,25 @@ public class R9Fragment extends Fragment {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
-                selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                String monthStr;
+//                This might not be needed but it works now
+                if(month+1 < 10){
+                    monthStr = "0" + String.valueOf(month+1);
+
+                }else{
+                    monthStr = String.valueOf(month+1);
+                }
+
+                String dayStr;
+
+                if(dayOfMonth < 10){
+                    dayStr = "0" + String.valueOf(dayOfMonth);
+
+                }else{
+                    dayStr = String.valueOf(dayOfMonth);
+                }
+                selectedDate = year + "-" + monthStr + "-" + dayStr;
+
             }
         });
 
