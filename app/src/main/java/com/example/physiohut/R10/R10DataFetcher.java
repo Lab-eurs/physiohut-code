@@ -69,7 +69,8 @@ public class R10DataFetcher {
                 //nullable
                 String completedAt = sessionJSON.getString("ap_completed_at_time");
                 Appointment a = new Appointment(ap_id,patientID,doctor_id,scheduledFor,state,completedAt);
-                Session s = new Session(p,a,sess_state,completedAt);
+                String completed = sessionJSON.getString("sess_completed_at_time");
+                Session s = new Session(p,a,sess_state,completed);
                 sessionsOfPatient.add(s);
             }
 

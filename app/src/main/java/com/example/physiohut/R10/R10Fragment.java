@@ -1,5 +1,7 @@
 package com.example.physiohut.R10;
 
+import static java.lang.Math.round;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.physiohut.AuthenticateUser;
+import com.example.physiohut.model.Appointment;
 import com.example.physiohut.model.Provision;
 import com.example.physiohut.R;
 import com.example.physiohut.model.Session;
@@ -31,6 +34,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,7 +48,6 @@ public class R10Fragment extends Fragment  {
     private static final R10DataFetcher dbFetcher = new R10DataFetcher();
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private HashMap<String, Comparator<Provision>> sortingFNsMapping = new HashMap<>();
 
 
     private RecyclerView.LayoutManager layoutManagerForRV;
@@ -62,11 +65,6 @@ public class R10Fragment extends Fragment  {
 
         }
     };
-    //the rest the same etc.
-    public  ArrayList<Provision> provisionData = new ArrayList<>(Arrays.asList(new Provision(1,"Malaksh","Trivw gera",15.75),
-            new Provision(2,"HlektroXalarwsh","se diapernaei revma",15.75),
-            new Provision(3,"Athlitiko Masaz","Ksepianesai",15.75),
-            new Provision(4,"Sauna","Idrwneis, kanei kalo",15.75)));
 
 
     // TODO: Rename and change types of parameters
@@ -105,18 +103,10 @@ public class R10Fragment extends Fragment  {
     }
 
 
-    //TODO: PUT BORDER IN RECYCLER VIEW-> DONE
-    //TODO: CHANGE TEXT SIZES AND BOLD IN RECYCLER VIEW-> DONE
-    //TODO: CHANGE SCROLLBAR -> DONE
-    //TODO: PUT BORDER IN RECYCLER VIEW ELEMENTS
-    //TODO: FIX THE BORDER THING THAT HIDES THE LITTLE ARROW IN THE SPINNER
-    //TODO: CHANGE TEXT COLORS TO MATCH THOSE OF MOCK-UP
-    //TODO: FIX SCROLLBAR JUST LIKE LINES WITH STROKES AND STYLE ETC -> DONE
-    //TODO: SPACE ELEMENTS AROUND BETTER
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_r10, container, false);
     }
 
@@ -138,27 +128,26 @@ public class R10Fragment extends Fragment  {
             }
         });
 
-        this.sortingFNsMapping.put("Αύξον Κόστος",this.compAscendingPrice);
-        this.sortingFNsMapping.put("Φθίνον Κόστος",this.compAscendingPrice);
-        this.sortingFNsMapping.put("Πιο πρόσφατες",this.compAscendingPrice);
-        this.sortingFNsMapping.put("Πιο παλιές",this.compAscendingPrice);
+
+
+
+        TextView totalAmount = (TextView) getView().findViewById(R.id.payment_amount);
+        int currentPatient = AuthenticateUser.patientID;
+        ArrayList<Session> sessions = dbFetcher.fetchCompletedSessionsOfPatient(currentPatient);
+        Double paidAmount = sessions.stream().filter(s->s.getSessionState() == Session.SESSION_STATE.COMPLETED).reduce(0.0,(acc, curr)-> acc + curr.getProvision().getPrice(),Double::sum).doubleValue();
+        String result = String.format("%.2f", paidAmount);
+        totalAmount.setText( result + "$");
+
+
+        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.provision_recycler_view);
+        SessionRecyclerAdapter sessionRecyclerAdapter = new SessionRecyclerAdapter(sessions);
+        recyclerView.setAdapter(sessionRecyclerAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         Spinner sortSpinner = (Spinner) getView().findViewById(R.id.sort_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(),R.array.sort_choices_array,R.layout.sort_spinner_item);
         adapter.setDropDownViewResource(R.layout.sort_spinner_item);
         sortSpinner.setAdapter(adapter);
-
-        TextView totalAmount = (TextView) getView().findViewById(R.id.payment_amount);
-        //TODO: ME AUTO NA DOUME TI THA KANOUME
-        int currentPatient = AuthenticateUser.patientID;
-        ArrayList<Session> sessions = dbFetcher.fetchCompletedSessionsOfPatient(currentPatient);
-        Double paidAmount = sessions.stream().reduce(0.0,(acc,curr)-> acc + curr.getProvision().getPrice(),Double::sum);
-        totalAmount.setText( paidAmount + "$");
-
-
-        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.provision_recycler_view);
-        recyclerView.setAdapter(new SessionRecyclerAdapter(sessions));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -171,10 +160,25 @@ public class R10Fragment extends Fragment  {
                 if(!Arrays.stream(validOptions).anyMatch(str -> selectedItem.equals(str))){
                     System.out.println("SOMETHING WENT TERRIBLY WRONG");
                 }
-                Comparator<Provision> sortingFN = sortingFNsMapping.getOrDefault(selectedItem,(Provision p1,Provision p2)-> 0);
-                Collections.sort((List) provisionData,sortingFN);
 
-                System.out.println("The list is finally " + provisionData);
+                List<Session> finalSessions = new ArrayList<>();
+                if(selectedItem.equals("Αύξον Κόστος")){
+                    finalSessions = sessions.stream().sorted((a,b)->new Double(a.getProvision().getPrice()).compareTo(new Double(b.getProvision().getPrice()))).collect(Collectors.toList());
+                }else if(selectedItem.equals("Φθίνον Κόστος")){
+                    finalSessions = sessions.stream().sorted((a,b)->new Double(b.getProvision().getPrice()).compareTo(new Double(a.getProvision().getPrice()))).collect(Collectors.toList());
+                }else if(selectedItem.equals("Πιο παλιές")){
+                    System.out.println("SORTING ASCENDING DATE");
+                    finalSessions = sessions.stream().sorted(Comparator.comparing(Session::getCompletedAt).reversed()).collect(Collectors.toList());
+                }else if(selectedItem.equals("Πιο πρόσφατες")){
+                    System.out.println("SORTING DESCENDING DATE");
+                    finalSessions = sessions.stream().sorted(Comparator.comparing(Session::getCompletedAt)).collect(Collectors.toList());
+                }else{
+                    finalSessions = (ArrayList<Session>) sessions;
+                }
+
+                SessionRecyclerAdapter sessAdapter = new SessionRecyclerAdapter((ArrayList<Session>) finalSessions);
+                recyclerView.swapAdapter(sessAdapter,false);
+
 
 
             }

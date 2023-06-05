@@ -10,6 +10,10 @@
     <color name="primary">#2667FF</color>
     <color name="button">#3B28CC</color>
     <color name="grey">#808080</color>
+    <color name="green_accepted">#8bf904</color>
+    <color name="yellow_pending">#f9b004</color>
+    <color name="red_rejected">#f90206</color>
+    <color name="blue_completed">#0282f9</color>
     <style name="provision_recycler_view">
         <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>

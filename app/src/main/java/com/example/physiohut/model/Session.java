@@ -1,5 +1,7 @@
 package com.example.physiohut.model;
 
+import androidx.annotation.NonNull;
+
 import java.time.LocalDateTime;
 
 public class Session {
@@ -16,6 +18,11 @@ public class Session {
         this.completedAt = completedAt;
     }
 
+
+    public String toString() {
+        return provision.getName() + " " + completedAt;
+    }
+
     public Provision getProvision() {
         return provision;
     }
@@ -30,5 +37,8 @@ public class Session {
 
     public String getCompletedAt() {
         return completedAt;
+    }
+    public void setCompletedAt(String c) {
+        completedAt = c;
     }
 }

@@ -12,6 +12,7 @@ public class SessionViewHolder extends RecyclerView.ViewHolder {
     private final TextView priceText;
     private final TextView descriptionText;
     private final TextView dateText;
+    private final TextView stateText;
 
     public SessionViewHolder(View view) {
         super(view);
@@ -20,11 +21,13 @@ public class SessionViewHolder extends RecyclerView.ViewHolder {
         priceText = (TextView) view.findViewById(R.id.priceTextV);
         descriptionText = (TextView) view.findViewById(R.id.descriptionTextV);
         dateText = (TextView) view.findViewById(R.id.dateTextV);
-
+        stateText = (TextView) view.findViewById(R.id.sessStateTextV);
     }
 
 
-
+    public TextView getStateTextView(){
+        return stateText;
+    }
     public TextView getPriceTextView(){
         return priceText;
     }
