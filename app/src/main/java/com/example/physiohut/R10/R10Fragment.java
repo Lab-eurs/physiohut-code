@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.physiohut.AuthenticateUser;
 import com.example.physiohut.model.Provision;
 import com.example.physiohut.R;
+import com.example.physiohut.model.Session;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -148,16 +149,15 @@ public class R10Fragment extends Fragment  {
         sortSpinner.setAdapter(adapter);
 
         TextView totalAmount = (TextView) getView().findViewById(R.id.payment_amount);
-        //TODO:  get this somehow from the DB(when users are implemented it will be seen
-        //TODO: πρέπει κάπου να βάλουμε κάποια ημερομηνία για να μπει στο UI
+        //TODO: ME AUTO NA DOUME TI THA KANOUME
         int currentPatient = AuthenticateUser.patientID;
-        ArrayList<Provision> provData = dbFetcher.fetchProvisionsFromDbForPatient(currentPatient);
-        Double paidAmount = provData.stream().reduce(0.0,(acc,curr)-> acc + curr.getPrice(),Double::sum);
+        ArrayList<Session> sessions = dbFetcher.fetchCompletedSessionsOfPatient(currentPatient);
+        Double paidAmount = sessions.stream().reduce(0.0,(acc,curr)-> acc + curr.getProvision().getPrice(),Double::sum);
         totalAmount.setText( paidAmount + "$");
 
 
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.provision_recycler_view);
-        recyclerView.setAdapter(new RecyclerAdapter(provData));
+        recyclerView.setAdapter(new RecyclerAdapter(sessions));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -186,31 +186,31 @@ public class R10Fragment extends Fragment  {
         });
 
     }
-    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ProvisionViewHolder>{
+    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.SessionViewHolder>{
 
 
-        public RecyclerAdapter(ArrayList<Provision> data){
+        public RecyclerAdapter(ArrayList<Session> data){
             this.localData = data;
         }
 
-        private ArrayList<Provision> localData;
+        private ArrayList<Session> localData;
         @NonNull
         @Override
-        public ProvisionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public SessionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.recycler_provision_row, parent, false);
 
-            return new ProvisionViewHolder(view);
+            return new SessionViewHolder(view);
 
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ProvisionViewHolder holder, int position) {
-                Provision p = localData.get(position);
-                holder.getDateTextView().setText(p.getDate());
+        public void onBindViewHolder(@NonNull SessionViewHolder holder, int position) {
+                Session s = localData.get(position);
+                holder.getDateTextView().setText(s.getCompletedAt());
                 //TODO: put logic here that trims the text to 12 chars max or some amount
-                holder.getDescriptionTextView().setText(p.getDescription());
-                holder.getPriceTextView().setText(String.valueOf(p.getPrice()) + "$");
+                holder.getDescriptionTextView().setText(s.getProvision().getDescription());
+                holder.getPriceTextView().setText(s.getProvision().getPrice() + "$");
 
 
 
@@ -221,13 +221,13 @@ public class R10Fragment extends Fragment  {
             return localData.size();
         }
 
-        public class ProvisionViewHolder extends RecyclerView.ViewHolder {
+        public class SessionViewHolder extends RecyclerView.ViewHolder {
 
             private final TextView priceText;
             private final TextView descriptionText;
             private final TextView dateText;
 
-            public ProvisionViewHolder(View view) {
+            public SessionViewHolder(View view) {
                 super(view);
                 // Define click listener for the ViewHolder's View
 

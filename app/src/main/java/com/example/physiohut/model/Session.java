@@ -7,9 +7,9 @@ public class Session {
     private Appointment appointment;
     public enum SESSION_STATE {PENDING,REJECTED,COMPLETED}
     private SESSION_STATE sessionState;
-    private LocalDateTime completedAt;
+    private String completedAt;
 
-    public Session(Provision provision, Appointment appointment, SESSION_STATE sessionState, LocalDateTime completedAt) {
+    public Session(Provision provision, Appointment appointment, SESSION_STATE sessionState, String completedAt) {
         this.provision = provision;
         this.appointment = appointment;
         this.sessionState = sessionState;
@@ -28,7 +28,7 @@ public class Session {
         return sessionState;
     }
 
-    public LocalDateTime getCompletedAt() {
+    public String getCompletedAt() {
         return completedAt;
     }
 }

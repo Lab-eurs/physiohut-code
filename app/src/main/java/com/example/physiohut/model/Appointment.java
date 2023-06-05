@@ -6,12 +6,12 @@ public class Appointment {
     private int id;
     private int patientID;
     private int doctorID;
-    private LocalDateTime scheduledFor;
+    private String scheduledFor;
     public enum APPOINTMENT_STATE {ACCEPTED,REJECTED,PENDING,COMPLETED};
     private APPOINTMENT_STATE appointmentState;
-    private LocalDateTime completedAt;
+    private String completedAt;
 
-    public Appointment(int id, int patientID, int doctorID, LocalDateTime scheduledFor, APPOINTMENT_STATE appointmentState, LocalDateTime completedAt) {
+    public Appointment(int id, int patientID, int doctorID, String scheduledFor, APPOINTMENT_STATE appointmentState, String completedAt) {
         this.id = id;
         this.patientID = patientID;
         this.doctorID = doctorID;
@@ -32,7 +32,7 @@ public class Appointment {
         return doctorID;
     }
 
-    public LocalDateTime getScheduledFor() {
+    public String getScheduledFor() {
         return scheduledFor;
     }
 
@@ -40,7 +40,7 @@ public class Appointment {
         return appointmentState;
     }
 
-    public LocalDateTime getCompletedAt() {
+    public String getCompletedAt() {
         return completedAt;
     }
 }
