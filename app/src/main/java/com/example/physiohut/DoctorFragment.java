@@ -107,7 +107,9 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
     private AppointmentsList cbl;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        //paizei na einai doctor id auto
         int patientID = 1;
+        //genika egw thn klash appointment xrhsimopoiw
         cbl = new AppointmentsList(patientID);
         super.onViewCreated(view, savedInstanceState);
 

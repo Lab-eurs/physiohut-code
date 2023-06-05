@@ -2,6 +2,7 @@ package com.example.physiohut.R6;
 
 import android.os.StrictMode;
 
+import com.example.physiohut.NetworkConstants;
 import com.example.physiohut.model.Appointment;
 import com.example.physiohut.model.Appointments;
 
@@ -29,7 +30,8 @@ public class R6DataFetcher {
         return new ArrayList<>();
     }
 
-    public ArrayList<Appointments> fetchWeeklyAppointments(String url) throws Exception {
+    public ArrayList<Appointments> fetchWeeklyAppointments(int patientID) throws Exception {
+        String url = NetworkConstants.getUrlOfFile("r6-r10-get_patient_provisions.php") + "?patient_id=" + patientID;
         ArrayList<Appointments> cbList = new ArrayList<>();
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create("",
