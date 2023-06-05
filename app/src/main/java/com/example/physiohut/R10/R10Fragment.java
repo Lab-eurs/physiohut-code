@@ -157,7 +157,7 @@ public class R10Fragment extends Fragment  {
 
 
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.provision_recycler_view);
-        recyclerView.setAdapter(new RecyclerAdapter(sessions));
+        recyclerView.setAdapter(new SessionRecyclerAdapter(sessions));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -186,71 +186,5 @@ public class R10Fragment extends Fragment  {
         });
 
     }
-    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.SessionViewHolder>{
 
-
-        public RecyclerAdapter(ArrayList<Session> data){
-            this.localData = data;
-        }
-
-        private ArrayList<Session> localData;
-        @NonNull
-        @Override
-        public SessionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.recycler_provision_row, parent, false);
-
-            return new SessionViewHolder(view);
-
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull SessionViewHolder holder, int position) {
-                Session s = localData.get(position);
-                holder.getDateTextView().setText(s.getCompletedAt());
-                //TODO: put logic here that trims the text to 12 chars max or some amount
-                holder.getDescriptionTextView().setText(s.getProvision().getDescription());
-                holder.getPriceTextView().setText(s.getProvision().getPrice() + "$");
-
-
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return localData.size();
-        }
-
-        public class SessionViewHolder extends RecyclerView.ViewHolder {
-
-            private final TextView priceText;
-            private final TextView descriptionText;
-            private final TextView dateText;
-
-            public SessionViewHolder(View view) {
-                super(view);
-                // Define click listener for the ViewHolder's View
-
-                    priceText = (TextView) view.findViewById(R.id.priceTextV);
-                    descriptionText = (TextView) view.findViewById(R.id.descriptionTextV);
-                    dateText = (TextView) view.findViewById(R.id.dateTextV);
-
-            }
-
-
-
-            public TextView getPriceTextView(){
-                return priceText;
-            }
-
-            public TextView getDescriptionTextView(){
-                return descriptionText;
-            }
-
-            public TextView getDateTextView(){
-                return dateText;
-            }
-
-        }
-    }
 }
