@@ -14,9 +14,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.physiohut.DoctorFragment;
+import com.example.physiohut.R1.R1DataFetcher;
+import com.example.physiohut.R10.R10DataFetcher;
 import com.example.physiohut.R10.R10Fragment;
 import com.example.physiohut.model.Provision;
 import com.example.physiohut.R;
+import com.example.physiohut.model.Session;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -32,8 +36,10 @@ public class R4Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PATIENT_ID = "patient_id";
+    private int patient_id;
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "param1";
 
 
     // TODO: Rename and change types of parameters
@@ -59,6 +65,8 @@ public class R4Fragment extends Fragment {
     public String getParoxi() {
         return paroxi;
     }
+
+
 
     public void setParoxi(String paroxi) {
         this.paroxi = paroxi;
@@ -89,9 +97,11 @@ public class R4Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            patient_id = getArguments().getInt(ARG_PATIENT_ID);
         }
 
 
@@ -101,25 +111,29 @@ public class R4Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        container.removeAllViews();
         return inflater.inflate(R.layout.fragment_r4, container, false);
     }
 
     private final String myIP = "192.168.205.51";
     private final int doc_id = 1;
     private static final R4DataFetcher dbfetcher = new R4DataFetcher();
-    ArrayList<Provision> provisions;
+    private ArrayList<Provision> provisions;
+    private ArrayList<Session> sessions;
     ArrayList<Provision> adapterProv = new ArrayList<>();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        System.out.println("ID is: "+ patient_id);
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.back:
+                        Navigation.findNavController(view).navigate(R.id.action_r4Fragment_to_doctorFragment);
+                        break;
                     case R.id.home:
                         Navigation.findNavController(view).navigate(R.id.action_r4Fragment_to_doctorFragment);
                         break;
@@ -127,62 +141,53 @@ public class R4Fragment extends Fragment {
                 return false;
             }
         });
-        int patientID = 1;
-//        String url = "http://"+myIP+"/physiohut/populatePatientHistory.php";
         TextView patientTitleTextV = (TextView) view.findViewById(R.id.textHistory);
-        patientTitleTextV.setText("Ιστορικό Ασθενή " + patientID);
+        patientTitleTextV.setText("Ιστορικό Ασθενή " + patient_id);
 
         try{
-            R4DataFetcher dbFETCHER = new R4DataFetcher();
-            provisions = dbFETCHER.PopulateRecycleView(doc_id,patientID);
+            R10DataFetcher dbFETCHER = new R10DataFetcher();
+            sessions = dbFETCHER.fetchCompletedSessionsOfPatient(patient_id);
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        provisions = dbfetcher.PopulateRecycleView(doc_id,patientID);
-        System.out.println("THE PROVISIONS ARE " + provisions);
+//        System.out.println("THE PROVISIONS ARE " + provisions);
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recycler_main);
-        recyclerView.setAdapter(new MyAdapter(provisions));
+        recyclerView.setAdapter(new RecyclerAdapter(sessions));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
     }
-    private ArrayList<Provision> getAdapterProv(){
-        for(int i=0; i<provisions.size();i++){
-            adapterProv.add(new Provision(provisions.get(i).getName(),provisions.get(i).getDate()));
-        }
-        return adapterProv;
-    }
 
 
 
-    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ProvisionHistoryViewHolder>{
+
+    public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PatientSessionsViewHolder>{
 
 
-        public RecyclerAdapter(ArrayList<Provision> data){
+        public RecyclerAdapter(ArrayList<Session> data){
             this.localData = data;
         }
 
-        private ArrayList<Provision> localData;
+        private ArrayList<Session> localData;
         @NonNull
         @Override
-        public ProvisionHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public PatientSessionsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.recycler_history_layout, parent, false);
 
-            return new ProvisionHistoryViewHolder(view);
+            return new PatientSessionsViewHolder(view);
 
         }
 
 
         @Override
-        public void onBindViewHolder(@NonNull ProvisionHistoryViewHolder holder, int position) {
-            Provision p = localData.get(position);
-            holder.getDateTextView().setText(p.getDate());
+        public void onBindViewHolder(@NonNull PatientSessionsViewHolder holder, int position) {
+            Session p = localData.get(position);
+            holder.getDateTextView().setText(p.getCompletedAt());
             //TODO: put logic here that trims the text to 12 chars max or some amount
-            holder.getProvisionTextView().setText(p.getDescription());
+            holder.getProvisionTextView().setText(p.getProvision().getName());
 //            holder.getPriceTextView().setText(String.valueOf(p.getPrice()) + "$");
-
 
 
         }
@@ -192,15 +197,14 @@ public class R4Fragment extends Fragment {
             return localData.size();
         }
 
-        public class ProvisionHistoryViewHolder extends RecyclerView.ViewHolder {
+        public class PatientSessionsViewHolder extends RecyclerView.ViewHolder {
 
             private final TextView provisionText;
             private final TextView dateText;
 
-            public ProvisionHistoryViewHolder(View view) {
+            public PatientSessionsViewHolder(View view) {
                 super(view);
                 // Define click listener for the ViewHolder's View
-
                 provisionText = (TextView) view.findViewById(R.id.textParoxi);
                 dateText = (TextView) view.findViewById(R.id.textImerominia);
 

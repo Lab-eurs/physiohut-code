@@ -30,7 +30,7 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/appointment"
+                    android:id="@+id/patientsTab"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -39,16 +39,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <Button
-                            android:id="@+id/btnR4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/button"
-                            android:text="@string/showHistory"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/list_view" />
+                        <!--                        <Button-->
+                        <!--                            android:id="@+id/btnR4"-->
+                        <!--                            android:layout_width="wrap_content"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:backgroundTint="@color/button"-->
+                        <!--                            android:text="@string/showHistory"-->
+                        <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+                        <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                        <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                        <!--                            app:layout_constraintTop_toBottomOf="@+id/list_view" />-->
 
 
                         <SearchView
@@ -79,10 +79,10 @@
                             android:src="@android:drawable/ic_input_add"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/list_view" />
+                            app:layout_constraintTop_toBottomOf="@+id/patientRecView" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/list_view"
+                            android:id="@+id/patientRecView"
                             style="@style/provision_recycler_view"
                             android:layout_width="411dp"
                             android:layout_height="450dp"
@@ -97,7 +97,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/date"
+                    android:id="@+id/appointmentsTab"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -145,10 +145,10 @@
                             android:focusable="true"
                             android:src="@android:drawable/ic_input_add"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/listView" />
+                            app:layout_constraintTop_toBottomOf="@+id/appointmentRecView" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/listView"
+                            android:id="@+id/appointmentRecView"
                             style="@style/provision_recycler_view"
                             android:layout_width="411dp"
                             android:layout_height="420dp"

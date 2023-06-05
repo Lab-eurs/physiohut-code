@@ -14,7 +14,7 @@ public class AppointmentsList {
 
         try {
             R6DataFetcher r6DataFetcher = new R6DataFetcher();
-            cbList = r6DataFetcher.fetchWeeklyAppointments(patientID);
+//            cbList = r6DataFetcher.fetchWeeklyAppointments(patientID);
             //filter them for this week
         } catch (Exception e) {
             e.printStackTrace();

@@ -2,7 +2,7 @@ package com.example.physiohut;
 
 public class AuthenticateUser {
 
-    public static int doctorID = 2;
+    public static int doctorID = 1;
     public static void setDoctorID(int id){
         doctorID = id;
     }
