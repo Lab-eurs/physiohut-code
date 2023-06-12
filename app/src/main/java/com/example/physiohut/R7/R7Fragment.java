@@ -136,7 +136,8 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
 
         //RecyclerView setup and init.
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewR7);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(new Adapter(getContext(),recArrayList));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //Sort-by routine.
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

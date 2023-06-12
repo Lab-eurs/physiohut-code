@@ -26,7 +26,7 @@
 
         <Button
             android:id="@+id/appointmentbtn"
-            android:layout_width="333dp"
+            android:layout_width="300dp"
             android:layout_height="59dp"
             android:layout_gravity="center"
             android:backgroundTint="@color/button"
@@ -38,7 +38,7 @@
 
         <Button
             android:id="@+id/economicbtn"
-            android:layout_width="333dp"
+            android:layout_width="300dp"
             android:layout_height="59dp"
             android:layout_gravity="center"
             android:backgroundTint="@color/button"

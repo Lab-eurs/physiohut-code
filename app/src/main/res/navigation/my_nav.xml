@@ -178,7 +178,11 @@
     </fragment>
     <fragment
         android:id="@+id/provisionPatients"
-        android:name="com.example.physiohut.ProvisionPatients"
+        android:name="com.example.physiohut.R8.ProvisionPatients"
         android:label="fragment_provision_patients"
-        tools:layout="@layout/fragment_provision_patients" />
+        tools:layout="@layout/fragment_provision_patients" >
+        <action
+            android:id="@+id/action_provisionPatients_to_doctorFragment"
+            app:destination="@id/doctorFragment" />
+    </fragment>
 </navigation>

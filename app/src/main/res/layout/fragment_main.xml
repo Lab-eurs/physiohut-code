@@ -12,11 +12,11 @@
 
         <Button
             android:id="@+id/DoctorBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:backgroundTint="@color/button"
-            android:text="@string/go_to_doctor"
+            android:text="Γιατρός"
             app:layout_constraintBottom_toTopOf="@+id/PatientBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,11 +24,11 @@
 
         <Button
             android:id="@+id/PatientBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:backgroundTint="@color/button"
-            android:text="@string/go_to_patient"
+            android:text="Ασθενής"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,11 +36,11 @@
 
         <Button
             android:id="@+id/PsfButton"
-            android:layout_width="158dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|bottom"
             android:backgroundTint="@color/button"
-            android:text="@string/go_to_psf"
+            android:text="ΠΣΦ"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

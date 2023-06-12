@@ -19,14 +19,16 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.050000012" />
+            app:layout_constraintVertical_bias="0.01" />
 
         <Button
             android:id="@+id/buttonCreation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/button"
             android:text="@string/creation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,10 +43,10 @@
             android:text="@string/text_code"
             app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.175"
+            app:layout_constraintHorizontal_bias="0.176"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.175" />
+            app:layout_constraintVertical_bias="0.109" />
 
         <EditText
             android:id="@+id/editText_code"
@@ -68,10 +70,10 @@
             android:text="@string/text_name_provision"
             app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.315"
+            app:layout_constraintHorizontal_bias="0.39"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_code"
-            app:layout_constraintVertical_bias="0.106" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/editText_name"
@@ -83,7 +85,7 @@
             android:text="@string/space"
             app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintHorizontal_bias="0.227"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_name"
             app:layout_constraintVertical_bias="0.0" />
@@ -95,10 +97,10 @@
             android:text="@string/text_description"
             app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.185"
+            app:layout_constraintHorizontal_bias="0.183"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_name"
-            app:layout_constraintVertical_bias="0.16000003" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/editText_description"
@@ -122,10 +124,10 @@
             android:text="@string/text_price"
             app:layout_constraintBottom_toTopOf="@+id/buttonCreation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.176"
+            app:layout_constraintHorizontal_bias="0.183"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_description"
-            app:layout_constraintVertical_bias="0.27" />
+            app:layout_constraintVertical_bias="0.08" />
 
         <EditText
             android:id="@+id/editText_price"

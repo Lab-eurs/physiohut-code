@@ -1,10 +1,12 @@
-package com.example.physiohut;
+package com.example.physiohut.R8;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +19,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 
-import com.example.physiohut.R8.R8DataFetcher;
+import com.example.physiohut.DoctorFragment;
+import com.example.physiohut.NetworkConstants;
+import com.example.physiohut.R;
 import com.example.physiohut.model.Provision;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -82,7 +86,6 @@ public class ProvisionPatients extends Fragment {
     ArrayList<Provision> adapterProv = new ArrayList<>();
     int id = 0;
     private static final R8DataFetcher dbFetcher = new R8DataFetcher();
-    private final String myIP = "192.168.179.235";
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -94,37 +97,50 @@ public class ProvisionPatients extends Fragment {
                 switch (item.getItemId()) {
                     case R.id.back:
                     case R.id.home:
-                        Navigation.findNavController(view).navigate(R.id.action_doctorFragment_self);
+                        Navigation.findNavController(view).navigate(R.id.action_provisionPatients_to_doctorFragment);
                         break;
                 }
                 return false;
             }
         });
-
-        provisions = dbFetcher.populateProvitionList(myIP);
+        try{
+            provisions = dbFetcher.fetchProvisions();
+        }catch (Exception e){
+            provisions = new ArrayList<>();
+        }
+        System.out.println("PROVISIONS GOT FROM DB:" + provisions);
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.recyclerProv);
-        recyclerView.setAdapter(new ProvisionPatients.MyProvAdapter(getAdapterProv()));
+        recyclerView.setAdapter(new ProvisionPatients.MyProvAdapter(provisions));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         Button okbtn = view.findViewById(R.id.provisionSubmit);
         okbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                id++;
                 ArrayList<String> provisionsName = new ArrayList<>();
-                for(int i=0;i<adapterProv.size();i++){
-                    if(adapterProv.get(i).isSelected()){
-                        provisionsName.add(adapterProv.get(i).getName());
+                for(int i=0;i<provisions.size();i++){
+                    Provision p = provisions.get(i);
+                    if(p.isSelected()){
+                        System.out.println("Prov: " +p.getName() + "ID: " + p.getId());
+                        provisionsName.add(String.valueOf(provisions.get(i).getId()));
                     }
+//                    System.out.println(adapterProv.get(i).isSelected());
                 }
-                String url = NetworkConstants.getUrlOfFile("r8-katagrafi.php") + "?ap_id="+id+"&provision="+provisionsName;
-                try{
-                    R8DataFetcher r8DataFetcher = new R8DataFetcher();
-                    r8DataFetcher.katagrafiR8(url);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                Navigation.findNavController(view).navigate(R.id.action_doctorFragment_self);
+                System.out.println("Those submitted" + provisionsName);
+
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("provisionList", provisionsName);
+
+                DoctorFragment doctorFragment = new DoctorFragment();
+                doctorFragment.setArguments(bundle);
+
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.container, doctorFragment);
+                transaction.addToBackStack("tag");
+
+                transaction.commit();
             }
         });
     }

@@ -27,7 +27,7 @@
     <string name="create_appointment">Create Appointment</string>
     <string name="total_payments">Συνολικά έχετε πληρώσει:</string>
     <string name="default_total">0$</string>
-    <string name="sort_by">Ταξινόμηση Κατά:</string>
+    <string name="sort_by">Ταξινόμηση:</string>
 
     <string-array name="sort_choices_array">
         <item>Επιλογές:</item>

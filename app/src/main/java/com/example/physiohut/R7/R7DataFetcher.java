@@ -37,53 +37,48 @@ public class R7DataFetcher {
     }
 
     public ArrayList<PendingAppointmentsR7> fetchAppointmentsFromDB() {
-        //ping url http://localhost/physiohut_backend/read.php
-        StrictMode.ThreadPolicy policy = new
-                StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        //ip Athina 192.168.1.46
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         RequestBody body = RequestBody.create("", MediaType.parse("text/plain"));
 
-//        String filename = "physiohut-pendingAppointments-script.php";
         PendingAppointmentsR7 docID = new PendingAppointmentsR7();
-        if(docID.getDoctor_id() == 0) {
+        if (docID.getDoctor_id() == 0) {
             docID.setDoctor_id(1);
         }
         String docId = Integer.toString(PendingAppointmentsR7.getDoctor_id());
         System.out.println(docId);
-        String url = NetworkConstants.getUrlOfFile("physiohut-pendingAppointments-script.php")  + "/?doctor_id=" + String.valueOf(docID.getDoctor_id());
-        Request request = new Request.Builder().url(url).method("GET",null).build();
+        String url = NetworkConstants.getUrlOfFile("r7-get-pending-appointments-of-doctor.php") + "?doctor_id=" + String.valueOf(docID.getDoctor_id());
+        Request request = new Request.Builder().url(url).method("GET", null).build();
         Response response;
 
         ArrayList<PendingAppointmentsR7> appointments = new ArrayList<>();
         try {
             response = client.newCall(request).execute();
-            assert response.body() != null;
-            String data = response.body().string();
-
-            JSONArray json = new JSONArray(data);
-            for(int i =0; i< json.length(); i++){
-                JSONObject appointmentJSON = json.getJSONObject(i);
-                JSONObject appointment = (JSONObject) appointmentJSON.get("pending");
-                System.out.println(appointment);
-
-                int appointment_id =  parseInt((String) appointment.get("pending_id"));
-                int pat_id =  Integer.parseInt((String) appointment.get("patient_id"));
-                int doc_id =  Integer.parseInt((String) appointment.get("doctor_id"));
-                String patientName = (String) appointment.get("NAME");
-                String date = (String) appointment.get("created_at");
-                String location = (String) appointment.get("location");
-                String time = (String) appointment.get("created_at_time");
-                appointments.add(new PendingAppointmentsR7(appointment_id, doc_id, pat_id, patientName, date ,location ,time));
+            if (response.isSuccessful()) {
+                String data = response.body().string();
+                JSONArray json = new JSONArray(data);
+                for (int i = 0; i < json.length(); i++) {
+                    JSONObject appointment = json.getJSONObject(i);
+                    int appointment_id = appointment.optInt("pending_id");
+                    int pat_id = appointment.optInt("patient_id");
+                    int doc_id = appointment.optInt("doctor_id");
+                    String patientName = appointment.optString("NAME");
+                    String date = appointment.optString("created_at");
+                    String location = appointment.optString("location");
+                    String time = appointment.optString("created_at_time");
+                    appointments.add(new PendingAppointmentsR7(appointment_id, doc_id, pat_id, patientName, date, location, time));
+                }
+            } else {
+                // Handle non-successful response
+                throw new RuntimeException("Failed to fetch appointments. HTTP status code: " + response.code());
             }
-
-            return appointments;
+        } catch (IOException | JSONException e) {
+            // Handle exceptions
+            throw new RuntimeException("Error fetching appointments", e);
         }
-        catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
-        }
+        return appointments;
     }
 
 }

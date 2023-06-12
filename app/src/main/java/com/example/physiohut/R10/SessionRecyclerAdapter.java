@@ -16,8 +16,6 @@ import com.example.physiohut.model.Session;
 import java.util.ArrayList;
 
 public class SessionRecyclerAdapter extends RecyclerView.Adapter<SessionViewHolder>{
-
-
     public SessionRecyclerAdapter(ArrayList<Session> data){
         this.localData = data;
     }
@@ -69,6 +67,5 @@ public class SessionRecyclerAdapter extends RecyclerView.Adapter<SessionViewHold
     public int getItemCount() {
         return localData.size();
     }
-
 
 }

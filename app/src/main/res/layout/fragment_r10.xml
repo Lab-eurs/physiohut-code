@@ -9,7 +9,7 @@
     tools:context=".R10.R10Fragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
         <TextView
@@ -20,10 +20,10 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.145"
+            app:layout_constraintHorizontal_bias="0.135"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.096" />
+            app:layout_constraintVertical_bias="0.027" />
 
         <TextView
             android:id="@+id/payment_amount"
@@ -33,10 +33,10 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.544"
+            app:layout_constraintHorizontal_bias="0.557"
             app:layout_constraintStart_toEndOf="@+id/textViewPatientProv"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.095" />
+            app:layout_constraintVertical_bias="0.027" />
 
         <View
             android:layout_width="match_parent"
@@ -48,47 +48,48 @@
             app:layout_constraintTop_toTopOf="@id/payment_amount"
             tools:layout_editor_absoluteX="0dp" />
 
+
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/sort_by"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.119"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.235" />
+            app:layout_constraintVertical_bias="0.122" />
 
         <Spinner
             android:id="@+id/sort_spinner"
-            android:layout_width="160dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/sort_by_rectangle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.958"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.233" />
-
+            app:layout_constraintVertical_bias="0.14" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/provision_recycler_view"
             style="@style/provision_recycler_view"
-            android:layout_width="380dp"
-            android:layout_height="360dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="125dp"
             android:background="@drawable/provision_recycler_border"
             android:paddingHorizontal="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.392"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             app:layout_constraintVertical_bias="1.0" />

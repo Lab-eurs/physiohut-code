@@ -54,8 +54,24 @@ public class R8DataFetcher {
         return provisions;
     }
 
-    public void markSessionAsCompleted(){
+    public void markSessionAsCompleted(int aponID){
+        System.out.println("Updating Session for appointment:" + aponID);
+        String url = NetworkConstants.getUrlOfFile("r7-complete-session.php") + "?session_id="+aponID;
+        System.out.println("SENDING HTTP GET TO: " + url);
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        Request request = new Request.Builder().url(url).method("GET",
+                null).build();
+        Response response = null;
+        try{
+            response = client.newCall(request).execute();
+            String data = response.body().string();
+            System.out.println("CREATING APPOINTMENT RESPONSE: " + data);
+            response.close();
+        }catch (Exception e){
 
+        }finally{
+            if(response!=null)response.close();
+        }
     }
 
     //not tested yet should work, paizei na thelei list<int>

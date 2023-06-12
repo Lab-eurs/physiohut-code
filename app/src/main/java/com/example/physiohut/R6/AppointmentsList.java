@@ -1,7 +1,6 @@
 package com.example.physiohut.R6;
 
 import com.example.physiohut.model.Appointments;
-import com.example.physiohut.NetworkConstants;
 
 import java.util.ArrayList;
 import java.util.List;

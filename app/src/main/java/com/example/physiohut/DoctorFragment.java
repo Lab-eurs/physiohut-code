@@ -16,18 +16,16 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.example.physiohut.R10.SessionRecyclerAdapter;
 import com.example.physiohut.R4.R4Fragment;
 import com.example.physiohut.R5.OkHttpHandler;
+import com.example.physiohut.R6.AppointmentListAdapter;
 import com.example.physiohut.R6.AppointmentsList;
 import com.example.physiohut.R6.R6DataFetcher;
-import com.example.physiohut.model.Appointment;
 import com.example.physiohut.model.Appointments;
 import com.example.physiohut.model.Doctor;
 import com.example.physiohut.model.Patient;
@@ -36,7 +34,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -124,7 +121,7 @@ public class DoctorFragment extends Fragment implements SearchView.OnQueryTextLi
 
         }
 
-        SessionRecyclerAdapter rcAdapter = new SessionRecyclerAdapter(sessions);
+        AppointmentListAdapter rcAdapter = new AppointmentListAdapter(sessions);
         appointmentsRecyclerView.setAdapter(rcAdapter);
         appointmentsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 //        ArrayAdapter<Appointments> arrayAdapter = new ArrayAdapter<Appointments>(getParentFragment().getContext(), R.layout.activity_listview, R.id.textView, cbl.getAppointmentList());

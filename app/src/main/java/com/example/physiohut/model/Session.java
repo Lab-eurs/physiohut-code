@@ -23,6 +23,7 @@ public class Session {
         return provision.getName() + " " + completedAt;
     }
 
+    public String getAppointmentID(){return  appointment.getId()+" ";}
     public Provision getProvision() {
         return provision;
     }
@@ -30,9 +31,12 @@ public class Session {
     public Appointment getAppointment() {
         return appointment;
     }
-
     public SESSION_STATE getSessionState() {
         return sessionState;
+    }
+
+    public void setSessionState(SESSION_STATE sessionState) {
+        this.sessionState = sessionState;
     }
 
     public String getCompletedAt() {
