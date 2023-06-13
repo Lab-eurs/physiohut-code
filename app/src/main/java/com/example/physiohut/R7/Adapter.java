@@ -1,5 +1,6 @@
 package com.example.physiohut.R7;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         PendingAppointmentsR7 appointmentsClass = arrayList.get(position);
         System.out.println(appointmentsClass.getPatientName());
         holder.patientNameR7.setText(appointmentsClass.getPatientName());
@@ -68,9 +69,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 holder.expandButtonR7.setRotation(180);
             }
         });
+        holder.confirmAppointmentButtonR7.setOnClickListener(view -> removeAt(position));
+        holder.declineAppointmentButtonR7.setOnClickListener(view -> removeAt(position));
+    }
+    private void removeAt(int position) {
+        arrayList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, arrayList.size());
 
     }
-
     @Override
     public int getItemCount() {
         return arrayList.size();
@@ -83,6 +90,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         TextView dateOfAppointmentDataR7;
         ConstraintLayout appointmentsRecyclerViewR7;
         ConstraintLayout expandedLayoutR7;
+        ImageButton confirmAppointmentButtonR7;
+        ImageButton declineAppointmentButtonR7;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             patientNameR7 = itemView.findViewById(R.id.patientNameR7);
@@ -90,6 +99,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             appointmentsRecyclerViewR7 = itemView.findViewById(R.id.recyclerViewR7);
             expandedLayoutR7 = itemView.findViewById(R.id.expandedLayoutR7);
             expandButtonR7 = itemView.findViewById(R.id.expandButtonR7);
+            confirmAppointmentButtonR7 = itemView.findViewById(R.id.confirmAppointmentButtonR7);
+            declineAppointmentButtonR7 =  itemView.findViewById(R.id.declineAppointmentButtonR7);
         }
 
     }

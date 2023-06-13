@@ -35,6 +35,8 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
     private Spinner spinner;
     private SearchView searchViewR7;
 
+    private RecyclerView recyclerView;
+
     public R7Fragment() {
         // Required empty public constructor
     }
@@ -57,6 +59,7 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -90,6 +93,7 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
                 return true;
             }
         });
+
         return view;
     }
 
@@ -115,6 +119,8 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
         }
     }
 
+
+
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -136,7 +142,7 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
         recArrayList = dbFetcher.fetchAppointmentsFromDB(AuthenticateUser.doctorID); //Fetch data from DB
 
         //RecyclerView setup and init.
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewR7);
+        recyclerView = view.findViewById(R.id.recyclerViewR7);
         recyclerView.setAdapter(new Adapter(getContext(),recArrayList));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -159,6 +165,9 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
         myAdapter = new Adapter(getContext(),recArrayList);
         recyclerView.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
+
+
+
 
     }
 
