@@ -15,14 +15,12 @@ public class PendingAppointmentsR7 {
     public PendingAppointmentsR7() {
         //empty constructor
     }
-    public PendingAppointmentsR7(int pendingAppointmentId, int doctor_id, int patient_id, String patientName, String appointmentDate, String appointmentArea, String appointmentTime) {
+    public PendingAppointmentsR7(int pendingAppointmentId, int doctor_id, int patient_id, String patientName, String appointmentDate) {
         this.pendingAppointmentId = pendingAppointmentId;
         this.doctor_id = doctor_id;
         this.patient_id = patient_id;
         this.patientName = patientName;
         this.appointmentDate = appointmentDate;
-        this.appointmentArea = appointmentArea;
-        this.appointmentTime = appointmentTime;
     }
 
     public static int getDoctor_id() { return doctor_id; }

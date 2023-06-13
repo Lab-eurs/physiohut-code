@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.physiohut.AuthenticateUser;
 import com.example.physiohut.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -132,7 +133,7 @@ public class R7Fragment extends Fragment implements AdapterView.OnItemSelectedLi
 
         //Main RecyclerView ArrayList.
         recArrayList = new ArrayList<>();
-        recArrayList = dbFetcher.fetchAppointmentsFromDB(); //Fetch data from DB
+        recArrayList = dbFetcher.fetchAppointmentsFromDB(AuthenticateUser.doctorID); //Fetch data from DB
 
         //RecyclerView setup and init.
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewR7);

@@ -118,29 +118,24 @@ public class ProvisionPatients extends Fragment {
             @Override
             public void onClick(View view) {
                 ArrayList<String> provisionsName = new ArrayList<>();
+                int pID = 0;
                 for(int i=0;i<provisions.size();i++){
                     Provision p = provisions.get(i);
                     if(p.isSelected()){
                         System.out.println("Prov: " +p.getName() + "ID: " + p.getId());
                         provisionsName.add(String.valueOf(provisions.get(i).getId()));
+                        pID = p.getId();
                     }
 //                    System.out.println(adapterProv.get(i).isSelected());
                 }
                 System.out.println("Those submitted" + provisionsName);
-
-                Bundle bundle = new Bundle();
-                bundle.putStringArrayList("provisionList", provisionsName);
-
-                DoctorFragment doctorFragment = new DoctorFragment();
-                doctorFragment.setArguments(bundle);
-
-                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.container, doctorFragment);
-                transaction.addToBackStack("tag");
-
-                transaction.commit();
+                try{
+                    R8DataFetcher r8DataFetcher = new R8DataFetcher();
+                    r8DataFetcher.markSessionAsCompleted(pID);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                Navigation.findNavController(view).navigate(R.id.action_provisionPatients_to_doctorFragment);
             }
         });
     }

@@ -35,6 +35,7 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<AppointmentView
         holder.getStateTextView().setText(s.getAppointmentID());
         //TODO: put logic here that trims the text to 12 chars max or some amount
         if(s.getSessionState() == Session.SESSION_STATE.COMPLETED){
+            holder.getButtonView().setEnabled(false);
             holder.getButtonView().setBackgroundColor(holder.getStateTextView().getResources().getColor(R.color.grey));
         }else if(s.getSessionState() == Session.SESSION_STATE.PENDING){
             holder.getButtonView().setTextColor(holder.getStateTextView().getResources().getColor(R.color.button));

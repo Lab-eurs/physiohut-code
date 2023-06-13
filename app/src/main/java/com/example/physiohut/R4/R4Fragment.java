@@ -23,6 +23,7 @@ import com.example.physiohut.R;
 import com.example.physiohut.model.Session;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 /**
@@ -132,10 +133,8 @@ public class R4Fragment extends Fragment {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.back:
-                        Navigation.findNavController(view).navigate(R.id.action_r4Fragment_to_doctorFragment);
-                        break;
                     case R.id.home:
-                        Navigation.findNavController(view).navigate(R.id.action_r4Fragment_to_doctorFragment);
+                        Navigation.findNavController(view).navigate(R.id.action_doctorFragment_self);
                         break;
                 }
                 return false;

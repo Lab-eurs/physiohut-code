@@ -31,18 +31,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.patient_recycler_view,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.patient_recycler_view,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
         PendingAppointmentsR7 appointmentsClass = arrayList.get(position);
-        
+        System.out.println(appointmentsClass.getPatientName());
         holder.patientNameR7.setText(appointmentsClass.getPatientName());
         holder.dateOfAppointmentDataR7.setText(appointmentsClass.getAppointmentDate());
-        holder.locationOfAppointmentDataR7.setText(appointmentsClass.getAppointmentArea());
-        holder.timeOfAppointmentDataR7.setText(appointmentsClass.getAppointmentTime());
 
         holder.expandButtonR7.setOnClickListener(view -> {
             if(arrayList.get(position).isVisible){
@@ -83,18 +81,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         ImageButton expandButtonR7;
         TextView patientNameR7;
         TextView dateOfAppointmentDataR7;
-        TextView locationOfAppointmentDataR7;
-        TextView timeOfAppointmentDataR7;
-
         ConstraintLayout appointmentsRecyclerViewR7;
         ConstraintLayout expandedLayoutR7;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             patientNameR7 = itemView.findViewById(R.id.patientNameR7);
             dateOfAppointmentDataR7 = itemView.findViewById(R.id.dateOfAppointmentDataR7);
-            locationOfAppointmentDataR7 = itemView.findViewById(R.id.locationOfAppointmentDataR7);
-            timeOfAppointmentDataR7 = itemView.findViewById(R.id.timeOfAppointmentDataR7);
             appointmentsRecyclerViewR7 = itemView.findViewById(R.id.recyclerViewR7);
             expandedLayoutR7 = itemView.findViewById(R.id.expandedLayoutR7);
             expandButtonR7 = itemView.findViewById(R.id.expandButtonR7);
