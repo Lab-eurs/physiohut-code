@@ -60,7 +60,7 @@
     <string name="space">   </string>
     <string name="spinner_title">Patients spinner</string>
     <string name="sortBy">Ταξινόμηση Κατά :</string>
-    <string name="dateOfAppointment">Ημερομηνία:</string>
+    <string name="dateOfAppointment">Ημερομηνία &amp; ώρα:</string>
     <string name="locationOfAppointment">Περιοχή:</string>
     <string name="timeOfAppointmentString">Ώρα:</string>
     <string name="arrowDescription">Arrow to expand view</string>

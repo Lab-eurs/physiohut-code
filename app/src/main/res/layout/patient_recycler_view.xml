@@ -95,34 +95,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/dateOfAppointmentR7" />
 
             <TextView
-                android:id="@+id/timeOfAppointmentR7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/timeOfAppointmentString"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locationOfAppointmentR7"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/timeOfAppointmentDataR7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/timeOfAppointmentR7"
-                app:layout_constraintTop_toBottomOf="@+id/locationOfAppointmentDataR7"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
                 android:id="@+id/dateOfAppointmentDataR7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -140,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginBottom="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -151,13 +124,13 @@
                 android:id="@+id/confirmAppointmentButtonR7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginBottom="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.873"
+                app:layout_constraintHorizontal_bias="0.857"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.893"
+                app:layout_constraintVertical_bias="0.882"
                 app:srcCompat="@drawable/ic_check_button" />
 
             <androidx.constraintlayout.utils.widget.ImageFilterButton
@@ -165,12 +138,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.384"
+                app:layout_constraintHorizontal_bias="0.333"
                 app:layout_constraintStart_toEndOf="@+id/confirmAppointmentButtonR7"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.893"
+                app:layout_constraintVertical_bias="0.836"
                 app:srcCompat="@drawable/ic_cancel_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

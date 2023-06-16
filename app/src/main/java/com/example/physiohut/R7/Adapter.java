@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.physiohut.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -42,6 +45,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         System.out.println(appointmentsClass.getPatientName());
         holder.patientNameR7.setText(appointmentsClass.getPatientName());
         holder.dateOfAppointmentDataR7.setText(appointmentsClass.getAppointmentDate());
+        holder.locationOfAppointmentDataR7.setText(appointmentsClass.getAppointmentLocation());
 
         holder.expandButtonR7.setOnClickListener(view -> {
             if(arrayList.get(position).isVisible){
@@ -69,8 +73,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 holder.expandButtonR7.setRotation(180);
             }
         });
-        holder.confirmAppointmentButtonR7.setOnClickListener(view -> removeAt(position));
-        holder.declineAppointmentButtonR7.setOnClickListener(view -> removeAt(position));
+        holder.confirmAppointmentButtonR7.setOnClickListener(view ->{
+            removeAt(position);
+            Toast.makeText(context,  "Appointment Confirmed!" ,Toast.LENGTH_SHORT).show();
+        });
+        holder.declineAppointmentButtonR7.setOnClickListener(view -> {
+            removeAt(position);
+            Toast.makeText(context,  "Appointment Declined" ,Toast.LENGTH_SHORT).show();
+        });
     }
     private void removeAt(int position) {
         arrayList.remove(position);
@@ -88,6 +98,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         ImageButton expandButtonR7;
         TextView patientNameR7;
         TextView dateOfAppointmentDataR7;
+        TextView locationOfAppointmentDataR7;
         ConstraintLayout appointmentsRecyclerViewR7;
         ConstraintLayout expandedLayoutR7;
         ImageButton confirmAppointmentButtonR7;
@@ -98,6 +109,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             dateOfAppointmentDataR7 = itemView.findViewById(R.id.dateOfAppointmentDataR7);
             appointmentsRecyclerViewR7 = itemView.findViewById(R.id.recyclerViewR7);
             expandedLayoutR7 = itemView.findViewById(R.id.expandedLayoutR7);
+            locationOfAppointmentDataR7 = itemView.findViewById(R.id.locationOfAppointmentDataR7);
             expandButtonR7 = itemView.findViewById(R.id.expandButtonR7);
             confirmAppointmentButtonR7 = itemView.findViewById(R.id.confirmAppointmentButtonR7);
             declineAppointmentButtonR7 =  itemView.findViewById(R.id.declineAppointmentButtonR7);

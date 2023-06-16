@@ -65,8 +65,10 @@ public class R7DataFetcher {
                 int doctor_id = pendingapointmentJSON.getInt("doctor_id");
                 int patient_id = pendingapointmentJSON.getInt("patient_id");
                 String patientName = pendingapointmentJSON.getString("patient_name");
-                String apointDate = pendingapointmentJSON.getString("date");
-                appointments.add(new PendingAppointmentsR7(ap_id,doctor_id,patient_id,patientName,apointDate));
+                String apointDate = pendingapointmentJSON.getString("scheduled_for");
+                String appointmentLocation = pendingapointmentJSON.getString("doctor_address");
+
+                appointments.add(new PendingAppointmentsR7(ap_id,doctor_id,patient_id,patientName,apointDate,appointmentLocation));
             }
             return appointments;
         }catch (IOException e){
