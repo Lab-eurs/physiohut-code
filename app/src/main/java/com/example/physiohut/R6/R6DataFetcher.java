@@ -36,7 +36,7 @@ public class R6DataFetcher {
 
     public ArrayList<Session> fetchWeeklyAppointments(int doctorID) throws Exception {
         ArrayList<Session> sessionsOfPatient = new ArrayList<>();
-
+        System.out.println("I AM INSIDE R6DATAFETCHER");
         String url = NetworkConstants.getUrlOfFile("r7-get-pending-appointments-of-doctor.php") + "?doctor_id=" + doctorID;
         ArrayList<Appointments> cbList = new ArrayList<>();
         OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -63,7 +63,7 @@ public class R6DataFetcher {
                 int ap_id = sessionJSON.getInt("appon_id");
                 int patient_id = sessionJSON.getInt("patient_id");
                 int doctor_id = sessionJSON.getInt("doctor_id");
-                String scheduledFor = sessionJSON.getString("date");
+                String scheduledFor = sessionJSON.getString("scheduled_for");
                 String apState = sessionJSON.getString("ap_state");
                 Appointment.APPOINTMENT_STATE state;
                 if(apState.equals("completed")){
@@ -91,7 +91,7 @@ public class R6DataFetcher {
                 Session s = new Session(p,a,sess_state,completed);
                 sessionsOfPatient.add(s);
             }
-
+            System.out.println("I leave here");
             return sessionsOfPatient;
         } catch (IOException e) {
             throw new RuntimeException(e);

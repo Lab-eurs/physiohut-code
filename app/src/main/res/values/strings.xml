@@ -14,7 +14,7 @@
     <string name="welcome_or_something">Welcome or something</string>
     <string name="create_clinic">Δημιουργία Φυσιοθεραπευτηρίου</string>
     <string name="create_new_provision">Δημιουργία Νέας Παροχής</string>
-    <string name="next_move">Επέλεξε την επόμενη σου κίνηση:</string>
+    <string name="next_move">Επίλεξε την επόμενη σου κίνηση:</string>
     <string name="text_clinic">Δημιουργία Φυσιοθεραπευτηρίου:</string>
     <string name="text_provision">Δημιουργία Νέας Παροχής:</string>
     <string name="appointment">Κλείστε ραντεβού</string>
